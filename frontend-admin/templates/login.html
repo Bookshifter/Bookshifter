@@ -11,7 +11,7 @@
         <!-- END META SECTION -->
         
         <!-- CSS INCLUDE -->        
-        <link rel="stylesheet" type="text/css" id="theme" href="{{ url_for('static', filename='css/theme-default.css') }}"/>
+        <link rel="stylesheet" type="text/css" id="theme" href="{{ url_for('static', filename='css/theme-dark.css') }}"/>
         <!-- EOF CSS INCLUDE -->                                       
     </head>
     <body>
@@ -19,53 +19,51 @@
         <div class="login-container lightmode">
         
             <div class="login-box animated fadeInDown">
-                <div class="login-logo"></div>
                 <div class="login-body">
-                    <div class="login-title"><strong>Log In</strong> to your account</div>
-                    <form action="index.html" class="form-horizontal" method="post">
+                    <div class="login-title"><strong>Entrar</strong> na sua conta</div>
+                    <form class="form-horizontal" method="POST">
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input type="text" class="form-control" placeholder="E-mail"/>
+                            <input type="text" class="form-control" placeholder="E-mail" name="email"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input type="password" class="form-control" placeholder="Password"/>
+                            <input type="password" class="form-control" placeholder="Senha" name="password"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-6">
-                            <a href="#" class="btn btn-link btn-block">Forgot your password?</a>
+                            <a href="#" class="btn btn-link btn-block">Esqueceu sua senha?</a>
                         </div>
                         <div class="col-md-6">
-                            <button class="btn btn-info btn-block">Log In</button>
+                            <button class="btn btn-info btn-block">Entrar</button>
                         </div>
                     </div>
-                    <div class="login-or">OR</div>
+                    <div class="login-or">OU</div>
                     <div class="form-group">
                         <div class="col-md-4">
-                            <button class="btn btn-info btn-block btn-twitter"><span class="fa fa-twitter"></span> Twitter</button>
+                            <button class="btn btn-info btn-block btn-twitter"><span class="fa fa-twitter"></span>Twitter</button>
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-info btn-block btn-facebook"><span class="fa fa-facebook"></span> Facebook</button>
+                            <button class="btn btn-info btn-block btn-facebook"><span class="fa fa-facebook"></span>Facebook</button>
                         </div>
                         <div class="col-md-4">                            
-                            <button class="btn btn-info btn-block btn-google"><span class="fa fa-google-plus"></span> Google</button>
+                            <button class="btn btn-info btn-block btn-google"><span class="fa fa-google-plus"></span>Google</button>
                         </div>
                     </div>
                     <div class="login-subtitle">
-                        Don't have an account yet? <a href="#">Create an account</a>
+                        Não tem uma conta? <a href="{{ url_for('register') }}">Criar uma conta</a>
                     </div>
                     </form>
                 </div>
                 <div class="login-footer">
                     <div class="pull-left">
-                        &copy; 2022 AppName
+                        &copy; Bookshifter
                     </div>
                     <div class="pull-right">
-                        <a href="#">About</a> |
-                        <a href="#">Privacy</a> |
-                        <a href="#">Contact Us</a>
+                        <a href="#">Home</a> |
+                        <a href="#">Sobre</a>
                     </div>
                 </div>
             </div>

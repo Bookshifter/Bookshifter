@@ -1,8 +1,10 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, flash, url_for
 
 import requests
+import functions.api as api
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
+app.secret_key = 'dev'
 
 # VIEWS
 
@@ -45,6 +47,40 @@ def all_tickets():
 @app.route('/chat')
 def chat():
     return render_template('chat.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    url_api = 'http://localhost:8080/'
+    if request.method == 'POST':
+        form = dict(request.form)
+        # url_login = f'http://localhost:8080/teste'
+        # response = api.api_books(url_login, 'POST')
+        flash('Login falhou!')
+        return redirect(url_for('login'))
+    return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    url_api = 'http://localhost:8080/'
+    if request.method == 'POST':
+        form = dict(request.form)
+        url_register = url_api + 'rest-register'
+        data = {
+            "firstName": f"{form['firstName']}",
+            "lastName": f"{form['lastName']}",
+            "email": f"{form['email']}",
+            "password": f"{form['password']}"
+        }
+        
+        params = {
+            'url': url_register,
+            'data': data,
+            'method': 'POST'
+        }
+        response, message = api.api_register(params=params)
+        flash('Verifique sua conta via email para ativá-la!' if 'success' in message else message['error'], 'success' if 'success' in message else 'danger')
+        return redirect(url_for('register'))
+    return render_template('register.html')
 
 @app.route('/forms')
 def forms():
@@ -319,14 +355,6 @@ def pages_login_inside():
 @app.route('/pages-login-website')
 def pages_login_website():
     return render_template('pages-login-website.html')
-
-@app.route('/pages-login-website-light')
-def pages_login_website_light():
-    return render_template('pages-login-website-light.html')
-
-@app.route('/pages-registration')
-def pages_registration():
-    return render_template('pages-registration.html')
 
 @app.route('/pages-registration-login')
 def pages_registration_login():

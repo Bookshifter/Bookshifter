@@ -40,7 +40,8 @@ public class Security {
                         "/register/**",
                         "/forgot-password/**",
                         "/rest-register/**",
-                        "/rest-forgot-password/**"
+                        "/rest-forgot-password/**",
+                        "/rest-users"
                 )
                 .permitAll()
                 .anyRequest()
