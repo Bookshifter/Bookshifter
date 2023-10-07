@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}                    
+    
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li  class="active"><a href="/forms">Novo chamado</a></li>
+    </ul>
+    <!-- END BREADCRUMB -->                                                
+    
+    <!-- PAGE TITLE -->
+    <div class="page-title">                    
+        <h2><span class="fa fa-ticket"></span> Escolha o tipo de chamado</h2>
+    </div>
+    <!-- END PAGE TITLE -->                     
+    
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrap">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 col-sm-12">
+                <div class="panel panel-default" id="service-panel">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-md-12 col-xs-5 control-label text-left">Selecione abaixo o tipo de chamado que deseja solicitar:</label>
+                            <br><br><br>
+                            <div class="col-md-12">
+                                <a href="/forms/join">
+                                    <button class="btn btn-primary col-md-12"><span class="fa fa-arrow-right "></span> Ativação, migração ou ampliação</button>
+                                </a>
+                                <br><br><br>
+                                <a href="/forms/mac">
+                                    <button class="btn btn-primary col-md-12"><span class="fa fa-arrow-right"></span> Troca de MAC</button>
+                                </a>
+                                <br><br><br>
+                                <a href="/forms/vlan">
+                                    <button class="btn btn-primary col-md-12"><span class="fa fa-arrow-right"></span> VLAN Bilateral</button>
+                                </a>
+                                <br><br><br>
+                                <a href="/forms/prefix">
+                                    <button class="btn btn-primary col-md-12"><span class="fa fa-arrow-right"></span> Aumento no limite de prefixos nos Route Servers</button>
+                                </a>
+                                <br><br><br>
+                                <a href="/forms/noc">
+                                    <button class="btn btn-primary col-md-12"><span class="fa fa-arrow-right"></span> Suporte técnico e atendimento (NOC)</button>
+                                </a>
+                                <br><br><br>
+                                <a href="/forms/nocg">
+                                    <button class="btn btn-primary col-md-12"><span class="fa fa-arrow-right"></span> Dúvidas e suporte para não participantes do IX.br (NOCG)</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- END PAGE CONTENT WRAPPER -->
+</div>
+
+{% endblock content %}
+
+{% block imports %}
+
+{% endblock imports %}

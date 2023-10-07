@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    
+    
+    <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+        <!-- TOGGLE NAVIGATION -->
+        
+        <!-- END TOGGLE NAVIGATION -->
+        <!-- SEARCH -->
+           
+        <!-- END SEARCH -->
+        <!-- POWER OFF -->
+         
+        <!-- END POWER OFF -->
+        <!-- LOGIN BLOCk -->
+        <li class="xn-icon-button pull-right">
+            <a href="#"><span class="fa fa-lock"></span></a>
+            <div class="informer informer-danger pulsate"><span class="fa fa-info"></span></div>
+            <div class="panel panel-primary animated zoomIn xn-drop-left">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Log</strong> In</h3>                                                                
+                </div>
+                <div class="panel-body">
+                    
+                    <div class="login-container login-v2 login-inside">
+
+                        <div class="login-box animated fadeInDown">
+                            <div class="login-body">
+                                <form action="index.html" class="form-horizontal" method="post">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <span class="fa fa-user"></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Username"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <span class="fa fa-lock"></span>
+                                            </div>                                
+                                            <input type="password" class="form-control" placeholder="Password"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <a href="#">Forgot your password?</a>
+                                    </div>          
+                                    <div class="col-md-6 text-right">
+                                        <a href="#">Create an account</a>
+                                    </div>              
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary btn-lg btn-block">Login</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>                                        
+                        </div>
+
+                    </div>
+                    
+                </div>                                 
+            </div>  
+        </li> 
+        <!-- END LOGIN BLOCK -->                                                           
+    </ul>
+                      
+    
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb push-down-0">
+        
+        
+        <li class="active">Login</li>
+    </ul>
+    <!-- END BREADCRUMB -->                                                
+    
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrap">
+    
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="login-container login-v2">
+
+                    <div class="login-box animated fadeInDown">
+                        <div class="login-body">
+                            <div class="login-title"><strong>Welcome</strong>, Please login.</div>
+                            <form action="index.html" class="form-horizontal" method="post">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="fa fa-user"></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <span class="fa fa-lock"></span>
+                                        </div>                                
+                                        <input type="password" class="form-control" placeholder="Password"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <a href="#">Forgot your password?</a>
+                                </div>          
+                                <div class="col-md-6 text-right">
+                                    <a href="#">Create an account</a>
+                                </div>              
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary btn-lg btn-block">Login</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>                                    
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        
+                                                            
+    </div>                
+                
+
+{% endblock content %}
+
+{% block imports %}
+
+
+{% endblock imports %}

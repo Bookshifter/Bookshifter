@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block content %}                
+
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+                            
+        <li class="active">Dashboard</li>
+    </ul>
+    <!-- END BREADCRUMB -->                       
+   
+    <!--
+    <div class="page-title">                    
+        <h2><span class="fa fa-bar-chart-o"></span> Painel</h2>
+    </div>
+    -->
+
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrap">
+        <div class="row">
+            <div class="col-md-3">
+                
+                <!-- START WIDGET MESSAGES -->
+                <div class="widget widget-warning widget-item-icon">
+                    <div class="widget-item-left">
+                        <span class="fa fa-comments"></span>
+                    </div>                             
+                    <div class="widget-data">
+                        <div class="widget-int num-count">6</div>
+                        <div class="widget-title">Novas mensagens</div>
+                        <div class="widget-subtitle">Verifique o quanto antes!</div>
+                    </div>      
+                    <div class="widget-controls">                                
+                        <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+                    </div>
+                </div>                            
+                <!-- END WIDGET MESSAGES -->
+                
+            </div>
+            <div class="col-md-3">
+                
+                <!-- START WIDGET SLIDER -->
+                <div class="widget widget-default widget-carousel">
+                    <div class="owl-carousel" id="owl-example">
+                        <div>                                    
+                            <div class="widget-title">Livros vendidos em 2023</div>                                                                        
+                            <div class="widget-subtitle">Atualizado em: 01/08/23</div>
+                            <div class="widget-int">89</div>
+                        </div>
+                        <div>                                    
+                            <div class="widget-title">Livros doados em 2023</div>
+                            <div class="widget-subtitle">Atualizado em: 01/08/23</div>
+                            <div class="widget-int">165</div>
+                        </div>
+                        <div>                                    
+                            <div class="widget-title">Livros adquiridos em 2023</div>
+                            <div class="widget-subtitle">Atualizado em: 01/08/23</div>
+                            <div class="widget-int">12</div>
+                        </div>
+                    </div>                            
+                    <div class="widget-controls">                                
+                        <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+                    </div>                             
+                </div>         
+                <!-- END WIDGET SLIDER -->
+                
+            </div>
+            
+            <div class="col-md-3">
+                
+                <!-- START WIDGET REGISTRED -->
+                <div class="widget widget-default widget-item-icon">
+                    <div class="widget-item-left">
+                        <span class="fa fa-book"></span>
+                    </div>
+                    <div class="widget-data">
+                        <div class="widget-int num-count">4</div>
+                        <div class="widget-title">Livros registrados</div>
+                        <div class="widget-subtitle">No seu estoque</div>
+                    </div>
+                    <div class="widget-controls">                                
+                        <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+                    </div>                            
+                </div>                            
+                <!-- END WIDGET REGISTRED -->
+                
+            </div>
+
+            <div class="col-md-3">
+                
+                <!-- START WIDGET CLOCK -->
+                <div class="widget widget-info widget-padding-sm">
+                    <div class="widget-big-int plugin-clock">00:00</div>                            
+                    <div class="widget-subtitle plugin-date">Loading...</div>
+                    <div class="widget-controls">                                
+                        <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="left" title="Remove Widget"><span class="fa fa-times"></span></a>
+                    </div>                            
+                </div>                        
+                <!-- END WIDGET CLOCK -->
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title-box">
+                            <h3>Últimos livros vendidos/doados</h3>
+                            <span>Aqui você pode ver os livros que saíram de seu estoque!</span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table datatable" style="text-align:center;">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Saída</th>
+                                        <th>Lucro</th>
+                                        <th>Usuário</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Clean Code</td>
+                                        <td>4 livros</td>
+                                        <td>R$ 39,00</td>
+                                        <td>luckystar274@mail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Não Faz Sentido</td>
+                                        <td>1 livros</td>
+                                        <td>--</td>
+                                        <td>joaopaulo31@mail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td>A Cabana</td>
+                                        <td>10 livros</td>
+                                        <td>R$ 300,00</td>
+                                        <td>vivianebarb0s4@mail.com</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title-box">
+                            <h3>Relação dos livros</h3>
+                            <span>Relação de doações e vendas deste mês</span>
+                        </div>
+                        <ul class="panel-controls" style="margin-top: 2px;">
+                            <li><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
+                            <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span></a>                                        
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span> Collapse</a></li>
+                                    <li><a href="#" class="panel-remove"><span class="fa fa-times"></span> Remove</a></li>
+                                </ul>                                        
+                            </li>                                        
+                        </ul>
+                    </div>
+                    <div class="panel-body padding-0">
+                        <div class="chart-holder" id="dashboard-donut-books" style="height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT WRAPPER -->
+
+{% endblock content %}
+
+{% block imports %}
+
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/demo_dashboard.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/demo_charts_morris.js') }}"></script>
+
+<script>
+    Morris.Donut({
+        element: 'dashboard-donut-books',
+        data: [
+            {label: "Doados", value: 5},
+            {label: "Vendidos", value: 2},
+        ],
+        colors: ['#303030', '#00FF00',],
+        resize: true
+    });
+</script>
+
+{% endblock imports %}

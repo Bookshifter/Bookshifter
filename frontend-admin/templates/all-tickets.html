@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb push-down-0">
+        <li href="/">Home</li>
+        <li class="active">Todos os chamados</li>
+    </ul>
+    <!-- END BREADCRUMB -->                
+                    
+    <!-- START CONTENT FRAME -->
+    <div class="content-frame">                                    
+        <!-- START CONTENT FRAME TOP -->
+        <div class="content-frame-top">                        
+            <div class="page-title">                    
+                <h2><span class="fa fa-ticket"></span> Todos os chamados</h2>
+            </div>                                                    
+            <div class="pull-right">
+                <a href="/forms">
+                    <button class="btn btn-success"><span class="fa fa-plus"></span> Abrir chamado</button>
+                    
+                </a>
+            </div>                           
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Chamados abertos - AS 26162</h3>
+            </div>
+            <div class="panel-body">
+                <p>Procure seus chamados por ticket, PIX, serviço ou localidade</p>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <span class="fa fa-ticket"></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Digite algo para buscar..."/>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary"><span class="fa fa-search"></span>Procurar</button>
+                                </div>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary"><span class="fa fa-filter"></span> Filtros</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>                                    
+            </div>
+
+            <div class="panel-body">
+                <!-- LIST GROUP -->
+                <div class="list-group" id="tickets-list">
+                    <a href="/chat" class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="contacts-title">
+                                    <strong style="font-size:16px;">#104934 - IX-CE - PIX ELETRONET - ATM</strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p><strong>gsantos@nic.br</strong>: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae, blanditiis veniam illo ratione repellendus, sit aliquam corporis harum, expedita non distinctio esse animi vero id architecto quidem incidunt facere doloribus?</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="pendency">
+                                    <p class="pull-right">Pendência: <span class="label label-warning">Com participante</span></p>
+                                    <br>
+                                    <p class="pull-right">Status: <span class="label label-info">Em ativação</span></p>
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="list-group-controls">
+                                    <button class="btn btn-info"><span class="fa fa-external-link"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/chat" class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="contacts-title">
+                                    <strong style="font-size:16px;">#104934 - IX-CE - PIX ELETRONET - ATM</strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p><strong>gsantos@nic.br</strong>: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus ducimus voluptatum harum. Tempore sit rem, neque ipsum quae earum ipsa quasi optio eligendi necessitatibus aut unde nobis consequatur inventore mollitia?</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="pendency">
+                                    <p class="pull-right">Pendência: <span class="label label-warning">Com participante</span></p>
+                                    <br>
+                                    <p class="pull-right">Status: <span class="label label-info">Em ativação</span></p>
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="list-group-controls">
+                                    <button class="btn btn-info"><span class="fa fa-external-link"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/chat" class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="contacts-title">
+                                    <strong style="font-size:16px;">#104934 - IX-CE - PIX ELETRONET - ATM</strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p><strong>fulano@mail.com</strong>: Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, aut quos repellat recusandae cum, impedit laboriosam repudiandae magni voluptas nemo doloribus? Odio incidunt alias minima laboriosam ipsa sit ex quia?</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="pendency">
+                                    <p class="pull-right">Pendência: <span class="label label-success">Com equipe IX.br</span></p>
+                                    <br>
+                                    <p class="pull-right">Status: <span class="label label-info">Em ativação</span></p>
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="list-group-controls">
+                                    <button class="btn btn-info"><span class="fa fa-external-link"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/chat" class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="contacts-title">
+                                    <strong style="font-size:16px;">#104934 - IX-CE - PIX ELETRONET - ATM</strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p><strong>gsantos@nic.br</strong>: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi ipsam fugit eveniet voluptas at quo corporis quaerat quisquam veniam itaque, id voluptatem, ipsa repellat iure, laboriosam aut autem iusto ea.</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="pendency">
+                                    <p class="pull-right">Pendência: <span class="label label-success">Com equipe IX.br</span></p>
+                                    <br>
+                                    <p class="pull-right">Status: <span class="label label-info">Em ativação</span></p>
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="list-group-controls">
+                                    <button class="btn btn-info"><span class="fa fa-external-link"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/chat" class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="contacts-title">
+                                    <strong style="font-size:16px;">#104934 - IX-CE - PIX ELETRONET - ATM</strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p><strong>gsantos@nic.br</strong>: Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis numquam rem quaerat illum accusantium natus dicta inventore. Totam fugit iste aliquam quam perspiciatis velit molestias accusantium et accusamus facere? Quaerat.</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="pendency">
+                                    <p class="pull-right">Pendência: <span class="label label-warning">Com participante</span></p>
+                                    <br>
+                                    <p class="pull-right">Status: <span class="label label-info">Em ativação</span></p>
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="list-group-controls">
+                                    <button class="btn btn-info"><span class="fa fa-external-link"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="/chat" class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="contacts-title">
+                                    <strong style="font-size:16px;">#104934 - IX-CE - PIX ELETRONET - ATM</strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <p><strong>fulano@mail.com</strong>: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat cum omnis voluptatibus delectus tenetur placeat voluptate vel nobis illum blanditiis, tempora accusantium autem numquam, quod, facilis beatae illo reprehenderit. Sit!</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="pendency">
+                                    <p class="pull-right">Pendência: <span class="label label-success">Com equipe IX.br</span></p>
+                                    <br>
+                                    <p class="pull-right">Status: <span class="label label-warning">Em quarentena</span></p>
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="list-group-controls">
+                                    <button class="btn btn-info"><span class="fa fa-external-link"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- END LIST GROUP -->
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT FRAME -->
+</div>
+
+{% endblock content %}
+
+{% block imports %}
+<script>
+    function breakline(event) {
+        // 13 is the keycode for "enter"
+        if (event.keyCode == 13 && event.shiftKey) {
+            // alert('shift - enter')
+            console.log('shift - enter')
+        }
+        if (event.keyCode == 13 && !event.shiftKey) {
+            // alert('enter')
+            console.log('enter')
+        }
+    }
+</script>
+
+{% endblock imports %}

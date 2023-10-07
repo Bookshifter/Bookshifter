@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+
+{% block content %}                    
+    
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/forms">Novo chamado</a></li>
+        <li class="active"><a href="/forms/g">G</a></li>
+    </ul>
+    <!-- END BREADCRUMB -->                                                
+    
+    <!-- PAGE TITLE -->
+    <div class="page-title">                    
+        <h2><span class="fa fa-ticket"></span> G</h2>
+    </div>
+    <!-- END PAGE TITLE -->                     
+    
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrap">
+        <div class="row">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-8 col-sm-12">
+                <form action="#" class="form-horizontal">
+                    <!-- START REQUEST INFORMATION -->
+                    <div class="panel panel-default" id="info-panel-nocg">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Informações da solicitação</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="control-label text-left text-muted"><strong>Observações</strong>:<br> Caso sua solicitação seja relacionada a uma ligação já existente ao IX.br, favor utilizar a opção <a href="/forms/noc">Suporte técnico e atendimento (NOC)</a></label>
+                                </div>
+                                <br>
+                                <label class="control-label text-left">Você é responsável por algum ASN?</label>
+
+                                <br><br>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="check"><input type="radio" class="iradio" name="iradio" value="yes" onchange="checkASN(this)" /> Sim</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="check"><input type="radio" class="iradio" name="iradio" value="no" onchange="checkASN(this)" /> Não</label>
+                                    </div>
+                                
+                                </div>
+                                <br><br>
+                                
+                                <div class="row" id="form-asn-select" style="display: none;">
+                                    <label class="control-label text-left">Informe o ASN</label>    
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- END REQUEST INFORMATION -->
+
+                    <!-- START IX INFORMATION -->
+                    <div class="panel panel-default" id="ix-panel-nocg">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Informações de IX</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <br>
+                                <label class="control-label text-left">Esta solicitação se aplica a algum IX.br específico?</label>
+
+                                <br><br>
+                                
+                                <select class="form-control select" id="form-ix-select">
+                                    <option value="">Selecione</option>
+                                    <option value="">Não especificamente</option>
+                                    <option value="ix-1">SP</option>
+                                    <option value="ix-2">RJ</option>
+                                    <option value="ix-3">CE</option>
+                                    <option value="ix-4">CGB</option>
+                                    <option value="ix-5">BH</option>
+                                </select>
+
+                                <br><br>
+                                
+                                <div class="row" id="form-asn-select" style="display: none;">
+                                    <label class="control-label text-left">Informe o ASN</label>    
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END IX INFORMATION -->
+
+                    <div class="panel panel-default" id="infos-panel-nocg">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Informações da solicitação</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="control-label text-left">Insira abaixo mais informações sobre o pedido:</label>
+
+                                <br><br><br>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label text-left">Qual das seguintes opções melhor descreve sua solicitação?</label>
+                                            <select class="form-control select" onchange="showOtherForm(this)" id="form-nocg-select">
+                                                <option value="" >Selecione</option>
+                                                <option value="routingcheck"> Problema de roteamento com um participante do IX.br</option>
+                                                <option value="question">Eu tenho uma questão sobre o IX.br</option>
+                                                <option value="other"> Outro, especificado abaixo</option>
+                                            </select>
+                                            <br>
+                                            <div id="other-select" style="display:none;">
+                                                <label class="control-label text-left">Especifique aqui:</label>
+                                                <input type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label text-left">Descrição:</label>
+                                            <textarea name="" id=""  rows="3" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label text-left">Entre com informações adicionais.<br>Ex. traceroute, endereço de origem/destino, ping, etc.:</label>
+                                            <textarea name="" id=""  rows="3" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="pull-right">
+                    <a href="/forms/nocg/review">
+                        <button id="continue-button" class="btn btn-success" disabled><span class="fa fa-arrow-right"></span> Revisar</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    &nbsp;
+    
+    <!-- END PAGE CONTENT WRAPPER -->
+</div>
+
+{% endblock content %}
+
+{% block imports %}
+<script>
+    const continue_button = document.getElementById('continue-button');
+    const asn_div = document.getElementById('form-asn-select');
+    const other_div = document.getElementById('other-select')
+    function checkASN(radio) {
+        continue_button.removeAttribute('disabled')
+        if (radio.value == 'yes') {
+            asn_div.style.display = 'contents'
+        } else {
+            asn_div.style.display = 'none'
+        }
+    }
+    function showOtherForm(select) {
+        if (select.value == 'other') {
+            other_div.style.display = 'contents'
+        } else {
+            other_div.style.display = 'none'
+        }
+    }
+</script>
+{% endblock imports %}
