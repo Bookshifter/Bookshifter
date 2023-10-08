@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, flash, url_for
+from flask import Flask, render_template, redirect, request, flash, url_for, jsonify, make_response
 
 import requests
 import functions.api as api
@@ -64,23 +64,58 @@ def register():
     url_api = 'http://localhost:8080/'
     if request.method == 'POST':
         form = dict(request.form)
-        url_register = url_api + 'rest-register'
-        data = {
-            "firstName": f"{form['firstName']}",
-            "lastName": f"{form['lastName']}",
-            "email": f"{form['email']}",
-            "password": f"{form['password']}"
-        }
-        
+        url_register = url_api + 'rest-register'        
         params = {
             'url': url_register,
-            'data': data,
+            'data': form,
             'method': 'POST'
         }
         response, message = api.api_register(params=params)
         flash('Verifique sua conta via email para ativá-la!' if 'success' in message else message['error'], 'success' if 'success' in message else 'danger')
         return redirect(url_for('register'))
+    
     return render_template('register.html')
+
+@app.route('/forgot-password', methods=['GET', 'POST'])
+def forgot_password():
+    url_api = 'http://localhost:8080/'
+    if request.method == 'POST':
+        form = dict(request.form)
+        url_register = url_api + 'rest-forgot-password'        
+        params = {
+            'url': url_register,
+            'data': form,
+            'method': 'POST'
+        }
+        response, message = api.api_register(params=params)
+        flash('Verifique seu email para redefinir sua senha!' if 'success' in message else message['error'], 'success' if 'success' in message else 'danger')
+        return redirect(url_for('forgot_password'))
+    return render_template('forgot-password.html')
+
+@app.route('/password-reset', methods=['GET', 'POST'])
+def password_reset():
+    token = request.args.get('token')
+    url_api = 'http://localhost:8080/'
+    if request.method == 'POST':
+        form = dict(request.form)
+        url_reset_password = url_api + f'rest-forgot-password/password-reset?token={token}'
+        params = {
+            'url': url_reset_password,
+            'data': form,
+            'method': 'POST'
+        }
+        response, message = api.api_register(params=params)
+        # flash('Senha alterada com sucesso!' if 'success' in message else message['error'], 'success' if 'success' in message else 'danger')
+        print(response)
+        print(message)
+        if 'error' in message:
+            flash(message['error'], 'danger')
+            return redirect(url_for('password_reset'))
+        return redirect(url_for('login'))
+    return render_template('reset-password.html')
+
+
+# OTHER VIEWS
 
 @app.route('/forms')
 def forms():
@@ -359,10 +394,6 @@ def pages_login_website():
 @app.route('/pages-registration-login')
 def pages_registration_login():
     return render_template('pages-registration-login.html')
-
-@app.route('/pages-forgot-password')
-def pages_forgot_password():
-    return render_template('pages-forgot-password.html')
 
 @app.route('/pages-error-404')
 def pages_error_404():

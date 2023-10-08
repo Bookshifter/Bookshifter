@@ -17,17 +17,17 @@ def api_register(params):
             return None, message
         
     if response.status_code == 403:
-        message = {'error': 'Proibido de realizar a solicitação.', 'response': response.json()}
+        message = {'error': 'Proibido de realizar a solicitação.', 'response': response}
     elif response.status_code == 404:
-        message = {'error': 'Não encontrado.', 'response': response.json()}
+        message = {'error': 'Não encontrado.', 'response': response}
     elif response.status_code == 500:
-        message = {'error': 'Erro de servidor.', 'response': response.json()}
+        message = {'error': 'Erro de servidor.', 'response': response}
     elif response.status_code == 200:
         message = {'success': 'OK.', 'response': response}
     elif response.status_code == 201:
         message = {'success': 'Criado.', 'response': response}
     else:
-        message = {'error': response.json()}
+        message = {'error': response}
         
     
     return response, message
