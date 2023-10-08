@@ -37,7 +37,7 @@ public class RestRegisterController {
     public ResponseEntity enableAccount(@RequestParam("token") String token){
         Optional<VerificationToken> verificationToken = tokenService.findByToken(token);
         if(verificationToken.isPresent() && verificationToken.get().getUser().isEnabled()){
-            return ResponseEntity.ok("Conta ativada com sucesso, por favor façva seu login");
+            return ResponseEntity.ok("Conta ativada com sucesso, por favor faça seu login");
         }
 
         String validationResult = tokenService.validateToken(token);

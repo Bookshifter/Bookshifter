@@ -37,6 +37,7 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         tokenService.saveVerificationToken(user, verificationToken);
 
         String url = event.getConfirmationURL() + "/register/enableAccount?token=" + verificationToken;
+
         try {
             sendActivationEmail(url);
         } catch (MessagingException | UnsupportedEncodingException e) {
@@ -46,11 +47,11 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
 
     public void sendActivationEmail(String url) throws MessagingException, UnsupportedEncodingException {
         String subject = "Ative sua conta";
-        String senderName = "Projeto DSList";
-        String content = "<p> Olá, "+ user.getFirstName() + ". Obrigado por fazer parte do DS Game List!</p>"
-                + "<p> Por favor, clique no link abaixo para completar seu registro.</p>"
+        String senderName = "Bookshifter";
+        String content = "<p>Olá, "+ user.getFirstName() + ". Obrigado por fazer parte do Bookshifter!</p>"
+                + "<p>Por favor, clique no link abaixo para completar seu registro.</p>"
                 + "<a href=\"" + url + "\">Ative sua conta</a>"
-                + "<p> Projeto DS Game List</p>";
+                + "<p>&copy; Bookshifter</p>";
 
         emailMessage(subject, senderName, content, mailSender, user);
     }
