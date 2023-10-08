@@ -76,6 +76,22 @@ def register():
     
     return render_template('register.html')
 
+@app.route('/register/enable', methods=['GET', 'POST'])
+def register_enable():
+    url_api = 'http://localhost:8080/'
+    if request.method == 'POST':
+        form = dict(request.form)
+        url_register = url_api + 'rest-register'
+        params = {
+            'url': url_register,
+            'data': form,
+            'method': 'POST'
+        }
+        response, message = api.api_register(params=params)
+        flash('Verifique sua conta via email para ativá-la!' if 'success' in message else message['error'], 'success' if 'success' in message else 'danger')
+    
+    return redirect(url_for('register'))
+
 @app.route('/forgot-password', methods=['GET', 'POST'])
 def forgot_password():
     url_api = 'http://localhost:8080/'
@@ -105,12 +121,11 @@ def password_reset():
             'method': 'POST'
         }
         response, message = api.api_register(params=params)
-        # flash('Senha alterada com sucesso!' if 'success' in message else message['error'], 'success' if 'success' in message else 'danger')
-        print(response)
-        print(message)
-        if 'error' in message:
-            flash(message['error'], 'danger')
-            return redirect(url_for('password_reset'))
+        if not 'success' in message:
+            flash('Ocorreu um erro, tente novamente!', 'danger')
+            return redirect(url_for('password_reset', token=token))
+        
+        flash('Redefinição de senha concluída!', 'success')
         return redirect(url_for('login'))
     return render_template('reset-password.html')
 
