@@ -26,6 +26,8 @@ def api_register(params):
         message = {'success': 'OK.', 'response': response}
     elif response.status_code == 201:
         message = {'success': 'Criado.', 'response': response}
+    elif response.status_code == 202:
+        message = {'success': 'Aceito.', 'response': response}
     else:
         message = {'error': response}
         

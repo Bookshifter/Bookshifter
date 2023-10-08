@@ -78,19 +78,16 @@ def register():
 
 @app.route('/register/enable', methods=['GET', 'POST'])
 def register_enable():
+    token = request.args.get('token')
     url_api = 'http://localhost:8080/'
-    if request.method == 'POST':
-        form = dict(request.form)
-        url_register = url_api + 'rest-register'
-        params = {
-            'url': url_register,
-            'data': form,
-            'method': 'POST'
+    url_enable_account = url_api + f'rest-register/rest-enableAccount?token={token}'
+    params = {
+            'url': url_enable_account,
+            'method': 'GET'
         }
-        response, message = api.api_register(params=params)
-        flash('Verifique sua conta via email para ativá-la!' if 'success' in message else message['error'], 'success' if 'success' in message else 'danger')
-    
-    return redirect(url_for('register'))
+    response, message = api.api_register(params=params)
+    flash('Sua conta foi ativada com sucesso!' if 'success' in message else message['error'], 'success' if 'success' in message else 'danger')
+    return redirect(url_for('login'))
 
 @app.route('/forgot-password', methods=['GET', 'POST'])
 def forgot_password():
