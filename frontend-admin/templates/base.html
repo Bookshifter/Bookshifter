@@ -299,46 +299,6 @@
 
         {% block imports %}
         {% endblock imports %}
-
-        <script>
-            // This will create a new entry in the browser's history, reloading afterwards
-            // window.location.href = nextURL;
-
-            // This will replace the current entry in the browser's history, reloading afterwards
-            // window.location.assign(nextURL);
-
-            // This will replace the current entry in the browser's history, reloading afterwards
-            // window.location.replace(nextURL);
-
-            function selectAsnIx (asn, ix) {
-                const origin = window.location.origin
-                const new_route = window.location.pathname.includes('services') ? '/services' : ''
-                // const new_url = origin + new_route
-                // window.location.href = new_url;
-
-                const params_list = window.location.pathname.split('/')
-
-                var ix_atual = params_list[params_list.length-1]
-
-                var asn_atual = params_list[params_list.length-2]
-
-                var rota_atual = params_list[params_list.length-3]
-
-                // Solução temporária
-                if (!ix_atual) {
-                    ix_atual = 'sp'
-                }
-                if (!asn_atual) {
-                    asn_atual = '61580'
-                }
-
-                if (asn != undefined) {
-                    window.location.href = `${new_route}/${asn}/${ix_atual}`
-                } else if (ix != undefined) {
-                    window.location.href = `${new_route}/${asn_atual}/${ix}`
-                }
-            }
-        </script>
         
     <!-- END SCRIPTS --> 
 </html>
