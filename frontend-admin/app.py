@@ -85,6 +85,7 @@ def register_enable():
             'url': url_enable_account,
             'method': 'GET'
         }
+    print(url_enable_account)
     response, message = api.api_register(params=params)
     flash('Sua conta foi ativada com sucesso!' if 'success' in message else message['error'], 'success' if 'success' in message else 'danger')
     return redirect(url_for('login'))

@@ -15,21 +15,22 @@ def api_register(params):
         case _:
             message = 'Método não suportado.'
             return None, message
-        
-    if response.status_code == 403:
-        message = {'error': 'Proibido de realizar a solicitação.', 'response': response}
-    elif response.status_code == 404:
-        message = {'error': 'Não encontrado.', 'response': response}
-    elif response.status_code == 500:
-        message = {'error': 'Erro de servidor.', 'response': response}
-    elif response.status_code == 200:
-        message = {'success': 'OK.', 'response': response}
-    elif response.status_code == 201:
-        message = {'success': 'Criado.', 'response': response}
-    elif response.status_code == 202:
-        message = {'success': 'Aceito.', 'response': response}
-    else:
-        message = {'error': response}
-        
     
-    return response, message
+    match response.status_code:
+        case 403:
+            message = {'error': 'Proibido de realizar a solicitação.', 'response': response.text}
+        case 404:
+            message = {'error': 'Não encontrado.', 'response': response.text}
+        case 500:
+            message = {'error': 'Erro de servidor.', 'response': response.text}
+        case 200:
+            message = {'success': 'OK.', 'response': response.text}
+        case 201:
+            message = {'success': 'Criado.', 'response': response.text}
+        case 202:
+            message = {'success': 'Aceito.', 'response': response.text}
+        case _:
+            message = {'error': response.text}
+    
+    
+    return response.text, message
