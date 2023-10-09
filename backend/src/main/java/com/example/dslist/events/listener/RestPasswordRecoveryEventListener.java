@@ -30,7 +30,8 @@ public class RestPasswordRecoveryEventListener implements ApplicationListener<Re
         String token = UUID.randomUUID().toString();
         service.saveResetPasswordToken(user, token);
 
-        String url = event.getConfirmationURL() + "/rest-forgot-password/password-reset?token=" + token;
+//        String url = event.getConfirmationURL() + "/rest-forgot-password/password-reset?token=" + token;
+        String url = "http://localhost:8000/password-reset?token=" + token;
 
         try {
             sendResetPasswordEmail(url);
@@ -41,12 +42,13 @@ public class RestPasswordRecoveryEventListener implements ApplicationListener<Re
 
     public void sendResetPasswordEmail(String url) throws MessagingException, UnsupportedEncodingException {
         String subject = "Recupere sua senha";
-        String senderName = "Projeto DSList";
-        String content = "<p> Olá, "+ user.getFirstName() + "</p>"
-                + "<p><strong> Foi requisatado uma mudança de senha para a conta DSList atrelada a este email.</strong></p>"
+        String senderName = "Bookshifter";
+        String content = "<p> Olá "+ user.getFirstName() + "</p>"
+                + "<p><strong> Foi requisitado uma mudança de senha para a conta atrelada a este email no Bookshifter" +
+                ".</strong></p>"
                 +  "<p> Clique no link abaixo para recuperar sua senha</p>"
                 + "<a href=\"" + url + "\">Recupere sua senha</a>"
-                + "<p> Projeto DS Game List</p>";
+                + "<p>&copy; Bookshifter</p>";
         emailMessage(subject, senderName, content, mailSender, user);
     }
     private static void emailMessage(String subject, String senderName,

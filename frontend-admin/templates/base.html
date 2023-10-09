@@ -217,46 +217,11 @@
                     <!-- END POWER OFF -->
                     <!-- MESSAGES -->
                     <li class="xn-icon-button pull-right">
-                        <a href="#"><span class="fa fa-comments"></span></a>
-                        <!--
-                            <div class="informer informer-danger">4</div>
-                        -->
-                        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><span class="fa fa-comments"></span> Messages</h3>                                
-                                <div class="pull-right">
-                                    <span class="label label-danger">4 new</span>
-                                </div>
-                            </div>
-                            <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
-                                <a href="#" class="list-group-item">
-                                    <div class="list-group-status status-online"></div>
-                                    <img src="{{ url_for('static', filename= 'assets/images/users/user2.jpg') }}" class="pull-left" alt="John Doe"/>
-                                    <span class="contacts-title">John Doe</span>
-                                    <p>Praesent placerat tellus id augue condimentum</p>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="list-group-status status-away"></div>
-                                    <img src="{{ url_for('static', filename= 'assets/images/users/user.jpg') }}" class="pull-left" alt=" Lourance Johns"/>
-                                    <span class="contacts-title"> Lourance Johns</span>
-                                    <p>Donec risus sapien, sagittis et magna quis</p>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="list-group-status status-away"></div>
-                                    <img src="{{ url_for('static', filename= 'assets/images/users/user3.jpg') }}" class="pull-left" alt="Lika Semione"/>
-                                    <span class="contacts-title">Lika Semione</span>
-                                    <p>Mauris vel eros ut nunc rhoncus cursus sed</p>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="list-group-status status-offline"></div>
-                                    <img src="{{ url_for('static', filename= 'assets/images/users/user6.jpg') }}" class="pull-left" alt="Darth Vader"/>
-                                    <span class="contacts-title">Darth Vader</span>
-                                    <p>I want my money back!</p>
-                                </a>
-                            </div>     
-                        </div>                        
+                        <a href="/register"><span class="fa fa-user"></span></a>
                     </li>
-                    <!-- END MESSAGES -->
+                    <li class="xn-icon-button pull-right">
+                        <a href="/login"><span class="glyphicon glyphicon-log-in"></span></a>
+                    </li>
                     <!-- LANG BAR -->
                     <li class="xn-icon-button pull-right">
                         <a href="#"><img class="flag" src="{{ url_for('static', filename= 'img/flags/flag-br.png') }}"></a>
@@ -334,46 +299,6 @@
 
         {% block imports %}
         {% endblock imports %}
-
-        <script>
-            // This will create a new entry in the browser's history, reloading afterwards
-            // window.location.href = nextURL;
-
-            // This will replace the current entry in the browser's history, reloading afterwards
-            // window.location.assign(nextURL);
-
-            // This will replace the current entry in the browser's history, reloading afterwards
-            // window.location.replace(nextURL);
-
-            function selectAsnIx (asn, ix) {
-                const origin = window.location.origin
-                const new_route = window.location.pathname.includes('services') ? '/services' : ''
-                // const new_url = origin + new_route
-                // window.location.href = new_url;
-
-                const params_list = window.location.pathname.split('/')
-
-                var ix_atual = params_list[params_list.length-1]
-
-                var asn_atual = params_list[params_list.length-2]
-
-                var rota_atual = params_list[params_list.length-3]
-
-                // Solução temporária
-                if (!ix_atual) {
-                    ix_atual = 'sp'
-                }
-                if (!asn_atual) {
-                    asn_atual = '61580'
-                }
-
-                if (asn != undefined) {
-                    window.location.href = `${new_route}/${asn}/${ix_atual}`
-                } else if (ix != undefined) {
-                    window.location.href = `${new_route}/${asn_atual}/${ix}`
-                }
-            }
-        </script>
         
     <!-- END SCRIPTS --> 
 </html>

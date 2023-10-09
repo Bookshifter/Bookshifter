@@ -40,12 +40,13 @@ public class PasswordRecoveryEventListener implements ApplicationListener<Passwo
 
     public void sendResetPasswordEmail(String url) throws MessagingException, UnsupportedEncodingException {
         String subject = "Recupere sua senha";
-        String senderName = "Projeto DSList";
-        String content = "<p> Olá, "+ user.getFirstName() + "</p>"
-                + "<p><strong> Foi requisatado uma mudança de senha para a conta DSList atrelada a este email.</strong></p>"
-                +  "<p> Clique no link abaixo para recuperar sua senha</p>"
+        String senderName = "Bookshifter";
+        String content = "<p>Olá "+ user.getFirstName() + "</p>"
+                + "<p><strong>Foi requisitada uma mudança de senha para a conta atrelada a este email no Bookshifter" +
+                ".</strong></p>"
+                +  "<p>Clique no link abaixo para recuperar sua senha</p>"
                 + "<a href=\"" + url + "\">Recupere sua senha</a>"
-                + "<p> Projeto DS Game List</p>";
+                + "<p> Bookshifter</p>";
         emailMessage(subject, senderName, content, mailSender, user);
     }
     private static void emailMessage(String subject, String senderName,

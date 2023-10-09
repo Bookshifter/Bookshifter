@@ -32,7 +32,8 @@ public class RestRegistrationCompleteEventListener implements ApplicationListene
         String verificationToken = UUID.randomUUID().toString();
         tokenService.saveVerificationToken(user, verificationToken);
 
-        String url = event.getConfirmationURL() + "/rest-register/rest-enableAccount?token=" + verificationToken;
+//        String url = event.getConfirmationURL() + "/rest-register/rest-enableAccount?token=" + verificationToken;
+        String url = "http://localhost:8000/register/enable?token=" + verificationToken;
         try {
             sendActivationEmail(url);
         } catch (MessagingException | UnsupportedEncodingException e) {
@@ -42,11 +43,11 @@ public class RestRegistrationCompleteEventListener implements ApplicationListene
 
     public void sendActivationEmail(String url) throws MessagingException, UnsupportedEncodingException {
         String subject = "Ative sua conta";
-        String senderName = "Projeto DSList";
-        String content = "<p> Olá, "+ user.getFirstName() + ". Obrigado por fazer parte do DS Game List!</p>"
-                + "<p> Por favor, clique no link abaixo para completar seu registro.</p>"
+        String senderName = "Bookshifter";
+        String content = "<p> Olá "+ user.getFirstName() + ". Obrigado por fazer parte do Bookshifter!</p>"
+                + "<p>Por favor, clique no link abaixo para ativar sua conta.</p>"
                 + "<a href=\"" + url + "\">Ative sua conta</a>"
-                + "<p> Projeto DS Game List</p>";
+                + "<p>&copy; Bookshifter</p>";
 
         emailMessage(subject, senderName, content, mailSender, user);
     }
