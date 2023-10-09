@@ -22,7 +22,7 @@ def api_register(params):
         case 404:
             message = {'error': 'Não encontrado.', 'response': response.text}
         case 500:
-            message = {'error': 'Erro de servidor.', 'response': response.text}
+            message = {'error': 'Erro no servidor.', 'response': response.text}
         case 200:
             message = {'success': 'OK.', 'response': response.text}
         case 201:
