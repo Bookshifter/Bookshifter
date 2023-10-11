@@ -55,7 +55,7 @@ def login():
         form = dict(request.form)
         # url_login = f'http://localhost:8080/teste'
         # response = api.api_books(url_login, 'POST')
-        flash('Login falhou!')
+        flash('Login falhou!', 'danger')
         return redirect(url_for('login'))
     return render_template('login.html')
 
