@@ -32,5 +32,4 @@ def api_register(params):
         case _:
             message = {'error': response.text}
     
-    
     return response.text, message

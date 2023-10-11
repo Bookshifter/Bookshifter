@@ -53,10 +53,21 @@ def login():
     url_api = 'http://localhost:8080/'
     if request.method == 'POST':
         form = dict(request.form)
-        # url_login = f'http://localhost:8080/teste'
-        # response = api.api_books(url_login, 'POST')
-        flash('Login falhou!', 'danger')
-        return redirect(url_for('login'))
+        url_login = url_api + 'rest-login'
+        params = {
+            'url': url_login,
+            'data': form,
+            'method': 'POST'
+        }
+        response, message = api.api_register(params)
+        print(jsonify(response["token"]))
+        headers = jsonify({'Authorization': f'Bearer {response["token"]}'})
+        if 'error' in message:
+            flash('Usuário ou senha errados! Tente novamente.', 'danger')
+            return redirect(url_for('login'))
+        else:
+            return headers, redirect(url_for('index'))
+
     return render_template('login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
