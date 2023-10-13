@@ -1,0 +1,4 @@
+FLASK_ENV=development
+FLASK_APP=app
+SECRET_KEY=teste
+FLASK_PORT=5000

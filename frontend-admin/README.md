@@ -4,5 +4,5 @@
 
 ```
 \bookshifter-flask> pip install -r requirements.txt
-\bookshifter-flask> python app.py
+\bookshifter-flask> python.exe -m flask run --debug --port=8000
 ```
