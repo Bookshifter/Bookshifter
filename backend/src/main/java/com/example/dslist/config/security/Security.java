@@ -47,7 +47,9 @@ public class Security {
                         "/forgot-password/**",
                         "/rest-register/**",
                         "/rest-forgot-password/**",
-                         "/rest-login"
+                            "/rest-login",
+                            "/books",
+                            "/books/**"
                     ).permitAll().anyRequest().authenticated()
                 ).addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
     }
