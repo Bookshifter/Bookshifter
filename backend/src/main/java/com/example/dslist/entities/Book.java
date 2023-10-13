@@ -18,17 +18,28 @@ public class Book {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    private String publisher;
+
+    private Integer publishYear;
+
     private Integer pageCount;
+
     private String largeCoverUrl;
+
+    @Column(name = "medium_cover_url")
     private String mediumCoverUrl;
     public Book(){
     }
 
-    public Book(String title, List<String> authors, String description, Integer pageCount, String largeCoverUrl,
-                String mediumCoverUrl){
+    public Book(String title, List<String> authors, String description, String publisher, Integer publishYear,
+                Integer pageCount, String largeCoverUrl, String mediumCoverUrl)
+    {
         this.title = title;
         this.authors = authors;
         this.description = description;
+        this.publisher = publisher;
+        this.publishYear = publishYear;
         this.pageCount = pageCount;
         this.largeCoverUrl = largeCoverUrl;
         this.mediumCoverUrl = mediumCoverUrl;
@@ -54,6 +65,14 @@ public class Book {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPublisher(){
+        return this.publisher;
+    }
+
+    public Integer getPublishYear(){
+        return this.publishYear;
     }
     public Integer getPageCount(){
         return this.pageCount;
