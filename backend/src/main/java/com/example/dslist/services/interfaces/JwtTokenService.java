@@ -1,9 +1,0 @@
-package com.example.dslist.services.interfaces;
-
-
-import com.example.dslist.entities.User;
-
-public interface JwtTokenService {
-    String generateToken(User user);
-    String validateToken(String token);
-}
