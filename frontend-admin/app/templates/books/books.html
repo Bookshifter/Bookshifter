@@ -17,104 +17,24 @@
     
     <!-- PAGE CONTENT WRAPPER -->
     <div class="page-content-wrap">
-        <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title-box">
-                            <h2 class="text-center">Clean Code</h2>
-                        </div>
-
-                    </div>
-                    <div class="panel-body">
-                        <div class="card">
-                            <img src="https://m.media-amazon.com/images/I/41SH-SvWPxL.jpg">
-                            <br>
-                            <p><strong>Autor: </strong>Robert C. Martin</p>
-                            <p><strong>Quantidade: </strong>100 disponíveis</p>
-                            <p><strong>Preço: </strong>R$ 9,90</p>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button class="btn btn-block btn-info">Editar</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-block btn-danger">Apagar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <div class="col-md-3">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 15px;">
+            {% for book in books %}
+                <div style="max-width: 300px; margin: 0 auto;">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title-box">
-                                <h2 class="text-center">Felipe Neto</h2>
+                        <div class="panel-heading" style="display:flex; height: 100px; align-items: center; justify-content: center;">
+                            <div class="panel-title-box" >
+                                <h2 class="text-center"> {{book.title}} </h2>
                             </div>
-
                         </div>
                         <div class="panel-body">
                             <div class="card">
-                                <img src="https://m.media-amazon.com/images/I/516Fooz-5yL.jpg">
+                                <img src="{{book.mediumCoverUrl}}">
                                 <br>
-                                <p><strong>Autor: </strong>Felipe Neto</p>
-                                <p><strong>Quantidade: </strong>1 disponível</p>
-                                <p>Para doação</p>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button class="btn btn-block btn-info">Editar</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button class="btn btn-block btn-danger">Apagar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title-box">
-                                <h2 class="text-center">Felipe Neto</h2>
-                            </div>
-
-                        </div>
-                        <div class="panel-body">
-                            <div class="card">
-                                <img src="https://m.media-amazon.com/images/I/91dgkACOTcL._AC_UF1000,1000_QL80_.jpg">
-                                <br>
-                                <p><strong>Autor: </strong>Felipe Neto</p>
-                                <p><strong>Quantidade: </strong>Sem livros disponíveis</p>
-                                <p><strong>Preço: </strong>R$ 29,90</p>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button class="btn btn-block btn-info">Editar</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button class="btn btn-block btn-danger">Apagar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title-box">
-                                <h2 class="text-center">CLEAN CODE</h2>
-                            </div>
-
-                        </div>
-                        <div class="panel-body">
-                            <div class="card">
-                                <img src="https://m.media-amazon.com/images/I/41SH-SvWPxL.jpg">
-                                <br>
-                                <p><strong>Autor: </strong>Robert C. Martin</p>
-                                <p><strong>Quantidade: </strong>100 disponíveis</p>
+                                <p><strong>Autor{% if book.authors|length > 1 %}es{% endif %}: </strong>
+                                    {% for author in book.authors %}{{ author }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                                </p>
+                                <p><strong>Editora: </strong>{{book.publisher}}</p>
                                 <p><strong>Preço: </strong>R$ 9,90</p>
                             </div>
                             <br>
@@ -129,34 +49,8 @@
                         </div>
                     </div>
                 </div>
-        <div class="col-md-3">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title-box">
-                                <h2 class="text-center">CLEAN CODE</h2>
-                            </div>
-
-                        </div>
-                        <div class="panel-body">
-                            <div class="card">
-                                <img src="https://m.media-amazon.com/images/I/41SH-SvWPxL.jpg">
-                                <br>
-                                <p><strong>Autor: </strong>Robert C. Martin</p>
-                                <p><strong>Quantidade: </strong>100 disponíveis</p>
-                                <p><strong>Preço: </strong>R$ 9,90</p>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button class="btn btn-block btn-info">Editar</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button class="btn btn-block btn-danger">Apagar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {% endfor %}
+        </div>
     </div>
     <!-- END PAGE CONTENT WRAPPER -->                                                 
 </div>
