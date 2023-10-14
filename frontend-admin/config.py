@@ -8,10 +8,11 @@ config = dotenv_values(".flaskenv")
 
 class Config:
     ENV = os.getenv("FLASK_ENV")
-    DEBUG = ENV == "development"
     SECRET_KEY = os.getenv("SECRET_KEY")
     FLASK_PORT = os.getenv("FLASK_PORT")
     DEV = os.getenv("DEV")
+    BACKEND_API_URL=os.getenv("BACKEND_API_URL")
+    DEBUG = ENV == "development"
     
     # URLs
     
