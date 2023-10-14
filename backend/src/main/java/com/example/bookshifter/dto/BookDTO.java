@@ -21,8 +21,9 @@ public class BookDTO{
     public BookDTO(){
     }
 
-    public BookDTO(String title, List<String> authors, String description, String publisher,
+    public BookDTO(Long id, String title, List<String> authors, String description, String publisher,
                    Integer publishYear, Integer pageCount, String largeCoverUrl, String mediumCoverUrl) {
+        this.id = id;
         this.title = title;
         this.authors = authors;
         this.description = description;
