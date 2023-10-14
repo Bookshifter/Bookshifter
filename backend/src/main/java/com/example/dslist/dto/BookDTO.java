@@ -9,6 +9,7 @@ import java.util.List;
 
 @Data
 public class BookDTO{
+    private Long id;
     private String title;
     private List<String> authors = new ArrayList<String>();
     private String description;
@@ -34,6 +35,7 @@ public class BookDTO{
     }
 
     public BookDTO(Book book) {
+        this.id = book.getId();
         this.title = book.getTitle();
         this.authors = book.getAuthors();
         this.description = book.getDescription();

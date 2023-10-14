@@ -44,6 +44,8 @@ public class Book {
         this.largeCoverUrl = largeCoverUrl;
         this.mediumCoverUrl = mediumCoverUrl;
     }
+
+    public Long getId(){return this.id; }
     public String getTitle(){
         return this.title;
     }

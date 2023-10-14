@@ -21,7 +21,6 @@ public class BookService implements com.example.dslist.services.interfaces.BookS
     @Autowired
     private RestTemplate restTemplate;
 
-    private Logger logger = LoggerFactory.getLogger(BookService.class);
     @Override
     public BookDTO saveBookByIsbn(Long isbn) {
         String bookUrl = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
