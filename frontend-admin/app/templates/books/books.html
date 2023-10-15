@@ -19,7 +19,7 @@
     <div class="page-content-wrap">
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 15px;">
             {% for book in books %}
-                <div style="max-width: 300px; margin: 0 auto;">
+                <div style="max-width: 300px; margin: 0 auto;" id="book-{{ book.id }}">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="display:flex; height: 100px; align-items: center; justify-content: center;">
                             <div class="panel-title-box" >
@@ -35,7 +35,7 @@
                                 {% endfor %}
                                 </p>
                                 <p><strong>Editora: </strong>{{book.publisher}}</p>
-                                <p><strong>Preço: </strong>R$ 9,90</p>
+                                <p><strong>Descrição: </strong>&nbsp;<span class="fa fa-info-circle" title="{{book.description}}"></span></p>
                             </div>
                             <br>
                             <div class="row">
@@ -43,7 +43,7 @@
                                     <button class="btn btn-block btn-info">Editar</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="btn btn-block btn-danger">Apagar</button>
+                                    <button class="btn btn-block btn-danger" onclick="deleteBook({'id': {{book.id}}, 'url': '{{backend_url}}'})">Apagar</button>
                                 </div>
                             </div>
                         </div>
@@ -56,3 +56,7 @@
 </div>
 
 {% endblock content %}
+
+{% block imports %}
+    <script type="text/javascript" src="{{ url_for('static', filename= 'js/book.js') }}"></script>
+{% endblock imports %}
