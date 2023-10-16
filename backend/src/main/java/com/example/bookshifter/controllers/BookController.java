@@ -26,6 +26,11 @@ public class BookController {
         return ResponseEntity.ok(service.findAllBooks());
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<BookDTO>> searchBook(@RequestParam String query){
+        return ResponseEntity.ok(service.searchProducts(query));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO> getById(@PathVariable Long id){
         return ResponseEntity.ok(service.findById(id));
@@ -38,5 +43,6 @@ public class BookController {
         service.deleteBook(id);
         return "Livro deletado com sucesso!";
     }
+
 
 }

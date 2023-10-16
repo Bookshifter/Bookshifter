@@ -83,4 +83,10 @@ public class BookService implements com.example.bookshifter.services.interfaces.
         Book book = result.get();
         repository.delete(book);
     }
+
+    @Override
+    public List<BookDTO> searchProducts(String query) {
+        List<Book> foundBooks = repository.searchAllByQuery(query);
+        return foundBooks.stream().map(BookDTO::new).toList();
+    }
 }
