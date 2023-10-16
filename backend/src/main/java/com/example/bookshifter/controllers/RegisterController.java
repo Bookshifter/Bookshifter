@@ -4,19 +4,18 @@ import com.example.bookshifter.dto.RegisterUserDTO;
 import com.example.bookshifter.entities.User;
 import com.example.bookshifter.entities.VerificationToken;
 import com.example.bookshifter.events.RegistrationCompleteEvent;
-import com.example.bookshifter.services.interfaces.UserService;
-import com.example.bookshifter.services.interfaces.VerificationTokenService;
+import com.example.bookshifter.services.UserService;
+import com.example.bookshifter.services.VerificationTokenService;
 import com.example.bookshifter.utils.UrlUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/register")
 public class RegisterController {
     @Autowired
@@ -26,34 +25,27 @@ public class RegisterController {
     @Autowired
     private VerificationTokenService tokenService;
 
-    @GetMapping
-    public String registrationForm(Model model){
-        model.addAttribute("user", new RegisterUserDTO());
-        return "registration";
-    }
-
     @PostMapping
-    public String registerUser(@ModelAttribute("user") RegisterUserDTO registerDTO, HttpServletRequest request){
+    public ResponseEntity registerUser(@RequestBody RegisterUserDTO registerDTO, final HttpServletRequest request){
         User user = service.registerUser(registerDTO);
         publisher.publishEvent(new RegistrationCompleteEvent(user, UrlUtil.getApplicationUrl(request)));
-        return "redirect:/register?success";
+        return ResponseEntity.ok("Email enviado com sucesso");
     }
 
-    @GetMapping("/enableAccount")
-    public String enableAccount(@RequestParam("token") String token){
+    //Implementar rest event listener
+    @GetMapping("/rest-enableAccount")
+    public ResponseEntity enableAccount(@RequestParam("token") String token){
         Optional<VerificationToken> verificationToken = tokenService.findByToken(token);
         if(verificationToken.isPresent() && verificationToken.get().getUser().isEnabled()){
-             return "redirect:/login?verified";
+            return ResponseEntity.ok("Conta ativada com sucesso, por favor faça seu login");
         }
 
-        String validation = tokenService.validateToken(token);
-        switch(validation.toLowerCase()){
-            case "expired":
-                return "redirect:/error?expired";
-            case "valid":
-                return "redirect:/login?valid";
-            default:
-                return "redirect:/error?invalid";
-        }
+        String validationResult = tokenService.validateToken(token);
+
+        return switch (validationResult.toLowerCase()) {
+            case "expired" -> ResponseEntity.status(426).body("Token expirado, por favor gere outro token");
+            case "valid" -> ResponseEntity.status(202).body("Token válido, por favor faça seu login");
+            default -> ResponseEntity.status(400).body("Token inválido, por favor gere um token válido");
+        };
     }
 }

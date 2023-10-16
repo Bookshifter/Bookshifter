@@ -42,9 +42,6 @@ public class Security {
                         "/error",
                         "/register/**",
                         "/forgot-password/**",
-                        "/rest-register/**",
-                        "/rest-forgot-password/**",
-                            "/rest-login",
                             "/books",
                             "/books/**"
                     ).permitAll().anyRequest().authenticated()

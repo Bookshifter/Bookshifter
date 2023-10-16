@@ -2,24 +2,18 @@ package com.example.bookshifter.controllers;
 
 import com.example.bookshifter.dto.BookDTO;
 import com.example.bookshifter.services.interfaces.BookService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
-    @Autowired
-    private RestTemplate template;
 
     @Autowired
     private BookService service;
-    public static Logger logger = LoggerFactory.getLogger(BookController.class);
 
     @PostMapping("/isbn:{isbn}")
     public String getBook(@PathVariable Long isbn){

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
 public class PasswordRecoveryEventListener implements ApplicationListener<PasswordRecoveryEvent> {
@@ -21,13 +22,15 @@ public class PasswordRecoveryEventListener implements ApplicationListener<Passwo
     private final PasswordResetTokenService service;
     private final JavaMailSender mailSender;
     private User user;
+
     @Override
     public void onApplicationEvent(PasswordRecoveryEvent event) {
         user = event.getUser();
         String token = UUID.randomUUID().toString();
         service.saveResetPasswordToken(user, token);
 
-        String url = event.getConfirmationURL() + "/forgot-password/password-reset?token=" + token;
+//        String url = event.getConfirmationURL() + "/rest-forgot-password/password-reset?token=" + token;
+        String url = "http://localhost:8000/password-reset?token=" + token;
 
         try {
             sendResetPasswordEmail(url);
@@ -36,16 +39,15 @@ public class PasswordRecoveryEventListener implements ApplicationListener<Passwo
         }
     }
 
-
     public void sendResetPasswordEmail(String url) throws MessagingException, UnsupportedEncodingException {
         String subject = "Recupere sua senha";
         String senderName = "Bookshifter";
-        String content = "<p>Olá "+ user.getFirstName() + "</p>"
-                + "<p><strong>Foi requisitada uma mudança de senha para a conta atrelada a este email no Bookshifter" +
+        String content = "<p> Olá "+ user.getFirstName() + "</p>"
+                + "<p><strong> Foi requisitado uma mudança de senha para a conta atrelada a este email no Bookshifter" +
                 ".</strong></p>"
-                +  "<p>Clique no link abaixo para recuperar sua senha</p>"
+                +  "<p> Clique no link abaixo para recuperar sua senha</p>"
                 + "<a href=\"" + url + "\">Recupere sua senha</a>"
-                + "<p> Bookshifter</p>";
+                + "<p>&copy; Bookshifter</p>";
         emailMessage(subject, senderName, content, mailSender, user);
     }
     private static void emailMessage(String subject, String senderName,

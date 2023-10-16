@@ -1,24 +1,19 @@
 package com.example.bookshifter.controllers;
 
-
+import com.example.bookshifter.dto.PasswordResetDTO;
 import com.example.bookshifter.entities.User;
 import com.example.bookshifter.events.PasswordRecoveryEvent;
-import com.example.bookshifter.services.interfaces.PasswordResetTokenService;
-import com.example.bookshifter.services.interfaces.UserService;
+import com.example.bookshifter.services.PasswordResetTokenService;
+import com.example.bookshifter.services.UserService;
 import com.example.bookshifter.utils.UrlUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
-@Controller
+@RestController
 @RequestMapping("/forgot-password")
 public class PasswordResetController {
     @Autowired
@@ -30,44 +25,41 @@ public class PasswordResetController {
     @Autowired
     private PasswordResetTokenService service;
 
-    @GetMapping
-    public String showForm(){
-        return "forgot-password";
-    }
-
     @PostMapping
-    public String sendResetPasswordRequest(HttpServletRequest request){
-        String email = request.getParameter("email");
+    public ResponseEntity sendResetPasswordRequest(@RequestBody PasswordResetDTO dto, HttpServletRequest request){
+        String email = dto.getEmail();
         Optional<User> user = userService.findByEmail(email);
-        
+
         if(user.isEmpty()){
-            return "redirect:/forgot-password?not_found";
+            return ResponseEntity.status(404).body("Usuário não encontrado");
         }
+
         publisher.publishEvent(new PasswordRecoveryEvent(user.get(), UrlUtil.getApplicationUrl(request)));
-        return "redirect:/forgot-password?success";
+        return  ResponseEntity.status(200).body("Email de mudança de senha enviado");
     }
 
-    @GetMapping("/password-reset")
-    public String changePasswordForm(@RequestParam("token") String token, Model model){
-        model.addAttribute("token", token);
-        return "password-reset";
-    }
     @PostMapping("/password-reset")
-    public String resetPassword(HttpServletRequest request) {
-        String requestToken = request.getParameter("token");
-        String requestPassword = request.getParameter("password");
+    public ResponseEntity resetPassword(@RequestBody PasswordResetDTO request, @RequestParam("token") String requestToken){
+        String validationTokenResult = service.validateToken(requestToken);
+        String newPassword = request.getNewPassword();
+        if(validationTokenResult.equalsIgnoreCase("valid")){
+            Optional<User> user = service.findUserByToken(requestToken);
 
-        String tokenValidation = service.validateToken(requestToken);
-
-        if (!tokenValidation.equalsIgnoreCase("VALID")) {
-            return "redirect:/error?invalid_token";
+            if(user.isPresent()){
+                if (checkValidation(newPassword, request.getNewPasswordConfirmation()).equalsIgnoreCase("valid")){
+                    service.resetPassword(user.get(), newPassword);
+                    return ResponseEntity.status(200).body("Senha alterada com sucesso");
+                } else ResponseEntity.status(409).body("AS senhas não coincidem");
+            }
         }
-        Optional<User> user = service.findUserByToken(requestToken);
 
-        if(user.isPresent()){
-            service.resetPassword(user.get(), requestPassword);
-            return "redirect:/login?reset_sucess";
+        return ResponseEntity.status(406).body("Token não pertence a nenhum usuário ou expirou");
+    }
+
+    private String checkValidation(String newPassword, String newPasswordConfirmation){
+        if(newPassword.equalsIgnoreCase(newPasswordConfirmation)){
+            return "VALID";
         }
-        return "redirect:/error";
+        return "INVALID";
     }
 }
