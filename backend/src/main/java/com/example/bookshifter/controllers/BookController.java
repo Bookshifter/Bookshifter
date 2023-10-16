@@ -21,7 +21,7 @@ public class BookController {
     private BookService service;
     public static Logger logger = LoggerFactory.getLogger(BookController.class);
 
-    @GetMapping("/isbn:{isbn}")
+    @PostMapping("/isbn:{isbn}")
     public String getBook(@PathVariable Long isbn){
         service.saveBookByIsbn(isbn);
         return "Livro adicionado!";
