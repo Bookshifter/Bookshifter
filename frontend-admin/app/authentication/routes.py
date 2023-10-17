@@ -21,8 +21,7 @@ def login():
         else:
             token_string= f'{response}'
             token_login = json.loads(token_string)
-            headers = jsonify({'Authorization': f"Bearer {token_login['token']}"})
-            return headers, redirect(url_for('index.index'))
+            return render_template('/index/index.html', token=token_login['token'])
     return render_template('/authentication/login.html')
 
 @bp.route('/register', methods=['GET', 'POST'])
