@@ -3,6 +3,7 @@ package com.example.bookshifter.services;
 import com.example.bookshifter.bookapi.google.FullRequestWrapper;
 import com.example.bookshifter.bookapi.openlibrary.FullRequestOpenLibrary;
 import com.example.bookshifter.dto.BookDTO;
+import com.example.bookshifter.dto.MinimalBookDTO;
 import com.example.bookshifter.entities.Book;
 import com.example.bookshifter.repositories.BookRepository;
 import org.slf4j.Logger;
@@ -51,10 +52,10 @@ public class BookService implements com.example.bookshifter.services.interfaces.
     }
 
     @Override
-    public List<BookDTO> findAllBooks(){
-        var result = repository.findAll();
+    public List<MinimalBookDTO> findAllBooks(){
+        var result = repository.findAllByMin();
 
-        List<BookDTO> books = result.stream().map(BookDTO::new).toList();
+        List<MinimalBookDTO> books = result.stream().map(MinimalBookDTO::new).toList();
 
         return  books;
     }
