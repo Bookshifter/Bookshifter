@@ -12,7 +12,35 @@
     <!-- PAGE TITLE -->
     <div class="page-title">                    
         <h2><span class="fa fa-book"></span> Meus livros</h2>
+        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#add-book"><span class="fa fa-plus"></span> Adicionar livro</button>
     </div>
+    <div class="modal" id="add-book" tabindex="-1" role="dialog" aria-labelledby="largeModalHead" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="largeModalHead">Adicionar livro</h4>
+                </div>
+                <div class="modal-body">
+                    <br>
+                    <form action="">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">ISBN do livro</label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" placeholder="ISBN-10 ou ISBN-13 do livro sem hífens..." id="isbn-new-book" />
+                            </div>
+                            <br>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success pull-right" onclick="addBook({'url': '{{backend_url}}'})">Salvar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                        
+                </div>
+            </div>
+        </div>
+        </div> 
     <!-- END PAGE TITLE -->                     
     
     <!-- PAGE CONTENT WRAPPER -->
