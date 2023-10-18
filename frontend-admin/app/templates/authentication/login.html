@@ -83,7 +83,12 @@
     </body>
 </html>
 
-
+{% block imports %}
+<script type="text/javascript">
+    if (localStorage['token'])
+    localStorage.removeItem('token')
+</script>
+{% endblock imports %}
 
 
 

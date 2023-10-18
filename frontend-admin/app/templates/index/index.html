@@ -191,6 +191,10 @@
         colors: ['#303030', '#00FF00',],
         resize: true
     });
+    if ('{{token}}' != "") {
+        localStorage.setItem("token", "{{token}}");
+        alert('Logado!');
+    };
 </script>
 
 {% endblock imports %}
