@@ -31,7 +31,6 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         String verificationToken = UUID.randomUUID().toString();
         tokenService.saveVerificationToken(user, verificationToken);
 
-        //String url = event.getConfirmationURL() + "/register/rest-enableAccount?token=" + verificationToken;
         String url = "http://localhost:8000/register/enable?token=" + verificationToken;
         try {
             sendActivationEmail(url);

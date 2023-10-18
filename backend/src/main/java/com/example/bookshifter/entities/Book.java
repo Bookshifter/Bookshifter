@@ -14,7 +14,7 @@ public class Book {
     private Long id;
     private String title;
     @ElementCollection
-    private List<String> authors = new ArrayList<String>();
+    private List<String> authors = new ArrayList<>();
 
     @Column(columnDefinition = "TEXT")
     private String description;

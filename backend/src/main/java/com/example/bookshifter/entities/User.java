@@ -25,7 +25,7 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "tb_user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    transient private Collection<Role> roles;
 
     public User(){
     }
@@ -74,6 +74,7 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.stream(this.getRoles().toString().split(", "))
                 .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+
     }
 
     public String getPassword() {

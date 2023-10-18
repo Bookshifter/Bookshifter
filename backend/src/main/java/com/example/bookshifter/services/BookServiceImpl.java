@@ -3,24 +3,23 @@ package com.example.bookshifter.services;
 import com.example.bookshifter.bookapi.google.FullRequestWrapper;
 import com.example.bookshifter.bookapi.openlibrary.FullRequestOpenLibrary;
 import com.example.bookshifter.dto.BookDTO;
-import com.example.bookshifter.dto.MinimalBookDTO;
 import com.example.bookshifter.entities.Book;
 import com.example.bookshifter.repositories.BookRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class BookService implements com.example.bookshifter.services.interfaces.BookService {
+public class BookServiceImpl implements com.example.bookshifter.services.interfaces.BookService {
     @Autowired
     private BookRepository repository;
     @Autowired
     private RestTemplate restTemplate;
+
 
     @Override
     public BookDTO saveBookByIsbn(Long isbn) {
@@ -33,29 +32,31 @@ public class BookService implements com.example.bookshifter.services.interfaces.
         String url = "https://openlibrary.org/search.json?q=" + isbn;
 
         ResponseEntity<FullRequestOpenLibrary> extraInfoResponse = restTemplate.getForEntity(url, FullRequestOpenLibrary.class);
+        try {
+            Book newBook = new Book(
+                    Objects.requireNonNull(response.getBody()).getItems()[0].getVolumeInfo().getTitle(),
+                    List.of(response.getBody().getItems()[0].getVolumeInfo().getAuthors()),
+                    Objects.requireNonNull(response.getBody().getItems()[0].getVolumeInfo().getDescription()),
+                    Objects.requireNonNull(extraInfoResponse.getBody()).getDocs()[0].getPublisher().get(0),
+                    Objects.requireNonNull(extraInfoResponse.getBody().getDocs()[0].getPublishYear().get(0)),
+                    Objects.requireNonNull(response.getBody().getItems()[0].getVolumeInfo().getPageCount()),
+                    largeCoverUrl,
+                    mediumCoverURL
+            );
 
-        Book newBook = new Book(
-                response.getBody().getItems()[0].getVolumeInfo().getTitle(),
-                List.of(response.getBody().getItems()[0].getVolumeInfo().getAuthors()),
-                response.getBody().getItems()[0].getVolumeInfo().getDescription(),
-                extraInfoResponse.getBody().getDocs()[0].getPublisher().get(0),
-                extraInfoResponse.getBody().getDocs()[0].getPublishYear().get(0),
-                response.getBody().getItems()[0].getVolumeInfo().getPageCount(),
-                largeCoverUrl,
-                mediumCoverURL
-        );
+            repository.save(newBook);
+            return new BookDTO(newBook);
+        } catch(RuntimeException e ){
+            throw new RuntimeException("Erro nas busca da api externa:"+ e.getStackTrace() );
+        }
 
-
-
-        repository.save(newBook);
-        return new BookDTO(newBook);
     }
 
     @Override
-    public List<MinimalBookDTO> findAllBooks(){
-        var result = repository.findAllByMin();
+    public List<BookDTO> findAllBooks(){
+        var result = repository.findAll();
 
-        List<MinimalBookDTO> books = result.stream().map(MinimalBookDTO::new).toList();
+        List<BookDTO> books = result.stream().map(BookDTO::new).toList();
 
         return  books;
     }

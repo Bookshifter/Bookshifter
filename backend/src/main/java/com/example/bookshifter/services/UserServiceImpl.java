@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements com.example.bookshifter.services.interfaces.UserService {
+public class UserServiceImpl implements com.example.bookshifter.services.interfaces.UserService {
     @Autowired
     private UserRepository repository;
     @Autowired

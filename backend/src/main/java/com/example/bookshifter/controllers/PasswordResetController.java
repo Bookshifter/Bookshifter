@@ -3,8 +3,8 @@ package com.example.bookshifter.controllers;
 import com.example.bookshifter.dto.PasswordResetDTO;
 import com.example.bookshifter.entities.User;
 import com.example.bookshifter.events.PasswordRecoveryEvent;
-import com.example.bookshifter.services.PasswordResetTokenService;
-import com.example.bookshifter.services.UserService;
+import com.example.bookshifter.services.PasswordResetTokenServiceImpl;
+import com.example.bookshifter.services.UserServiceImpl;
 import com.example.bookshifter.utils.UrlUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +17,16 @@ import java.util.Optional;
 @RequestMapping("/forgot-password")
 public class PasswordResetController {
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
     private ApplicationEventPublisher publisher;
 
     @Autowired
-    private PasswordResetTokenService service;
+    private PasswordResetTokenServiceImpl service;
 
     @PostMapping
-    public ResponseEntity sendResetPasswordRequest(@RequestBody PasswordResetDTO dto, HttpServletRequest request){
+    public ResponseEntity<String> sendResetPasswordRequest(@RequestBody PasswordResetDTO dto, HttpServletRequest request){
         String email = dto.getEmail();
         Optional<User> user = userService.findByEmail(email);
 
@@ -39,7 +39,7 @@ public class PasswordResetController {
     }
 
     @PostMapping("/password-reset")
-    public ResponseEntity resetPassword(@RequestBody PasswordResetDTO request, @RequestParam("token") String requestToken){
+    public ResponseEntity<String> resetPassword(@RequestBody PasswordResetDTO request, @RequestParam("token") String requestToken){
         String validationTokenResult = service.validateToken(requestToken);
         String newPassword = request.getNewPassword();
         if(validationTokenResult.equalsIgnoreCase("valid")){

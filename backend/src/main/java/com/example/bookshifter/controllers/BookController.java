@@ -1,6 +1,7 @@
 package com.example.bookshifter.controllers;
 
 import com.example.bookshifter.dto.BookDTO;
+import com.example.bookshifter.dto.MinimalBookDTO;
 import com.example.bookshifter.services.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

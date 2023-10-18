@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Calendar;
 import java.util.Optional;
 @Service
-public class VerificationTokenService  implements com.example.bookshifter.services.interfaces.VerificationTokenService {
+public class VerificationTokenServiceImpl implements com.example.bookshifter.services.interfaces.VerificationTokenService {
     @Autowired
     private VerificationTokenRepository repository;
     @Autowired

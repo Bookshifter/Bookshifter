@@ -12,7 +12,7 @@ import java.util.Calendar;
 import java.util.Optional;
 
 @Service
-public class PasswordResetTokenService implements com.example.bookshifter.services.interfaces.PasswordResetTokenService {
+public class PasswordResetTokenServiceImpl implements com.example.bookshifter.services.interfaces.PasswordResetTokenService {
     @Autowired
     private UserRepository userRepository;
 

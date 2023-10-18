@@ -2,7 +2,7 @@ package com.example.bookshifter.events.listener;
 
 import com.example.bookshifter.entities.User;
 import com.example.bookshifter.events.PasswordRecoveryEvent;
-import com.example.bookshifter.services.PasswordResetTokenService;
+import com.example.bookshifter.services.PasswordResetTokenServiceImpl;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.UUID;
 public class PasswordRecoveryEventListener implements ApplicationListener<PasswordRecoveryEvent> {
 
 
-    private final PasswordResetTokenService service;
+    private final PasswordResetTokenServiceImpl service;
     private final JavaMailSender mailSender;
     private User user;
 
@@ -28,8 +28,6 @@ public class PasswordRecoveryEventListener implements ApplicationListener<Passwo
         user = event.getUser();
         String token = UUID.randomUUID().toString();
         service.saveResetPasswordToken(user, token);
-
-//        String url = event.getConfirmationURL() + "/rest-forgot-password/password-reset?token=" + token;
         String url = "http://localhost:8000/password-reset?token=" + token;
 
         try {

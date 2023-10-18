@@ -1,7 +1,6 @@
 package com.example.bookshifter.dto;
 
 import com.example.bookshifter.entities.Book;
-import com.example.bookshifter.projections.BookMinProjection;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.List;
 public class BookDTO{
     private Long id;
     private String title;
-    private List<String> authors = new ArrayList<String>();
+    private List<String> authors = new ArrayList<>();
     private String description;
     private String publisher;
     private Integer publishYear;

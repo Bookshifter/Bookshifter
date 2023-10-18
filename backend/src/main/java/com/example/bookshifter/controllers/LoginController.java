@@ -22,7 +22,7 @@ public class LoginController {
     @Autowired
     private JwtTokenService jwtTokenService;
     @PostMapping
-    public ResponseEntity<?> login(@RequestBody LoginDTO credentials){
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO credentials){
         var usernamePassword= new UsernamePasswordAuthenticationToken(credentials.email(), credentials.password());
         var auth = this.manager.authenticate(usernamePassword);
 

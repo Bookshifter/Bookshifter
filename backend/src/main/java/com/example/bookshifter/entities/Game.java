@@ -80,8 +80,7 @@ public class Game {
         return this.genre;
     }
 
-    private void setGenre(String genre){
-        this.genre = genre;
+
     }
     public String getImageUrl() {
         return imageUrl;

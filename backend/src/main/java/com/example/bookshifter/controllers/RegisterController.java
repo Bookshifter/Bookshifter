@@ -4,8 +4,8 @@ import com.example.bookshifter.dto.RegisterUserDTO;
 import com.example.bookshifter.entities.User;
 import com.example.bookshifter.entities.VerificationToken;
 import com.example.bookshifter.events.RegistrationCompleteEvent;
-import com.example.bookshifter.services.UserService;
-import com.example.bookshifter.services.VerificationTokenService;
+import com.example.bookshifter.services.UserServiceImpl;
+import com.example.bookshifter.services.VerificationTokenServiceImpl;
 import com.example.bookshifter.utils.UrlUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +19,14 @@ import java.util.Optional;
 @RequestMapping("/register")
 public class RegisterController {
     @Autowired
-    private UserService service;
+    private UserServiceImpl service;
     @Autowired
     private ApplicationEventPublisher publisher;
     @Autowired
-    private VerificationTokenService tokenService;
+    private VerificationTokenServiceImpl tokenService;
 
     @PostMapping
-    public ResponseEntity registerUser(@RequestBody RegisterUserDTO registerDTO, final HttpServletRequest request){
+    public ResponseEntity<String> registerUser(@RequestBody RegisterUserDTO registerDTO, final HttpServletRequest request){
         User user = service.registerUser(registerDTO);
         publisher.publishEvent(new RegistrationCompleteEvent(user, UrlUtil.getApplicationUrl(request)));
         return ResponseEntity.ok("Email enviado com sucesso");
@@ -34,7 +34,7 @@ public class RegisterController {
 
     //Implementar rest event listener
     @GetMapping("/rest-enableAccount")
-    public ResponseEntity enableAccount(@RequestParam("token") String token){
+    public ResponseEntity<String> enableAccount(@RequestParam("token") String token){
         Optional<VerificationToken> verificationToken = tokenService.findByToken(token);
         if(verificationToken.isPresent() && verificationToken.get().getUser().isEnabled()){
             return ResponseEntity.ok("Conta ativada com sucesso, por favor faça seu login");

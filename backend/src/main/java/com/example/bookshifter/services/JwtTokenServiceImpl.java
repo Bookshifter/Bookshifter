@@ -5,12 +5,13 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.example.bookshifter.entities.User;
+import com.example.bookshifter.services.interfaces.JwtTokenService;
 import com.example.bookshifter.utils.TokensExpirationTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JwtTokenService implements com.example.bookshifter.services.interfaces.JwtTokenService {
+public class JwtTokenServiceImpl implements JwtTokenService {
     //Pega o valor do application.yml e atribui a variável secret
     @Value("${api.security.token.secret}")
     private String secret;
