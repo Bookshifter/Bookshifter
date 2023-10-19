@@ -1,4 +1,4 @@
-package com.example.bookshifter.bookapi.openlibrary;
+package com.example.bookshifter.api.book.openlibrary;
 
 public class FullRequestOpenLibrary {
 

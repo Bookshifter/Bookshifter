@@ -43,7 +43,8 @@ public class Security {
                         "/register/**",
                         "/forgot-password/**",
                             "/books",
-                            "/books/**"
+                            "/books/**",
+                            "/fatec/**"
                     ).permitAll().anyRequest().authenticated()
                 ).addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
     }
