@@ -23,17 +23,15 @@
                 </div>
                 <div class="modal-body">
                     <br>
-                    <form action="">
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">ISBN do livro</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" placeholder="ISBN-10 ou ISBN-13 do livro sem hífens..." id="isbn-new-book" />
-                            </div>
-                            <br>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">ISBN do livro</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" placeholder="ISBN-10 ou ISBN-13 do livro sem hífens..." id="isbn-new-book" />
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-success pull-right" onclick="addBook({'url': '{{backend_url}}'})">Salvar</button>
-                    </form>
+                    </div>
+                    <br>
+                    <button class="btn btn-success pull-right" onclick="addBook({'url': '{{backend_url}}'})">Salvar</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                        

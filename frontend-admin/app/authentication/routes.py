@@ -5,10 +5,10 @@ import json
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
-    url_api = 'http://localhost:8080/'
+    backend_url = current_app.config.get('BACKEND_API_URL')
     if request.method == 'POST':
         form = dict(request.form)
-        url_login = url_api + 'rest-login'
+        url_login = backend_url + 'login'
         params = {
             'url': url_login,
             'data': form,
@@ -21,15 +21,18 @@ def login():
         else:
             token_string= f'{response}'
             token_login = json.loads(token_string)
-            return render_template('/index/index.html', token=token_login['token'])
+            logged = make_response(render_template('/index/index.html'))
+            logged.headers['Authorization'] = f"Bearer {token_login['token']}"
+            return logged
+        
     return render_template('/authentication/login.html')
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
-    url_api = 'http://localhost:8080/'
+    backend_url = current_app.config.get('BACKEND_API_URL')
     if request.method == 'POST':
         form = dict(request.form)
-        url_register = url_api + 'rest-register'        
+        url_register = backend_url + 'register'        
         params = {
             'url': url_register,
             'data': form,
@@ -44,8 +47,8 @@ def register():
 @bp.route('/register/enable', methods=['GET', 'POST'])
 def register_enable():
     token = request.args.get('token')
-    url_api = 'http://localhost:8080/'
-    url_enable_account = url_api + f'rest-register/rest-enableAccount?token={token}'
+    backend_url = current_app.config.get('BACKEND_API_URL')
+    url_enable_account = backend_url + f'register/rest-enableAccount?token={token}'
     params = {
             'url': url_enable_account,
             'method': 'GET'
@@ -57,10 +60,10 @@ def register_enable():
 
 @bp.route('/forgot-password', methods=['GET', 'POST'])
 def forgot_password():
-    url_api = 'http://localhost:8080/'
+    backend_url = current_app.config.get('BACKEND_API_URL')
     if request.method == 'POST':
         form = dict(request.form)
-        url_register = url_api + 'rest-forgot-password'        
+        url_register = backend_url + 'forgot-password'        
         params = {
             'url': url_register,
             'data': form,
@@ -74,10 +77,10 @@ def forgot_password():
 @bp.route('/password-reset', methods=['GET', 'POST'])
 def password_reset():
     token = request.args.get('token')
-    url_api = 'http://localhost:8080/'
+    backend_url = current_app.config.get('BACKEND_API_URL')
     if request.method == 'POST':
         form = dict(request.form)
-        url_reset_password = url_api + f'rest-forgot-password/password-reset?token={token}'
+        url_reset_password = backend_url + f'forgot-password/password-reset?token={token}'
         params = {
             'url': url_reset_password,
             'data': form,

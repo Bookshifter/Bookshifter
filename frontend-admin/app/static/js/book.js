@@ -18,26 +18,30 @@ function deleteBook(params) {
     });
 }
 
-function addBook(params) {
-    const isbn = document.getElementById('isbn-new-book').value
+async function addBook(params) {
+    const isbn = parseInt(document.getElementById('isbn-new-book').value);
     if (!isbn) {
-        alert('Insira o ISBN do livro')
-        return false
+        alert('Insira o ISBN do livro');
+        return false;
     }
-    apiUrl =  `${params['url']}books/isbn:${isbn}`
-    fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
+    const apiUrl = `${params['url']}books/isbn:${isbn}`;
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            const data = await response.text();
+            console.log(data);
+            alert('Livro adicionado com sucesso!');
+            window.location.reload();
+        } else {
+            throw new Error('Erro na solicitação do servidor');
         }
-    })
-    .then(response => {
-        console.log(response.text)
-        alert('Livro adicionado com sucesso!');
-        window.location.reload();
-    })
-    .catch(error => {
+    } catch (error) {
+        console.error(error);
         alert('Ops, houve um erro com a solicitação, tente novamente mais tarde!');
-        console.error('Erro ao enviar a solicitação POST:', error);
-    });
+    }
 }
