@@ -44,7 +44,7 @@ public class Security {
                         "/forgot-password/**",
                             "/books",
                             "/books/**",
-                            "/fatec/**"
+                            "/fatec"
                     ).permitAll().anyRequest().authenticated()
                 ).addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
     }
