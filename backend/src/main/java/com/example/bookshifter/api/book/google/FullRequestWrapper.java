@@ -1,4 +1,4 @@
-package com.example.bookshifter.bookapi.google;
+package com.example.bookshifter.api.book.google;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
