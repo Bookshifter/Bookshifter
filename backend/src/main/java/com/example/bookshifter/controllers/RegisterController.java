@@ -32,8 +32,8 @@ public class RegisterController {
         return ResponseEntity.ok("Email enviado com sucesso");
     }
 
-    //Implementar rest event listener
-    @GetMapping("/rest-enableAccount")
+
+    @GetMapping("/account")
     public ResponseEntity<String> enableAccount(@RequestParam("token") String token){
         Optional<VerificationToken> verificationToken = tokenService.findByToken(token);
         if(verificationToken.isPresent() && verificationToken.get().getUser().isEnabled()){
