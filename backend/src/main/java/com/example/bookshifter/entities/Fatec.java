@@ -17,7 +17,7 @@ public class Fatec {
     private String street;
     private String neighborhood;
     private String city;
-    @OneToMany
+    @OneToMany(mappedBy = "book")
     @JoinColumn(name = "book")
     transient private List<Book> book;
 

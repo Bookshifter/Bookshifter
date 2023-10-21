@@ -29,11 +29,16 @@ public class Book {
 
     @Column(name = "medium_cover_url")
     private String mediumCoverUrl;
+    @ManyToOne()
+    @JoinColumn(name = "fatec")
+
+    private Fatec fatec;
+
     public Book(){
     }
 
     public Book(String title, List<String> authors, String description, String publisher, Integer publishYear,
-                Integer pageCount, String largeCoverUrl, String mediumCoverUrl)
+                Integer pageCount, String largeCoverUrl, String mediumCoverUrl )
     {
         this.title = title;
         this.authors = authors;
