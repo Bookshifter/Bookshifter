@@ -1,6 +1,7 @@
 package com.example.bookshifter.controllers;
 
 import com.example.bookshifter.dto.BookDTO;
+import com.example.bookshifter.dto.BookRequestDTO;
 import com.example.bookshifter.dto.MinimalBookDTO;
 import com.example.bookshifter.services.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class BookController {
 
     @CrossOrigin("*")
     @PostMapping("/isbn:{isbn}")
-    public String getBook(@PathVariable Long isbn){
-        service.saveBookByIsbn(isbn);
+    public String getBook(@PathVariable Long isbn, @RequestBody BookRequestDTO dto){
+        service.saveBookByIsbn(isbn, dto);
         return "Livro adicionado!";
     }
 
@@ -45,6 +46,4 @@ public class BookController {
         service.deleteBook(id);
         return "Livro deletado com sucesso!";
     }
-
-
 }

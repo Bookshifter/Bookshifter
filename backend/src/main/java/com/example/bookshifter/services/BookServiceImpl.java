@@ -3,8 +3,11 @@ package com.example.bookshifter.services;
 import com.example.bookshifter.api.book.google.FullRequestWrapper;
 import com.example.bookshifter.api.book.openlibrary.FullRequestOpenLibrary;
 import com.example.bookshifter.dto.BookDTO;
+import com.example.bookshifter.dto.BookRequestDTO;
 import com.example.bookshifter.entities.Book;
+import com.example.bookshifter.entities.Fatec;
 import com.example.bookshifter.repositories.BookRepository;
+import com.example.bookshifter.repositories.FatecRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements com.example.bookshifter.services.interfaces.BookService {
@@ -19,10 +23,11 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
     private BookRepository repository;
     @Autowired
     private RestTemplate restTemplate;
-
+    @Autowired
+    private FatecRepository fatecRepository;
 
     @Override
-    public BookDTO saveBookByIsbn(Long isbn) {
+    public BookDTO saveBookByIsbn(Long isbn, BookRequestDTO dto) {
         String bookUrl = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
         String largeCoverUrl = "https://covers.openlibrary.org/b/isbn/" + isbn + "-L.jpg";
         String mediumCoverURL = "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg";
@@ -32,6 +37,11 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
         String url = "https://openlibrary.org/search.json?q=" + isbn;
 
         ResponseEntity<FullRequestOpenLibrary> extraInfoResponse = restTemplate.getForEntity(url, FullRequestOpenLibrary.class);
+        Optional<Fatec> fatecOptional = fatecRepository.findByName(dto.fatecName());
+        if(fatecOptional.isEmpty()){
+            throw new RuntimeException("Fatec não elegível");
+        }
+
         try {
             Book newBook = new Book(
                     Objects.requireNonNull(response.getBody()).getItems()[0].getVolumeInfo().getTitle(),
@@ -41,7 +51,8 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
                     Objects.requireNonNull(extraInfoResponse.getBody().getDocs()[0].getPublishYear().get(0)),
                     Objects.requireNonNull(response.getBody().getItems()[0].getVolumeInfo().getPageCount()),
                     largeCoverUrl,
-                    mediumCoverURL
+                    mediumCoverURL,
+                    fatecOptional.get()
             );
 
             repository.save(newBook);

@@ -1,12 +1,13 @@
 package com.example.bookshifter.services.interfaces;
 
 import com.example.bookshifter.dto.BookDTO;
+import com.example.bookshifter.dto.BookRequestDTO;
 
 
 import java.util.List;
 
 public interface BookService {
-    BookDTO saveBookByIsbn(Long isbn);
+    BookDTO saveBookByIsbn(Long isbn, BookRequestDTO dto);
 
     List<BookDTO> findAllBooks();
 

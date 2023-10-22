@@ -38,7 +38,7 @@ public class Book {
     }
 
     public Book(String title, List<String> authors, String description, String publisher, Integer publishYear,
-                Integer pageCount, String largeCoverUrl, String mediumCoverUrl )
+                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, Fatec fatec)
     {
         this.title = title;
         this.authors = authors;
@@ -48,6 +48,7 @@ public class Book {
         this.pageCount = pageCount;
         this.largeCoverUrl = largeCoverUrl;
         this.mediumCoverUrl = mediumCoverUrl;
+        this.fatec = fatec;
     }
 
     public Long getId(){return this.id; }
@@ -98,6 +99,10 @@ public class Book {
 
     public String getMediumCoverUrl(){
         return this.mediumCoverUrl;
+    }
+
+    public Fatec getFatec(){
+        return this.fatec;
     }
 
 }
