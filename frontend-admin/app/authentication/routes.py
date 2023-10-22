@@ -54,7 +54,7 @@ def register():
 def register_enable():
     token = request.args.get('token')
     backend_url = current_app.config.get('BACKEND_API_URL')
-    url_enable_account = backend_url + f'register/rest-enableAccount?token={token}'
+    url_enable_account = backend_url + f'register/account?token={token}'
     params = {
             'url': url_enable_account,
             'method': 'GET'
