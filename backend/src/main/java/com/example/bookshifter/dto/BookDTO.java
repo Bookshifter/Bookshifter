@@ -1,6 +1,7 @@
 package com.example.bookshifter.dto;
 
 import com.example.bookshifter.entities.Book;
+import com.example.bookshifter.entities.Fatec;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -17,12 +18,13 @@ public class BookDTO{
     private Integer pageCount;
     private String largeCoverUrl;
     private String mediumCoverUrl;
+    private String fatecName;
 
     public BookDTO(){
     }
 
     public BookDTO(Long id, String title, List<String> authors, String description, String publisher,
-                   Integer publishYear, Integer pageCount, String largeCoverUrl, String mediumCoverUrl) {
+                   Integer publishYear, Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String fatecName) {
         this.id = id;
         this.title = title;
         this.authors = authors;
@@ -32,6 +34,7 @@ public class BookDTO{
         this.pageCount = pageCount;
         this.largeCoverUrl = largeCoverUrl;
         this.mediumCoverUrl = mediumCoverUrl;
+        this.fatecName = fatecName;
     }
 
     public BookDTO(Book book) {
@@ -44,6 +47,7 @@ public class BookDTO{
         this.pageCount = book.getPageCount();
         this.largeCoverUrl = book.getLargeCoverUrl();
         this.mediumCoverUrl = book.getMediumCoverUrl();
+        this.fatecName = book.getFatec().getName();
     }
 
     public String getTitle(){
@@ -76,5 +80,9 @@ public class BookDTO{
 
     public String getMediumCoverUrl(){
         return this.mediumCoverUrl;
+    }
+
+    public String getFatecName(){
+        return this.fatecName;
     }
 }
