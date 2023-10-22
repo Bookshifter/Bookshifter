@@ -1,4 +1,5 @@
-from flask import Flask, render_template, redirect, request, flash, url_for, jsonify, make_response
+from flask import Flask, render_template, redirect, request, flash, url_for, make_response, session
+from flask_jwt_extended import create_access_token, get_jwt_identity
 from app.authentication import bp, api
 from flask import current_app
 import json
@@ -21,8 +22,13 @@ def login():
         else:
             token_string= f'{response}'
             token_login = json.loads(token_string)
+            session['token'] = token_login['token']
             logged = make_response(render_template('/index/index.html'))
             logged.headers['Authorization'] = f"Bearer {token_login['token']}"
+            logged.set_cookie('Authorization', f"{token_login['token']}")
+            logged.set_cookie('access_token_cookie', f"{token_login['token']}")
+            
+            # access_token = create_access_token(identity=form['email'])
             return logged
         
     return render_template('/authentication/login.html')
@@ -53,7 +59,6 @@ def register_enable():
             'url': url_enable_account,
             'method': 'GET'
         }
-    print(url_enable_account)
     response, message = api.api_register(params=params)
     flash('Sua conta foi ativada com sucesso!' if 'success' in message else message['error'], 'success' if 'success' in message else 'danger')
     return redirect(url_for('authentication.login'))
@@ -94,3 +99,9 @@ def password_reset():
         flash('Redefinição de senha concluída!', 'success')
         return redirect(url_for('authentication.login'))
     return render_template('/authentication/reset-password.html')
+
+@bp.route('/logout')
+def logout():
+    session.clear()
+    flash('Deslogado com sucesso!', 'success')
+    return redirect(url_for('authentication.login'))

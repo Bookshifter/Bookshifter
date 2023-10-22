@@ -1,16 +1,21 @@
-from flask import Flask
-
+from flask import Flask, session
+from flask_session import Session
+from flask_jwt_extended import JWTManager
 from config import Config
 
+jwt = JWTManager()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-
-    # Initialize Flask extensions here
-
-    # Register blueprints here
     
+    jwt.init_app(app)
+    
+    app.config['JWT_TOKEN_LOCATION'] = ['cookies'] # nova linha
+    
+    app.config['SESSION_TYPE'] = 'filesystem'
+    Session(app)
+
     from app.account import bp as account_bp
     app.register_blueprint(account_bp)
     
