@@ -1,7 +1,7 @@
 package com.example.bookshifter.services;
 
-import com.example.bookshifter.bookapi.google.FullRequestWrapper;
-import com.example.bookshifter.bookapi.openlibrary.FullRequestOpenLibrary;
+import com.example.bookshifter.api.book.google.FullRequestWrapper;
+import com.example.bookshifter.api.book.openlibrary.FullRequestOpenLibrary;
 import com.example.bookshifter.dto.BookDTO;
 import com.example.bookshifter.entities.Book;
 import com.example.bookshifter.repositories.BookRepository;
