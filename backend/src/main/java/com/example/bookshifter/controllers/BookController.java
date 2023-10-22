@@ -17,6 +17,7 @@ public class BookController {
     @Autowired
     private BookService service;
 
+    @CrossOrigin("*")
     @PostMapping("/isbn:{isbn}")
     public String getBook(@PathVariable Long isbn, @RequestBody BookRequestDTO dto){
         service.saveBookByIsbn(isbn, dto);
