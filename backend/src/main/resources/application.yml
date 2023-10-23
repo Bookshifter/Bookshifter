@@ -3,11 +3,16 @@
 server:
     port: 8080
 spring:
-    #creiar db na fatec antes de rodar
+    #criar db na fatec antes de rodar
     datasource:
         url: jdbc:mysql://localhost:3306/testdb
+<<<<<<< HEAD
         username:
         password:
+=======
+        username: 
+        password: 
+>>>>>>> frontend/session
         driver-class-name:
     jpa:
         hibernate:
@@ -17,8 +22,13 @@ spring:
     mail:
         host: smtp.gmail.com
         port: 587
+<<<<<<< HEAD
         username:
         password:
+=======
+        username: 
+        password: 
+>>>>>>> frontend/session
         properties:
             mail:
                 smtp:
@@ -37,4 +47,8 @@ api:
     security:
         token:
             #NÃO COMMITAR COM A LINHA ABAIXO PREENCHIDA
+<<<<<<< HEAD
             secret:
+=======
+            secret: 
+>>>>>>> frontend/session

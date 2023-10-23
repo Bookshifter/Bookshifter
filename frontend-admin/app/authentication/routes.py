@@ -4,6 +4,8 @@ from app.authentication import bp, api
 from flask import current_app
 import json
 
+# insert a /admin prefix in my routes.
+# app.register_blueprint(admin_bp, url_prefix='/admin')
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     backend_url = current_app.config.get('BACKEND_API_URL')
@@ -23,7 +25,7 @@ def login():
             token_string= f'{response}'
             token_login = json.loads(token_string)
             session['token'] = token_login['token']
-            logged = make_response(render_template('/index/index.html'))
+            logged = make_response(redirect(url_for('dashboard.dashboard')))
             logged.headers['Authorization'] = f"Bearer {token_login['token']}"
             logged.set_cookie('Authorization', f"{token_login['token']}")
             logged.set_cookie('access_token_cookie', f"{token_login['token']}")

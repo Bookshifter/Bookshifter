@@ -2,17 +2,17 @@ from flask import Flask, session
 from flask_session import Session
 from flask_jwt_extended import JWTManager
 from config import Config
+from datetime import timedelta
 
-jwt = JWTManager()
+# jwt = JWTManager()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     
-    jwt.init_app(app)
-    
-    app.config['JWT_TOKEN_LOCATION'] = ['cookies'] # nova linha
-    
+    # jwt.init_app(app)
+    # app.config['JWT_TOKEN_LOCATION'] = ['cookies']
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
     app.config['SESSION_TYPE'] = 'filesystem'
     Session(app)
 
@@ -31,8 +31,8 @@ def create_app(config_class=Config):
     from app.forms import bp as forms_bp
     app.register_blueprint(forms_bp)
     
-    from app.index import bp as main_bp
-    app.register_blueprint(main_bp)
+    from app.dashboard import bp as dashboard_bp
+    app.register_blueprint(dashboard_bp)
     
     from app.pages import bp as pages_bp
     app.register_blueprint(pages_bp)
