@@ -7,7 +7,7 @@ import com.example.bookshifter.dto.BookRequestDTO;
 import java.util.List;
 
 public interface BookService {
-    BookDTO saveBookByIsbn(Long isbn, BookRequestDTO dto);
+    BookDTO saveBookByIsbn(Long isbn,Long fatecId, BookRequestDTO dto);
 
     List<BookDTO> findAllBooks();
 

@@ -27,7 +27,7 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
     private FatecRepository fatecRepository;
 
     @Override
-    public BookDTO saveBookByIsbn(Long isbn, BookRequestDTO dto) {
+    public BookDTO saveBookByIsbn(Long isbn, Long fatecId, BookRequestDTO dto) {
         String bookUrl = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
         String largeCoverUrl = "https://covers.openlibrary.org/b/isbn/" + isbn + "-L.jpg";
         String mediumCoverURL = "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg";
@@ -37,7 +37,7 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
         String url = "https://openlibrary.org/search.json?q=" + isbn;
 
         ResponseEntity<FullRequestOpenLibrary> extraInfoResponse = restTemplate.getForEntity(url, FullRequestOpenLibrary.class);
-        Optional<Fatec> fatecOptional = fatecRepository.findByName(dto.fatecName());
+        Optional<Fatec> fatecOptional = fatecRepository.findById(fatecId);
         if(fatecOptional.isEmpty()){
             throw new RuntimeException("Fatec não elegível");
         }
@@ -52,6 +52,7 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
                     Objects.requireNonNull(response.getBody().getItems()[0].getVolumeInfo().getPageCount()),
                     largeCoverUrl,
                     mediumCoverURL,
+                    dto.bookState(),
                     fatecOptional.get()
             );
 

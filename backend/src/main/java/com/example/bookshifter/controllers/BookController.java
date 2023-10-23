@@ -18,9 +18,9 @@ public class BookController {
     private BookService service;
 
     @CrossOrigin("*")
-    @PostMapping("/isbn:{isbn}")
-    public String getBook(@PathVariable Long isbn, @RequestBody BookRequestDTO dto){
-        service.saveBookByIsbn(isbn, dto);
+    @PostMapping("/")
+public String getBook(@RequestParam(name = "isbn") Long isbn, @RequestParam(name = "fatecId") Long fatecId, @RequestBody BookRequestDTO dto){
+        service.saveBookByIsbn(isbn, fatecId, dto);
         return "Livro adicionado!";
     }
 

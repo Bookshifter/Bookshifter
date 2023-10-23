@@ -29,16 +29,17 @@ public class Book {
 
     @Column(name = "medium_cover_url")
     private String mediumCoverUrl;
+    @Column(columnDefinition = "TEXT")
+    private String bookState;
     @ManyToOne()
     @JoinColumn(name = "fatec")
-
     private Fatec fatec;
 
     public Book(){
     }
 
     public Book(String title, List<String> authors, String description, String publisher, Integer publishYear,
-                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, Fatec fatec)
+                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState, Fatec fatec)
     {
         this.title = title;
         this.authors = authors;
@@ -48,6 +49,7 @@ public class Book {
         this.pageCount = pageCount;
         this.largeCoverUrl = largeCoverUrl;
         this.mediumCoverUrl = mediumCoverUrl;
+        this.bookState = bookState;
         this.fatec = fatec;
     }
 
@@ -99,6 +101,10 @@ public class Book {
 
     public String getMediumCoverUrl(){
         return this.mediumCoverUrl;
+    }
+
+    public String getBookState(){
+        return this.bookState;
     }
 
     public Fatec getFatec(){

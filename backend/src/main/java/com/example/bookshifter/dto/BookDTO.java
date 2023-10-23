@@ -18,13 +18,16 @@ public class BookDTO{
     private Integer pageCount;
     private String largeCoverUrl;
     private String mediumCoverUrl;
+    private String bookState;
     private String fatecName;
+    private Long fatecID;
 
     public BookDTO(){
     }
 
     public BookDTO(Long id, String title, List<String> authors, String description, String publisher,
-                   Integer publishYear, Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String fatecName) {
+                   Integer publishYear, Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState,
+                   String fatecName, Long fatecID) {
         this.id = id;
         this.title = title;
         this.authors = authors;
@@ -34,7 +37,10 @@ public class BookDTO{
         this.pageCount = pageCount;
         this.largeCoverUrl = largeCoverUrl;
         this.mediumCoverUrl = mediumCoverUrl;
+        this.bookState = bookState;
         this.fatecName = fatecName;
+        this.fatecID = fatecID;
+
     }
 
     public BookDTO(Book book) {
@@ -47,7 +53,9 @@ public class BookDTO{
         this.pageCount = book.getPageCount();
         this.largeCoverUrl = book.getLargeCoverUrl();
         this.mediumCoverUrl = book.getMediumCoverUrl();
+        this.bookState = book.getBookState();
         this.fatecName = book.getFatec().getName();
+        this.fatecID = book.getFatec().getId();
     }
 
     public String getTitle(){

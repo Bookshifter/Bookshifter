@@ -31,6 +31,9 @@ public class Fatec {
         this.city = city;
 
     }
+    public Long getId(){
+        return this.id;
+    }
 
     public String getName() {
         return name;
