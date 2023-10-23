@@ -24,6 +24,19 @@
                 <div class="modal-body">
                     <br>
                     <div class="form-group">
+                        <label class="col-md-2 control-label">Fatec destino</label>
+                        <div class="col-md-10">
+                            <select class="form-control" id="fatec-new-book">
+                                <option value="N/A" disabled selected>Selecione uma Fatec</option>
+                                {% for fatec in fatecs %}
+                                    <option value="{{fatec.id}}">{{fatec.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <br>
+                    </div>
+                    <br>
+                    <div class="form-group">
                         <label class="col-md-2 control-label">ISBN do livro</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" placeholder="ISBN-10 ou ISBN-13 do livro sem hífens..." id="isbn-new-book" />
@@ -33,9 +46,6 @@
                     <br>
                     <button class="btn btn-success pull-right" onclick="addBook({'url': '{{backend_url}}'})">Salvar</button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                        
-                </div>
             </div>
         </div>
         </div> 
@@ -43,40 +53,52 @@
     
     <!-- PAGE CONTENT WRAPPER -->
     <div class="page-content-wrap">
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 15px;">
-            {% for book in books %}
-                <div style="max-width: 300px; margin: 0 auto;" id="book-{{ book.id }}">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="display:flex; height: 100px; align-items: center; justify-content: center;">
-                            <div class="panel-title-box" >
-                                <h2 class="text-center"> {{book.title}} </h2>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="card">
-                                <img src="{{book.mediumCoverUrl}}">
-                                <br>
-                                <p><strong>Autor{% if book.authors|length > 1 %}es{% endif %}: </strong>
-                                    {% for author in book.authors %}{{ author }}{% if not loop.last %}, {% endif %}
-                                {% endfor %}
-                                </p>
-                                <p><strong>Editora: </strong>{{book.publisher}}</p>
-                                <p><strong>Descrição: </strong>&nbsp;<span class="fa fa-info-circle" title="{{book.description}}"></span></p>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button class="btn btn-block btn-info">Editar</button>
+        {% if not books %}
+        <div class="text-center">
+            <h1>Você não tem livros cadastrados.</h3>
+            <br>
+            <img src="{{ url_for('static', filename= 'img/media/no-books.png') }}" style="max-width:20%;">
+            <br><br><br>
+            <h3>Para cadastrar um livro, clique <a data-toggle="modal" data-target="#add-book">aqui</a> ou no botão adicionar livro.</h3>
+        </div>
+        {% else %}
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 15px;">
+                {% for book in books %}
+                    <div style="max-width: 300px; margin: 0 auto;" id="book-{{ book.id }}">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="display:flex; height: 100px; align-items: center; justify-content: center;">
+                                <div class="panel-title-box" >
+                                    <h2 class="text-center"> {{book.title}} </h2>
                                 </div>
-                                <div class="col-md-6">
-                                    <button class="btn btn-block btn-danger" onclick="deleteBook({'id': {{book.id}}, 'url': '{{backend_url}}'})">Apagar</button>
+                            </div>
+                            <div class="panel-body">
+                                <div class="card">
+                                    <img src="{{book.mediumCoverUrl}}">
+                                    <br>
+                                    <p><strong>Autor{% if book.authors|length > 1 %}es{% endif %}: </strong>
+                                        {% for author in book.authors %}{{ author }}{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                    </p>
+                                    <p><strong>Editora: </strong>{{book.publisher}}</p>
+                                    <p><strong>Descrição: </strong>&nbsp;<span class="fa fa-info-circle" title="{{book.description}}"></span></p>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-block btn-info">Editar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-block btn-danger" onclick="deleteBook({'id': {{book.id}}, 'url': '{{backend_url}}'})">Apagar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        
     </div>
     <!-- END PAGE CONTENT WRAPPER -->                                                 
 </div>
