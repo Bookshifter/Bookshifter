@@ -1,5 +1,5 @@
 from flask import render_template
-from app.tables import bp
+from app.admin import bp
 from flask import current_app
 
 @bp.route('/history')

@@ -31,16 +31,16 @@
                         </div>
                     </li>
                     <li>
-                        <a href="/"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboard</span></a>
+                        <a href="{{url_for('dashboard.shelf')}}"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="/account"><span class="fa fa-user"></span> <span class="xn-text">Conta</span></a>
+                        <a href="{{url_for('account.account')}}"><span class="fa fa-user"></span> <span class="xn-text">Conta</span></a>
                     </li>
                     <li>
-                        <a href="/books"><span class="glyphicon glyphicon-book"></span> <span class="xn-text">Meus livros</span></a>
+                        <a href="{{url_for('books.books')}}"><span class="glyphicon glyphicon-book"></span> <span class="xn-text">Meus livros</span></a>
                     </li>
                     <li>
-                        <a href="/history"><span class="fa fa-lock"></span> <span class="xn-text">Histórico</span></a>
+                        <a href="{{url_for('admin.history')}}"><span class="fa fa-lock"></span> <span class="xn-text">Histórico</span></a>
                     </li>
                     <li class="xn-openable">
                         <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Pages</span></a>
