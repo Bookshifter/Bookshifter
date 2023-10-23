@@ -25,7 +25,7 @@ def login():
             token_string= f'{response}'
             token_login = json.loads(token_string)
             session['token'] = token_login['token']
-            logged = make_response(redirect(url_for('index.shelf')))
+            logged = make_response(redirect(url_for('dashboard.dashboard')))
             logged.headers['Authorization'] = f"Bearer {token_login['token']}"
             logged.set_cookie('Authorization', f"{token_login['token']}")
             logged.set_cookie('access_token_cookie', f"{token_login['token']}")

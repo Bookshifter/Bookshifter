@@ -4,8 +4,8 @@ from flask import current_app
 from app.authentication import functions as auth
 
 @bp.route('/shelf/dashboard')
-def shelf():
+def dashboard():
   session_active = auth.verify_session(session)
   if not session_active:
     return redirect(url_for('authentication.login'))
-  return render_template('/index/index.html')
+  return render_template('/dashboard/dashboard.html')
