@@ -6,8 +6,8 @@ spring:
     #criar db na fatec antes de rodar
     datasource:
         url: jdbc:mysql://localhost:3306/testdb
-        username:
-        password:
+        username: root
+        password: 20030210
         driver-class-name:
     jpa:
         hibernate:
@@ -17,8 +17,8 @@ spring:
     mail:
         host: smtp.gmail.com
         port: 587
-        username:
-        password:
+        username: book.shifter.brazil@gmail.com
+        password: rmiduyrssggrjiep
         properties:
             mail:
                 smtp:
@@ -37,4 +37,4 @@ api:
     security:
         token:
             #NÃO COMMITAR COM A LINHA ABAIXO PREENCHIDA
-            secret:
+            secret: ${JWT_SECRET:charliebrown}

@@ -49,4 +49,7 @@ def create_app(config_class=Config):
     from app.books import bp as books_bp
     app.register_blueprint(books_bp)
     
+    from app.ecommerce import bp as ecommerce_bp
+    app.register_blueprint(ecommerce_bp)
+    
     return app
