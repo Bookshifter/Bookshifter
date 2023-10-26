@@ -207,7 +207,7 @@
                     </li>   
                     <!-- END SEARCH -->
                     <!-- POWER OFF -->
-                    <li class="xn-icon-button pull-right last">
+                    <li class="xn-icon-button float-right last">
                         <a href="#"><span class="fa fa-power-off"></span></a>
                         <ul class="xn-drop-left animated zoomIn">
                             <li><a href="/pages-lock-screen"><span class="fa fa-lock"></span> Lock Screen</a></li>
@@ -216,14 +216,11 @@
                     </li> 
                     <!-- END POWER OFF -->
                     <!-- MESSAGES -->
-                    <li class="xn-icon-button pull-right">
-                        <a href="/register"><span class="fa fa-user"></span></a>
-                    </li>
-                    <li class="xn-icon-button pull-right">
-                        <a href="/login"><span class="glyphicon glyphicon-log-in"></span></a>
+                    <li class="xn-icon-button float-right">
+                        <a href="{{url_for('authentication.login')}}"><span class="fa fa-user"></span></a>
                     </li>
                     <!-- LANG BAR -->
-                    <li class="xn-icon-button pull-right">
+                    <li class="xn-icon-button float-right">
                         <a href="#"><img class="flag" src="{{ url_for('static', filename= 'img/flags/br.png') }}"></a>
                         <ul class="xn-drop-left xn-drop-white animated zoomIn">
                             <li><a href="#"><img class="flag" src="{{ url_for('static', filename= 'img/flags/us.png') }}"> Inglês</a></li>

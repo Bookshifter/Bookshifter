@@ -1,8 +1,8 @@
 from flask import Flask, session
 from flask_session import Session
-from flask_jwt_extended import JWTManager
 from config import Config
 from datetime import timedelta
+# from flask_jwt_extended import JWTManager
 
 # jwt = JWTManager()
 

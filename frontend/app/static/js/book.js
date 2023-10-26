@@ -20,17 +20,34 @@ function deleteBook(params) {
 
 async function addBook(params) {
     const isbn = parseInt(document.getElementById('isbn-new-book').value);
+    const fatecId = parseInt(document.getElementById('fatec-new-book').value);
+    const bookState = document.getElementById('book-state').value;
+    var fatec = "N/A";
+    if (fatecId) {
+        fatec = document.getElementById(`fatec-${fatecId}`).value;
+    } else {
+        alert('Selecione a Fatec');
+        return false;
+    }
     if (!isbn) {
         alert('Insira o ISBN do livro');
         return false;
+    } else if (isbn.toString().length != 13) {
+        alert('O ISBN deve conter 13 dígitos');
+        return false;
     }
-    const apiUrl = `${params['url']}books/isbn:${isbn}`;
+
+    const apiUrl = `${params['url']}books/?isbn=${isbn}&fatecId=${fatecId}`;
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({
+                bookState: bookState,
+                fatec: fatec
+            })
         });
         if (response.ok) {
             const data = await response.text();
