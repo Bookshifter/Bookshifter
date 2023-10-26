@@ -23,17 +23,14 @@ async function addBook(params) {
     const fatecId = parseInt(document.getElementById('fatec-new-book').value);
     const bookState = document.getElementById('book-state').value;
     var fatec = "N/A";
-    if (fatecId) {
-        fatec = document.getElementById(`fatec-${fatecId}`).value;
-    } else {
-        alert('Selecione a Fatec.');
-        return false;
-    }
     if (!isbn) {
         alert('Insira o ISBN do livro.');
         return false;
     } else if (isbn.toString().length != 13 && isbn.toString().length != 10) {
         alert('O ISBN deve ser válido, com 10 ou 13 dígitos.');
+        return false;
+    } else if (!fatecId) {
+        alert('Selecioe uma Fatec.')
         return false;
     }
 
@@ -45,8 +42,7 @@ async function addBook(params) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                bookState: bookState,
-                fatec: fatec
+                bookState: bookState
             })
         });
         if (response.ok) {
