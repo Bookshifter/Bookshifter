@@ -3,12 +3,14 @@ package com.example.bookshifter.services;
 import com.example.bookshifter.api.fatec.LocationInfo;
 import com.example.bookshifter.dto.BookDTO;
 import com.example.bookshifter.dto.FatecDTO;
+import com.example.bookshifter.dto.FatecInfoDTO;
 import com.example.bookshifter.dto.ResponseFatecDTO;
 import com.example.bookshifter.entities.Book;
 import com.example.bookshifter.entities.Fatec;
 import com.example.bookshifter.repositories.BookRepository;
 import com.example.bookshifter.repositories.FatecRepository;
 
+import com.example.bookshifter.services.interfaces.FatecService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,13 +20,29 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class FatecServiceImpl {
+public class FatecServiceImpl implements FatecService {
     @Autowired
     private FatecRepository repository;
     @Autowired
     private BookRepository bookRepository;
     @Autowired
     private RestTemplate template;
+
+    public List<FatecInfoDTO> getAll(){
+        var result = repository.findAll();
+        List<FatecInfoDTO> fatecs = result.stream().map(FatecInfoDTO::new).toList();
+        return fatecs;
+    }
+
+    public FatecInfoDTO getFatecById(Long id){
+        var result = repository.findById(id);
+        if(result.isPresent()){
+            Fatec fatec = result.get();
+            FatecInfoDTO fatecInfoDTO = new FatecInfoDTO(fatec);
+            return  fatecInfoDTO;
+        }
+        throw new RuntimeException("Fatec requerida ainda não cadastrada");
+    }
 
     public FatecDTO createFatec(FatecDTO dto){
         String url ="https://viacep.com.br/ws/" + dto.cep() + "/json/";
