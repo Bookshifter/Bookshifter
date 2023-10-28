@@ -16,7 +16,8 @@
     </head>
     <body>
         
-        <div class="login-container lightmode">
+        <!-- <div class="login-container lightmode"> -->
+        <div class="login-container ">
         
             <div class="login-box animated fadeInDown">
                 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -72,8 +73,8 @@
                         &copy; Bookshifter
                     </div>
                     <div class="pull-right">
-                        <a href="/">Home</a> |
-                        <a href="/about">Sobre</a>
+                        <a href="{{url_for('ecommerce.index')}}">Home</a> |
+                        <a href="{{url_for('ecommerce.about')}}">Sobre</a>
                     </div>
                 </div>
             </div>
@@ -85,8 +86,8 @@
 
 {% block imports %}
 <script type="text/javascript">
-    if (localStorage['token'])
-    localStorage.removeItem('token')
+    //if (localStorage['token'])
+    //localStorage.removeItem('token')
 </script>
 {% endblock imports %}
 

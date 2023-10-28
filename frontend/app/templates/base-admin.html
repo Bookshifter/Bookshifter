@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>        
+        <!-- META SECTION -->
+        <title>Bookshifter</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+        <!-- END META SECTION -->
+        
+        <!-- CSS INCLUDE -->        
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/rtl.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/theme-dark.css') }}">
+        <!-- END CSS INCLUDE -->
+    </head>
+    <body>
+        <!-- START PAGE CONTAINER -->
+        <div class="page-container">
+            <!-- START PAGE SIDEBAR -->
+            <div class="page-sidebar">
+                <!-- START X-NAVIGATION -->
+                <ul class="x-navigation x-navigation-hover">
+                    <li class="xn-profile">
+                        <div class="profile">
+                            <div class="profile-image">
+                                <img src="{{ url_for('static', filename='img/logo-bookshifter-1.png') }}" style="width:90% !important;">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{{url_for('dashboard.dashboard')}}"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('account.account')}}"><span class="fa fa-user"></span> <span class="xn-text">Conta</span></a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('books.books')}}"><span class="fa fa-book"></span> <span class="xn-text">Meus livros</span></a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('admin.history')}}"><span class="fa fa-lock"></span> <span class="xn-text">Histórico</span></a>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Pages</span></a>
+                        <ul>
+                            <li><a href="/pages-gallery"><span class="fa fa-image"></span> Gallery</a></li>
+                            <li><a href="/pages-invoice"><span class="fa fa-dollar"></span> Invoice</a></li>
+                            <li><a href="/pages-profile"><span class="fa fa-user"></span> Profile</a></li>
+                            <li><a href="/pages-address-book"><span class="fa fa-users"></span> Address Book</a></li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-clock-o"></span> Timeline</a>
+                                <ul>
+                                    <li><a href="/pages-timeline"><span class="fa fa-align-center"></span> Default</a></li>
+                                    <li><a href="/pages-timeline-simple"><span class="fa fa-align-justify"></span> Full Width</a></li>
+                                </ul>
+                            </li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-envelope"></span> Mailbox</a>
+                                <ul>
+                                    <li><a href="/pages-mailbox-inbox"><span class="fa fa-inbox"></span> Inbox</a></li>
+                                    <li><a href="/pages-mailbox-message"><span class="fa fa-file-text"></span> Message</a></li>
+                                    <li><a href="/pages-mailbox-compose"><span class="fa fa-pencil"></span> Compose</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/pages-calendar"><span class="fa fa-calendar"></span> Calendar</a></li>
+                            <li><a href="/pages-tasks"><span class="fa fa-edit"></span> Tasks</a></li>
+                            <li><a href="/pages-content-table"><span class="fa fa-columns"></span> Content Table</a></li>
+                            <li><a href="/pages-faq"><span class="fa fa-question-circle"></span> FAQ</a></li>
+                            <li><a href="/pages-search"><span class="fa fa-search"></span> Search</a></li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-file"></span> Blog</a>
+                                
+                                <ul>
+                                    <li><a href="/pages-blog-list"><span class="fa fa-copy"></span> List of Posts</a></li>
+                                    <li><a href="/pages-blog-post"><span class="fa fa-file-o"></span>Single Post</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="pages-lock-screen"><span class="fa fa-lock"></span> Lock Screen</a></li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-sign-in"></span> Login</a>
+                                <ul>
+                                    <li><a href="/pages-login">Login v1</a></li>
+                                    <li><a href="/pages-login-v2">Login v2</a></li>
+                                    <li><a href="/pages-login-inside">Login v2 Inside</a></li>
+                                    <li><a href="/pages-login-website">Website Login</a></li>
+                                    <li><a href="/pages-login-website-light"> Website Login Light</a></li>
+                                </ul>
+                            </li>
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-plus"></span> Registration</a>
+                                <ul>
+                                    <li><a href="/pages-registration">Default</a></li>
+                                    <li><a href="/pages-registration-login">With Login</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/pages-forgot-password"><span class="fa fa-question"></span> Forgot Password</a></li>                            
+                            <li class="xn-openable">
+                                <a href="#"><span class="fa fa-warning"></span> Error Pages</a>
+                                <ul>
+                                    <li><a href="/pages-error-404">Error 404 Sample 1</a></li>
+                                    <li><a href="/pages-error-404-2">Error 404 Sample 2</a></li>
+                                    <li><a href="/pages-error-500"> Error 500</a></li>
+                                </ul>
+                            </li>                            
+                        </ul>
+                    </li>
+                    <li class="xn-title">Components</li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">UI Kits</span></a>                        
+                        <ul>
+                            <li><a href="/widgets"><span class="fa fa-heart"></span> Widgets</a></li>                            
+                            <li><a href="/elements"><span class="fa fa-cogs"></span> Elements</a></li>
+                            <li><a href="/buttons"><span class="fa fa-square-o"></span> Buttons</a></li>                            
+                            <li><a href="/panels"><span class="fa fa-pencil-square-o"></span> Panels</a></li>
+                            <li><a href="/icons"><span class="fa fa-magic"></span> Icons</a><div class="informer informer-warning">+679</div></li>
+                            <li><a href="/typography"><span class="fa fa-pencil"></span> Typography</a></li>
+                            <li><a href="/portlet"><span class="fa fa-th"></span> Portlet</a></li>
+                            <li><a href="/sliders"><span class="fa fa-arrows-h"></span> Sliders</a></li>
+                            <li><a href="/alerts-popups"><span class="fa fa-warning"></span> Alerts & Popups</a></li>                            
+                            <li><a href="/lists"><span class="fa fa-list-ul"></span> Lists</a></li>
+                            <li><a href="/tour"><span class="fa fa-random"></span> Tour</a></li>
+                            <li><a href="/nestable"><span class="fa fa-sitemap"></span> Nestable List</a></li>
+                            <li><a href="/autocomplete"><span class="fa fa-search-plus"></span> Autocomplete</a></li>
+                            <li><a href="/slide-menu"><span class="fa fa-angle-right"></span> Slide Menu</a></li>
+                        </ul>
+                    </li>                    
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-pencil"></span> <span class="xn-text">Forms</span></a>
+                        <ul>
+                            <li class="xn-openable">
+                                <a href="/form-layouts-two-column"><span class="fa fa-tasks"></span> Form Layouts</a>
+                                <ul>
+                                    <li><a href="/form-layouts-one-column"><span class="fa fa-align-justify"></span> One Column</a></li>
+                                    <li><a href="/form-layouts-two-column"><span class="fa fa-th-large"></span> Two Column</a></li>
+                                    <li><a href="/form-layouts-tabbed"><span class="fa fa-table"></span> Tabbed</a></li>
+                                    <li><a href="/form-layouts-separated"><span class="fa fa-th-list"></span> Separated Rows</a></li>
+                                </ul> 
+                            </li>
+                            <li><a href="/form-elements"><span class="fa fa-file-text-o"></span> Elements</a></li>
+                            <li><a href="/form-validation"><span class="fa fa-list-alt"></span> Validation</a></li>
+                            <li><a href="/form-wizards"><span class="fa fa-arrow-right"></span> Wizards</a></li>
+                            <li><a href="/form-editors"><span class="fa fa-text-width"></span> WYSIWYG Editors</a></li>
+                            <li><a href="/form-file-handling"><span class="fa fa-floppy-o"></span> File Handling</a></li>
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="/tables"><span class="fa fa-table"></span> <span class="xn-text">Tables</span></a>
+                        <ul>                            
+                            <li><a href="/table-basic"><span class="fa fa-align-justify"></span> Basic</a></li>
+                            <li><a href="/table-datatables"><span class="fa fa-sort-alpha-desc"></span> Data Tables</a></li>
+                            <li><a href="/table-export"><span class="fa fa-download"></span> Export Tables</a></li>                            
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-bar-chart-o"></span> <span class="xn-text">Charts</span></a>
+                        <ul>
+                            <li><a href="/charts-morris">Morris</a></li>
+                            <li><a href="/charts-nvd3">NVD3</a></li>
+                            <li><a href="/charts-rickshaw">Rickshaw</a></li>
+                            <li><a href="/charts-other">Other</a></li>
+                        </ul>
+                    </li>                    
+                    <li>
+                        <a href="/maps"><span class="fa fa-map-marker"></span> <span class="xn-text">Maps</span></a>
+                    </li>                    
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-sitemap"></span> <span class="xn-text">Navigation Levels</span></a>
+                        <ul>                            
+                            <li class="xn-openable">
+                                <a href="#">Second Level</a>
+                                <ul>
+                                    <li class="xn-openable">
+                                        <a href="#">Third Level</a>
+                                        <ul>
+                                            <li class="xn-openable">
+                                                <a href="#">Fourth Level</a>
+                                                <ul>
+                                                    <li><a href="#">Fifth Level</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>                            
+                        </ul>
+                    </li>
+                    
+                </ul>
+                <!-- END X-NAVIGATION -->
+            </div>
+            <!-- END PAGE SIDEBAR -->
+            <div class="page-content"> 
+                <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+                    <!-- TOGGLE NAVIGATION -->
+                    <li class="xn-icon-button">
+                        <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
+                    </li>
+                    
+                    <!-- END TOGGLE NAVIGATION -->
+                    <!-- SEARCH -->
+                    <li class="xn-search">
+                        <form role="form">
+                            <input type="text" name="search" placeholder="Search..."/>
+                        </form>
+                    </li>   
+                    <!-- END SEARCH -->
+                    <!-- POWER OFF -->
+                    <li class="xn-icon-button float-right last">
+                        <a href="#"><span class="fa fa-power-off"></span></a>
+                        <ul class="xn-drop-left animated zoomIn">
+                            <li><a href="/pages-lock-screen"><span class="fa fa-lock"></span> Lock Screen</a></li>
+                            <li><a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span> Sign Out</a></li>
+                        </ul>                        
+                    </li> 
+                    <!-- END POWER OFF -->
+                    <!-- MESSAGES -->
+                    <li class="xn-icon-button float-right">
+                        <a href="{{url_for('authentication.login')}}"><span class="fa fa-user"></span></a>
+                    </li>
+                    <!-- LANG BAR -->
+                    <li class="xn-icon-button float-right">
+                        <a href="#"><img class="flag" src="{{ url_for('static', filename= 'img/flags/br.png') }}"></a>
+                        <ul class="xn-drop-left xn-drop-white animated zoomIn">
+                            <li><a href="#"><img class="flag" src="{{ url_for('static', filename= 'img/flags/us.png') }}"> Inglês</a></li>
+                            <li><a href="#"><img class="flag" src="{{ url_for('static', filename= 'img/flags/es.png') }}"> Espanhol</a></li>
+                        </ul>                        
+                    </li> 
+                    <!-- END LANG BAR -->
+                </ul>
+                <!-- PAGE CONTENT -->
+                    {% block content %}
+                    {% endblock content %}
+                    <!-- END PAGE CONTENT -->
+            </div>
+        </div>
+        <!-- END PAGE CONTAINER -->
+
+        <!-- MESSAGE BOX-->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-sign-out"></span> Sair?</div>
+                    <div class="mb-content">
+                        <p>Tem certeza de que deseja sair?</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a href="{{url_for('authentication.logout')}}" class="btn btn-success btn-lg">Sim</a>
+                            <button class="btn btn-default btn-lg mb-control-close">Não</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MESSAGE BOX-->        
+    </body>
+    <!-- START SCRIPTS -->
+        <!-- START PLUGINS -->      
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/jquery/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/jquery/jquery-ui.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/bootstrap-4.4.1/bootstrap.min.js') }}"></script> 
+
+        <!-- END PLUGINS -->
+
+        <!-- START THIS PAGE PLUGINS-->        
+        <script type='text/javascript' src="{{ url_for('static', filename= 'js/plugins/icheck/icheck.min.js') }}"></script>        
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/scrolltotop/scrolltopcontrol.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/morris/raphael-min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/morris/morris.min.js') }}"></script>       
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/rickshaw/d3.v3.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/rickshaw/rickshaw.min.js') }}"></script>
+        <script type='text/javascript' src="{{ url_for('static', filename= 'js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+        <script type='text/javascript' src="{{ url_for('static', filename= 'js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>                
+        <script type='text/javascript' src="{{ url_for('static', filename= 'js/plugins/bootstrap-4.4.1/bootstrap-datepicker.js') }}"></script>                
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/owl/owl.carousel.min.js') }}"></script>                 
+
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/moment.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/daterangepicker/daterangepicker.js') }}"></script>
+        <!-- END THIS PAGE PLUGINS-->        
+
+        <!-- START TEMPLATE -->
+
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins.js') }}"></script>        
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/actions.js') }}"></script>
+        <!-- END TEMPLATE -->
+
+        <!-- START TABLES PLUGINS -->
+        <script type="text/javascript" src="{{ url_for('static', filename= 'js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+        <!-- END TABLES PLUGINS -->
+
+        {% block imports %}
+        {% endblock imports %}
+        
+    <!-- END SCRIPTS --> 
+</html>

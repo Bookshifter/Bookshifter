@@ -1,8 +1,8 @@
 from flask import Flask, session
 from flask_session import Session
-from flask_jwt_extended import JWTManager
 from config import Config
 from datetime import timedelta
+# from flask_jwt_extended import JWTManager
 
 # jwt = JWTManager()
 
@@ -48,5 +48,8 @@ def create_app(config_class=Config):
 
     from app.books import bp as books_bp
     app.register_blueprint(books_bp)
+    
+    from app.ecommerce import bp as ecommerce_bp
+    app.register_blueprint(ecommerce_bp)
     
     return app
