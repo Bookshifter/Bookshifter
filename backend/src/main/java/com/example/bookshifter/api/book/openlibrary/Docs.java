@@ -10,7 +10,7 @@ public class Docs {
     @JsonProperty("publish_year")
     private ArrayList<Integer> publishYear = new ArrayList<>();
 
-    public ArrayList<String> publisher = new ArrayList<>();
+    private ArrayList<String> publisher = new ArrayList<>();
 
     public ArrayList<Integer> getPublishYear(){
         return  this.publishYear;
