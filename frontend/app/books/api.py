@@ -5,16 +5,19 @@ import json
 def api_books(params):
     message = ''
     response = None
+    headers = {
+    'Authorization': f"Bearer {params['token']}"
+    }
     try:
         match params['method']:
             case 'POST':
-                response = requests.post(json=params['data'], url=params['url'])
+                response = requests.post(json=params['data'], url=params['url'], headers=headers)
             case 'GET':
-                response = requests.get(url=params['url'])
+                response = requests.get(url=params['url'], headers=headers)
             case 'PATCH':
-                response = requests.patch(json=params['data'], url=params['url'])
+                response = requests.patch(json=params['data'], url=params['url'], headers=headers)
             case 'DELETE': 
-                response = requests.delete(json=params['data'], url=params['url'])
+                response = requests.delete(json=params['data'], url=params['url'],headers=headers)
             case _:
                 response = {'error': 'Método não suportado.'}
     except requests.exceptions.ConnectionError:
@@ -46,10 +49,10 @@ def api_books(params):
             return message
         
 
-def get_api_books(url):
+def get_api_books(params):
     try:
-        response = requests.get(url
-                            # headers={"Authorization": f"Token {token}"}
+        response = requests.get(params['url'],
+                            headers={"Authorization": f"Bearer {params['token']}"}
                             )
     except requests.exceptions.ConnectionError:
         return {'error': 'Erro ao conectar na API.'}
