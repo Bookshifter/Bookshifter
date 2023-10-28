@@ -29,7 +29,7 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Override
     public List<UserDTO> findAll(){
         var result = repository.findAll();
@@ -56,11 +56,10 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
            String getEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 
             Optional<User> userOptional = repository.findByEmail(getEmail);
-            logger.debug(userOptional.toString());
             if(userOptional.isPresent()){
                 return userOptional.get();
             }
         }
-        throw new RuntimeException("Token JWT expirado ou não informado, por vaor tente novamente");
+        throw new RuntimeException("Token JWT expirado ou não informado, por favaor tente novamente");
     }
 }
