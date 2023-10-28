@@ -1,7 +1,7 @@
 package com.example.bookshifter.dto;
 
 import com.example.bookshifter.entities.Book;
-import com.example.bookshifter.entities.Fatec;
+
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -20,14 +20,17 @@ public class BookDTO{
     private String mediumCoverUrl;
     private String bookState;
     private String fatecName;
+    private String ownerName;
     private Long fatecID;
+    private Long ownerID;
+
 
     public BookDTO(){
     }
 
     public BookDTO(Long id, String title, List<String> authors, String description, String publisher,
                    Integer publishYear, Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState,
-                   String fatecName, Long fatecID) {
+                   String fatecName, String ownerName, Long fatecID, Long ownerID) {
         this.id = id;
         this.title = title;
         this.authors = authors;
@@ -39,7 +42,9 @@ public class BookDTO{
         this.mediumCoverUrl = mediumCoverUrl;
         this.bookState = bookState;
         this.fatecName = fatecName;
+        this.ownerName = ownerName;
         this.fatecID = fatecID;
+        this.ownerID = ownerID;
 
     }
 
@@ -55,6 +60,7 @@ public class BookDTO{
         this.mediumCoverUrl = book.getMediumCoverUrl();
         this.bookState = book.getBookState();
         this.fatecName = book.getFatec().getName();
+        this.ownerName = book.getOwner().getFirstName() + " " + book.getOwner().getLastName();
         this.fatecID = book.getFatec().getId();
     }
 
