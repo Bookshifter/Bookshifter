@@ -62,6 +62,7 @@ public class BookDTO{
         this.fatecName = book.getFatec().getName();
         this.ownerName = book.getOwner().getFirstName() + " " + book.getOwner().getLastName();
         this.fatecID = book.getFatec().getId();
+        this.ownerID = book.getOwner().getId();
     }
 
     public String getTitle(){
