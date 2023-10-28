@@ -6,10 +6,17 @@ import com.example.bookshifter.dto.BookDTO;
 import com.example.bookshifter.dto.BookRequestDTO;
 import com.example.bookshifter.entities.Book;
 import com.example.bookshifter.entities.Fatec;
+import com.example.bookshifter.entities.User;
 import com.example.bookshifter.repositories.BookRepository;
 import com.example.bookshifter.repositories.FatecRepository;
+import com.example.bookshifter.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,6 +32,11 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
     private RestTemplate restTemplate;
     @Autowired
     private FatecRepository fatecRepository;
+
+    @Autowired
+    private UserService userService;
+
+    private Authentication auth;
 
     @Override
     public BookDTO saveBookByIsbn(Long isbn, Long fatecId, BookRequestDTO dto) {
@@ -43,6 +55,7 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
         }
 
         try {
+            User owner = userService.getAuthenticatedUserInfo(auth);
             Book newBook = new Book(
                     Objects.requireNonNull(response.getBody()).getItems()[0].getVolumeInfo().getTitle(),
                     List.of(response.getBody().getItems()[0].getVolumeInfo().getAuthors()),
@@ -53,15 +66,15 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
                     largeCoverUrl,
                     mediumCoverURL,
                     dto.bookState(),
-                    fatecOptional.get()
+                    fatecOptional.get(),
+                    owner
             );
 
             repository.save(newBook);
             return new BookDTO(newBook);
         } catch(RuntimeException e ){
             throw new RuntimeException("Erro nas busca da api externa:"+ e.getStackTrace() );
-        }
-
+            }
     }
 
     @Override

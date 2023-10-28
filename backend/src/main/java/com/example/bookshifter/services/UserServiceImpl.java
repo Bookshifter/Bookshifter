@@ -6,7 +6,13 @@ import com.example.bookshifter.dto.UserDTO;
 import com.example.bookshifter.entities.Role;
 import com.example.bookshifter.entities.User;
 import com.example.bookshifter.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +28,8 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     private UserRepository repository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public List<UserDTO> findAll(){
         var result = repository.findAll();
@@ -40,5 +48,19 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     public Optional<User> findByEmail(String email){
         return Optional.ofNullable(repository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado")));
+    }
+
+    @Override
+    public User getAuthenticatedUserInfo(Authentication authentication){
+        if(!(authentication instanceof AnonymousAuthenticationToken)) {
+           String getEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+
+            Optional<User> userOptional = repository.findByEmail(getEmail);
+            logger.debug(userOptional.toString());
+            if(userOptional.isPresent()){
+                return userOptional.get();
+            }
+        }
+        throw new RuntimeException("Token JWT expirado ou não informado, por vaor tente novamente");
     }
 }
