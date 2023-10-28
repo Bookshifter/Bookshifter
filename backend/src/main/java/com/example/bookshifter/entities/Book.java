@@ -35,11 +35,16 @@ public class Book {
     @JoinColumn(name = "fatec")
     private Fatec fatec;
 
+    @ManyToOne()
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
+
+
     public Book(){
     }
 
     public Book(String title, List<String> authors, String description, String publisher, Integer publishYear,
-                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState, Fatec fatec)
+                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState, Fatec fatec, User owner)
     {
         this.title = title;
         this.authors = authors;
@@ -51,6 +56,8 @@ public class Book {
         this.mediumCoverUrl = mediumCoverUrl;
         this.bookState = bookState;
         this.fatec = fatec;
+        this.owner = owner;
+
     }
 
     public Long getId(){return this.id; }
@@ -109,6 +116,9 @@ public class Book {
 
     public Fatec getFatec(){
         return this.fatec;
+    }
+    public User getOwner(){
+        return this.owner;
     }
 
 }

@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class UrlUtil {
 
 
-    private void StringUtils() throws IllegalAccessException {
+    private void stringUtils() throws IllegalAccessException {
         throw new IllegalAccessException("Utility class");
     }
     public static String getApplicationUrl(HttpServletRequest request){

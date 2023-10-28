@@ -18,4 +18,7 @@ public interface BookRepository extends JpaRepository<Book,  Long> {
     @Query(nativeQuery = true, value = "SELECT title, publisher, medium_cover_url as mediumCoverUrl from tb_book book ")
 
     List<BookMinProjection> findAllByMin();
+
+    @Query(nativeQuery = true, value = "SELECT * FROM tb_book book where book.fatec =:id")
+    List<Book> findByFatecId(Long id);
 }

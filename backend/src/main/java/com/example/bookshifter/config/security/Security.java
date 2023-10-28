@@ -1,7 +1,5 @@
 package com.example.bookshifter.config.security;
 
-import com.example.bookshifter.services.AuthorizationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,11 +15,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class Security {
-    @Autowired
-    private AuthorizationService service;
 
-    @Autowired
-    private JwtSecurityFilter filter;
+    @Bean
+    public JwtSecurityFilter createJwtFilter(){
+        return new JwtSecurityFilter();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -41,11 +39,8 @@ public class Security {
                         "/login",
                         "/error",
                         "/register/**",
-                        "/forgot-password/**",
-                            "/books",
-                            "/books/**",
-                            "/fatec"
+                        "/forgot-password/**"
                     ).permitAll().anyRequest().authenticated()
-                ).addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
+                ).addFilterBefore(createJwtFilter(), UsernamePasswordAuthenticationFilter.class).build();
     }
 }

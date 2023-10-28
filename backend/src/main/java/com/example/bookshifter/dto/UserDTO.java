@@ -6,10 +6,10 @@ import com.example.bookshifter.entities.User;
 import java.util.List;
 
 public class UserDTO {
-    public String firstName;
-    public String lastName;
-    public String email;
-    public List<Role> roles;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private List<Role> roles;
 
     public UserDTO(){
 
