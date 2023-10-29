@@ -9,27 +9,27 @@
         
         <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
         <!-- END META SECTION -->
-        
-        <!-- CSS INCLUDE -->        
-        <link rel="stylesheet" type="text/css" id="theme" href="{{ url_for('static', filename='css/theme-dark.css') }}"/>
+
+        <!-- CSS INCLUDE --> 
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/theme-dark.css') }}"/>
+	    <link rel="stylesheet" href="{{url_for('static',filename='css/animate.css')}}">
+	    <link rel="stylesheet" href="{{url_for('static',filename='css/magnific-popup.css')}}">
         <!-- EOF CSS INCLUDE -->                                       
     </head>
     <body>
         
         <!-- <div class="login-container lightmode"> -->
         <div class="login-container ">
-        
             <div class="login-box animated fadeInDown">
                 {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                        <div class="alert alert-{{category}}" role="alert">
-                            
-                            <p>{{ message }}</p>
-                        </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
+					{% if messages %}
+						{% for category, message in messages %}
+						<div class="alert alert-{{category}} alert-dismissible" role="alert">
+							<p class="text-middle">{{ message }}</p>
+						</div>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
                 <div class="login-body">
                     <div class="login-title"><strong>Entrar</strong> na sua conta</div>
                     <form class="form-horizontal" method="POST">

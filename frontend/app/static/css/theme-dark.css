@@ -10294,6 +10294,7 @@ div.tagsinput div {
 .file-input-new .glyphicon-file {
   display: none;
 }
+
 .loading {
   background: transparent url(../img/loading.gif) no-repeat scroll center center content-box !important;
 }

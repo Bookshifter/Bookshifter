@@ -21,7 +21,7 @@ def api_books(params):
             case _:
                 response = {'error': 'Método não suportado.'}
     except requests.exceptions.ConnectionError:
-        return {'error': 'Erro ao conectar na API do cadastro'}
+        return {'error': 'Erro ao conectar na API.'}
     except Exception as e:
         return {'error': str(e)}
     

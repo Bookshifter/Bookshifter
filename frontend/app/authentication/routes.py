@@ -1,11 +1,9 @@
 from flask import Flask, render_template, redirect, request, flash, url_for, make_response, session
-from flask_jwt_extended import create_access_token, get_jwt_identity
 from app.authentication import bp, api
 from flask import current_app
 import json
 
-# insert a /admin prefix in my routes.
-# app.register_blueprint(admin_bp, url_prefix='/admin')
+
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     backend_url = current_app.config.get('BACKEND_API_URL')
@@ -26,8 +24,6 @@ def login():
             token_login = json.loads(token_string)
             session['token'] = token_login['token']
             logged = make_response(redirect(url_for('ecommerce.index')))
-            logged.headers['Authorization'] = f"Bearer {token_login['token']}"
-            logged.set_cookie('Authorization', f"{token_login['token']}")
             logged.set_cookie('access_token_cookie', f"{token_login['token']}")
             
             # access_token = create_access_token(identity=form['email'])

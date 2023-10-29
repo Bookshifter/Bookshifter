@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, session
+from flask import render_template, redirect, url_for, session, flash
 from app.ecommerce import bp
 from flask import current_app
 from app.authentication import functions as auth

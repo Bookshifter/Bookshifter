@@ -22,7 +22,6 @@ async function addBook(params) {
     const isbn = document.getElementById('isbn-new-book').value;
     const fatecId = parseInt(document.getElementById('fatec-new-book').value);
     const bookState = document.getElementById('book-state').value;
-    var fatec = "N/A";
     if (!isbn) {
         alert('Insira o ISBN do livro.');
         return false;
@@ -39,7 +38,7 @@ async function addBook(params) {
         const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 bookState: bookState
