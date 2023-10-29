@@ -33,46 +33,36 @@
                 <div class="login-body">
                     <div class="login-title"><strong>Entrar</strong> na sua conta</div>
                     <form class="form-horizontal" method="POST">
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" placeholder="E-mail" name="email"/>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" placeholder="E-mail" name="email"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <input type="password" class="form-control" placeholder="Senha" name="password"/>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="password" class="form-control" placeholder="Senha" name="password"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            <a href="/forgot-password" class="btn btn-link btn-block">Esqueceu sua senha?</a>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="{{url_for('authentication.forgot_password')}}" class="btn btn-link btn-block">Esqueceu sua senha?</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-info btn-block">Entrar</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <button class="btn btn-info btn-block">Entrar</button>
-                        </div>
-                    </div>
-                    <div class="login-or">OU</div>
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <button class="btn btn-info btn-block btn-twitter"><span class="fa fa-twitter"></span>Twitter</button>
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn btn-info btn-block btn-facebook"><span class="fa fa-facebook"></span>Facebook</button>
-                        </div>
-                        <div class="col-md-4">                            
-                            <button class="btn btn-info btn-block btn-google"><span class="fa fa-google-plus"></span>Google</button>
-                        </div>
-                    </div>
                     <div class="login-subtitle">
-                        Não tem uma conta? <a href="/register">Criar uma conta</a>
+                        Não tem uma conta? <a href="{{url_for('authentication.register')}}">Criar uma conta</a>
                     </div>
                     </form>
                 </div>
                 <div class="login-footer">
-                    <div class="pull-left">
+                    <div class="float-left">
                         &copy; Bookshifter
                     </div>
-                    <div class="pull-right">
+                    <div class="float-right">
                         <a href="{{url_for('ecommerce.index')}}">Home</a> |
                         <a href="{{url_for('ecommerce.about')}}">Sobre</a>
                     </div>

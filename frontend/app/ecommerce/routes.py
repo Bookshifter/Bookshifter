@@ -5,6 +5,7 @@ from app.authentication import functions as auth
 
 @bp.route('/')
 def index():
+  print(session)
   return render_template('/ecommerce/index.html')
 
 @bp.route('/about')
