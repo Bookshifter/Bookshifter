@@ -78,13 +78,14 @@
 								<li><a href="{{url_for('ecommerce.contact')}}">Contato</a></li>
 								<li>
 									<div class="header-icons">
+										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search" title="Buscar livros"></i></a>
+										<a href="{{url_for('ecommerce.cart')}}"><i class="fas fa-shopping-cart" title="Carrinho"></i></a>
 										{% if session['token'] %}
-										<a href="{{url_for('dashboard.dashboard')}}"><i class="fas fa-lock"></i></a>
+										<a href="{{url_for('dashboard.dashboard')}}" title="Painel de livros"><i class="fas fa-lock"></i></a>
+										<a href="{{url_for('authentication.logout')}}" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
 										{% else %}
-										<a href="{{url_for('authentication.login')}}"><i class="fas fa-sign-in-alt"></i></a>
+										<a href="{{url_for('authentication.login')}}" class="float-right"><i class="fas fa-sign-in-alt"></i></a>
 										{% endif %}
-										<a href="{{url_for('ecommerce.cart')}}"><i class="fas fa-shopping-cart"></i></a>
-										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 									</div>
 								</li>
 							</ul>

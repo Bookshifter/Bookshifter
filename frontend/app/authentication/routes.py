@@ -106,4 +106,4 @@ def password_reset():
 def logout():
     session.clear()
     flash('Deslogado com sucesso!', 'success')
-    return redirect(url_for('authentication.login'))
+    return redirect(url_for('ecommerce.index'))
