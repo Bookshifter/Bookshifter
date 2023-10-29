@@ -71,37 +71,45 @@
                 <br><br><br>
                 <h3>Para cadastrar um livro, clique <a data-toggle="modal" data-target="#add-book" class="text-info">aqui</a> ou no botão adicionar livro.</h3>
             </div>
-       {% else %}
-       <div class="container">
-        <div class="row">
-            {% for book in books %}
-            <div class="col-md-4 col-sm-12 col-lg-4 mt-4" >
-                <div class="card" id="book-{{ book.id }}">
-                    <img src="{{book.mediumCoverUrl}}" class="card-img-top" style="height:400px;">
-                    <div class="card-body">
-                        <h2 class="card-title" style="height: 50px;">{{book.title}}</h2>
-                        <br>
-                        <p class="card-text">Autor{% if book.authors|length > 1 %}es{% endif %}:
-                        {% for author in book.authors %}{{ author }}{% if not loop.last %}, {% endif %}
-                        {% endfor %}
-                        </p>
-                        <p class="card-text"><strong>Editora: </strong>{{book.publisher}}</p>
-                        <p class="card-text"><strong>Estado do livro: </strong>{{book.bookState}}</p>
-                        <p class="card-text"><strong>Local: </strong>{{book.fatecName}}</p>
-                        <p class="card-text"><strong>Descrição: </strong>&nbsp;<span class="fa fa-info-circle" title="{{book.description}}"></span></p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <button class="btn btn-block btn-info">Editar</button>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-block btn-danger" onclick="deleteBook({'id': {{book.id}}, 'url': '{{backend_url}}'})">Apagar</button>
+        {% elif 'error' in books %}
+        <div class="text-center">
+            <h1>Erro ao buscar livros!</h3>
+            <br>
+            <img src="{{ url_for('static', filename= 'img/media/no-books.png') }}" style="max-width:20%;">
+            <br><br><br>
+            <h3>Tente novamente mais tarde.</h3>
+        </div>
+        {% else %}
+        <div class="container">
+            <div class="row">
+                {% for book in books %}
+                <div class="col-md-4 col-sm-12 col-lg-4 mt-4" >
+                    <div class="card" id="book-{{ book.id }}">
+                        <img src="{{book.mediumCoverUrl}}" class="card-img-top" style="height:400px;">
+                        <div class="card-body">
+                            <h2 class="card-title" style="height: 50px;">{{book.title}}</h2>
+                            <br>
+                            <p class="card-text">Autor{% if book.authors|length > 1 %}es{% endif %}:
+                            {% for author in book.authors %}{{ author }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                            </p>
+                            <p class="card-text"><strong>Editora: </strong>{{book.publisher}}</p>
+                            <p class="card-text"><strong>Estado do livro: </strong>{{book.bookState}}</p>
+                            <p class="card-text"><strong>Local: </strong>{{book.fatecName}}</p>
+                            <p class="card-text"><strong>Descrição: </strong>&nbsp;<span class="fa fa-info-circle" title="{{book.description}}"></span></p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button class="btn btn-block btn-info">Editar</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-block btn-danger" onclick="deleteBook({'id': {{book.id}}, 'url': '{{backend_url}}'})">Apagar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
         </div>
         {% endif %}
 

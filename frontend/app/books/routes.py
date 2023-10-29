@@ -10,7 +10,8 @@ def books():
     if not session_active:
         return redirect(url_for('authentication.login'))
     backend_url = current_app.config.get('BACKEND_API_URL')
-    books = api.get_api_books(f'{backend_url}books/all')
+    print(session['token'])
+    books = api.get_api_books({'url':f'{backend_url}books/all', 'token': session['token']})
     # Resgatar fatecs via API
     fatecs = [
         {

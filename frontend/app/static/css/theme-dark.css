@@ -9829,7 +9829,7 @@ input.ui-editRangeSlider-inputValue {
 }
 .owl-item.loading {
   min-height: 150px;
-  background: url(../img/owl/AjaxLoader.gif) no-repeat center center;
+  background: url(../img/loaders/AjaxLoader.gif) no-repeat center center;
 }
 
 
@@ -10195,7 +10195,7 @@ div.tagsinput div {
   font-size: 999px;
   text-align: right;
   color: #fff;
-  background: transparent url(../img/fileinput/loading.gif) top left no-repeat;
+  background: transparent url(../img/loaders/default.gif) top left no-repeat;
   border: none;
 }
 .btn-file {
