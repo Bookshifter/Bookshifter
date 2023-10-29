@@ -24,16 +24,27 @@ def books():
                 'url': url
             }
             response = api.api_books(params)
-            print(response)
             if 'error' in response:
-                flash('Erro ao cadastrar livro! Tente novamente mais tarde.', 'danger')
+                flash(response['error'], 'danger')
                 return redirect(url_for('books.books'))
             else:
                 flash('Livro cadastrado com sucesso!', 'success')
                 return redirect(url_for('books.books'))
-        else:
-            flash('Você tentou apagar um livro!', 'info')
-            return redirect(url_for('books.books'))
+        elif 'delete-book' in request.form:
+            url = backend_url + f"books/{form['book_id']}"
+            params = {
+                'token' : session['token'],
+                'method': 'DELETE',
+                'url': url
+            }
+            response = api.api_books(params)
+            if 'error' in response:
+                flash(response['error'], 'danger')
+                return redirect(url_for('books.books'))
+            else:
+                flash('Livro apagado com sucesso!', 'success')
+                return redirect(url_for('books.books'))
+        
     books = api.get_api_books({'url':f'{backend_url}books/all', 'token': session['token']})
     fatecs = api.get_api_books({'url':f'{backend_url}fatecs', 'token': session['token']})
     response = make_response(render_template('/books/books.html', backend_url=backend_url, books=books, fatecs=fatecs))

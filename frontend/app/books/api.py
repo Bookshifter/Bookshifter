@@ -17,7 +17,7 @@ def api_books(params):
             case 'PATCH':
                 response = requests.patch(json=params['data'], url=params['url'], headers=headers)
             case 'DELETE': 
-                response = requests.delete(json=params['data'], url=params['url'],headers=headers)
+                response = requests.delete(url=params['url'], headers=headers)
             case _:
                 response = {'error': 'Método não suportado.'}
     except requests.exceptions.ConnectionError:
