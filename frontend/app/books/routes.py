@@ -12,7 +12,6 @@ def books():
     backend_url = current_app.config.get('BACKEND_API_URL')
     if request.method == 'POST':
         form = dict(request.form)
-        print(form)
         if 'add-book' in request.form:
             url = backend_url + f"books/?isbn={form['isbn']}&fatecId={form['fatec']}"
             params = {
@@ -24,6 +23,7 @@ def books():
                 'url': url
             }
             response = api.api_books(params)
+            print(response)
             if 'error' in response:
                 flash(response['error'], 'danger')
                 return redirect(url_for('books.books'))
