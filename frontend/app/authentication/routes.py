@@ -23,9 +23,10 @@ def login():
             token_string= f'{response}'
             token_login = json.loads(token_string)
             session['token'] = token_login['token']
+            session['username'] = form['email']
+            session.permanent = False
             logged = make_response(redirect(url_for('ecommerce.index')))
             logged.set_cookie('access_token_cookie', f"{token_login['token']}")
-            
             # access_token = create_access_token(identity=form['email'])
             return logged
         

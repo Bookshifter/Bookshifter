@@ -7,7 +7,7 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
     app.config['SESSION_PERMANENT'] = False
-    app.config['PERMANENT_SESSION_LIFETIME'] = 300 # 5 minutes
+    app.config['PERMANENT_SESSION_LIFETIME'] =timedelta(minutes=5)
     app.config['SESSION_TYPE'] = 'filesystem'
     Session(app)
 
