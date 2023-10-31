@@ -14,6 +14,8 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/rtl.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/theme-dark.css') }}">
+        <link rel="stylesheet" href="{{url_for('static',filename='css/animate.css')}}">
+	    <link rel="stylesheet" href="{{url_for('static',filename='css/magnific-popup.css')}}">
         <!-- END CSS INCLUDE -->
     </head>
     <body>
@@ -26,7 +28,9 @@
                     <li class="xn-profile">
                         <div class="profile">
                             <div class="profile-image">
-                                <img src="{{ url_for('static', filename='img/logo-bookshifter-1.png') }}" style="width:90% !important;">
+                                <a href="{{url_for('ecommerce.index')}}">
+                                    <img src="{{ url_for('static', filename='img/logo-bookshifter.png') }}" style="width:90% !important;">
+                                </a>
                             </div>
                         </div>
                     </li>
@@ -208,17 +212,10 @@
                     <!-- END SEARCH -->
                     <!-- POWER OFF -->
                     <li class="xn-icon-button float-right last">
-                        <a href="#"><span class="fa fa-power-off"></span></a>
-                        <ul class="xn-drop-left animated zoomIn">
-                            <li><a href="/pages-lock-screen"><span class="fa fa-lock"></span> Lock Screen</a></li>
-                            <li><a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span> Sign Out</a></li>
-                        </ul>                        
+                        <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>
+                                          
                     </li> 
                     <!-- END POWER OFF -->
-                    <!-- MESSAGES -->
-                    <li class="xn-icon-button float-right">
-                        <a href="{{url_for('authentication.login')}}"><span class="fa fa-user"></span></a>
-                    </li>
                     <!-- LANG BAR -->
                     <li class="xn-icon-button float-right">
                         <a href="#"><img class="flag" src="{{ url_for('static', filename= 'img/flags/br.png') }}"></a>
@@ -243,12 +240,12 @@
                 <div class="mb-middle">
                     <div class="mb-title"><span class="fa fa-sign-out"></span> Sair?</div>
                     <div class="mb-content">
-                        <p>Tem certeza de que deseja sair?</p>
+                        <h4 class="text-white">Tem certeza de que deseja sair?</h4>
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">
-                            <a href="{{url_for('authentication.logout')}}" class="btn btn-success btn-lg">Sim</a>
-                            <button class="btn btn-default btn-lg mb-control-close">Não</button>
+                            <a href="{{url_for('authentication.logout')}}" class="btn btn-danger btn-lg">Sim</a>
+                            <button class="btn btn-primary btn-lg mb-control-close">Não</button>
                         </div>
                     </div>
                 </div>

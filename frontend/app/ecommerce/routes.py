@@ -1,15 +1,16 @@
-from flask import render_template, redirect, url_for, session
+from flask import render_template, redirect, url_for, session, flash
 from app.ecommerce import bp
 from flask import current_app
 from app.authentication import functions as auth
 
 @bp.route('/')
 def index():
-  return render_template('/ecommerce/index.html')
+  print(session)
+  return render_template('/ecommerce/index.html', page="index")
 
 @bp.route('/about')
 def about():
-  return render_template('/ecommerce/about.html')
+  return render_template('/ecommerce/about.html', page="about")
 
 @bp.route('/cart')
 def cart():
@@ -21,15 +22,15 @@ def checkout():
 
 @bp.route('/contact')
 def contact():
-  return render_template('/ecommerce/contact.html')
+  return render_template('/ecommerce/contact.html', page="contact")
 
 @bp.route('/summary')
 def summary():
-  return render_template('/ecommerce/summary.html')
+  return render_template('/ecommerce/summary.html', page="summary")
 
 @bp.route('/shop')
 def shop():
-  return render_template('/ecommerce/shop.html')
+  return render_template('/ecommerce/shop.html', page="shop")
 
 @bp.route('/single-news')
 def single_news():

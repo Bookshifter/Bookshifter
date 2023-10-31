@@ -2,17 +2,12 @@ from flask import Flask, session
 from flask_session import Session
 from config import Config
 from datetime import timedelta
-# from flask_jwt_extended import JWTManager
-
-# jwt = JWTManager()
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-    
-    # jwt.init_app(app)
-    # app.config['JWT_TOKEN_LOCATION'] = ['cookies']
-    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
+    app.config['SESSION_PERMANENT'] = False
+    app.config['PERMANENT_SESSION_LIFETIME'] =timedelta(minutes=2)
     app.config['SESSION_TYPE'] = 'filesystem'
     Session(app)
 
