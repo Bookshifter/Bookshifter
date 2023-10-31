@@ -1,10 +1,14 @@
 package com.example.bookshifter.services;
 
+import com.example.bookshifter.dto.BookDTO;
 import com.example.bookshifter.dto.RegisterUserDTO;
 
+import com.example.bookshifter.dto.UserAndBookDTO;
 import com.example.bookshifter.dto.UserDTO;
+import com.example.bookshifter.entities.Book;
 import com.example.bookshifter.entities.Role;
 import com.example.bookshifter.entities.User;
+import com.example.bookshifter.repositories.BookRepository;
 import com.example.bookshifter.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +32,10 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     private UserRepository repository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private BookRepository bookRepository;
 
-
+    private Authentication auth;
     @Override
     public List<UserDTO> findAll(){
         var result = repository.findAll();
@@ -61,5 +67,20 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
             }
         }
         throw new RuntimeException("Token JWT expirado ou não informado, por favaor tente novamente");
+    }
+
+    @Override
+    public UserAndBookDTO getAuthenticatedUserBooks(String email) {
+        Optional<User> userOptional = repository.findByEmail(email);
+
+        if(userOptional.isPresent()){
+            List<Book> books = bookRepository.findByOwner(userOptional.get().getId());
+            List<BookDTO> booksDTO = books.stream().map(BookDTO::new).toList();
+
+            return new UserAndBookDTO(userOptional.get().getFirstName(), userOptional.get().getLastName(),
+                    userOptional.get().getEmail(), booksDTO);
+        }
+
+        throw new RuntimeException("O email requisatado não está atrelado a nenhum usuário");
     }
 }
