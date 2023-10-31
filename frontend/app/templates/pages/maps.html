@@ -1,0 +1,144 @@
+{% extends 'base-admin.html' %}
+
+{% block content %}
+
+
+    
+                       
+    
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li><a href="{{url_for('dashboard.dashboard')}}">Home</a></li>
+        
+        <li class="active">Maps</li>
+    </ul>
+    <!-- END BREADCRUMB -->                
+    
+    <!-- PAGE TITLE -->
+    <div class="page-title">                    
+        <h2><span class="fa fa-arrow-circle-o-left"></span> Maps</h2>
+    </div>
+    <!-- END PAGE TITLE -->                
+    
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrap">                
+    
+        <div class="row">
+            <div class="col-md-6">                        
+                <!-- START GOOGLE WORLD MAP -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Google World Map</h3>
+                    </div>
+                    <div class="panel-body panel-body-map">
+                        <div id="google_world_map" style="width: 100%; height: 300px;"></div>
+                    </div>
+                </div>
+                <!-- END GOOGLE WORLD MAP-->
+            </div>                                        
+            <div class="col-md-6">                        
+                <!-- START GOOGLE EUROPE MAP -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Google Europe Map</h3>
+                    </div>
+                    <div class="panel-body panel-body-map">
+                        <div id="google_eu_map" style="width: 100%; height: 300px;"></div>
+                    </div>
+                </div>
+                <!-- END GOOGLE EUROPE MAP -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">                        
+                <!-- START GOOGLE MAP WITH MARKER -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Google Map With Markers</h3>
+                    </div>
+                    <div class="panel-body panel-body-map">
+                        <div id="google_ptm_map" style="width: 100%; height: 300px;"></div>
+                    </div>
+                </div>
+                <!-- END GOOGLE MAP WITH MARKER -->
+            </div>                                        
+            <div class="col-md-6">                        
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Google Map Search</h3>
+                        <div class="pull-right" style="width: 200px;">
+                            <input type="text" id="target" class="form-control"/>
+                        </div>                                
+                    </div>
+                    <div class="panel-body panel-body-map">
+                        <div id="google_search_map" style="width: 100%; height: 300px;"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">                        
+                <!-- START jVectorMap World -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">jVectorMap World</h3>
+                        <div class="pull-right" style="width: 200px;">
+                            <input type="text" class="form-control" placeholder="Select country" id="vector_world_map_value"/>
+                        </div>                                
+                    </div>
+                    <div class="panel-body panel-body-map">
+                        <div id="vector_world_map" style="width: 100%; height: 300px"></div>
+                    </div>
+                </div>
+                <!-- END jVectorMap World -->
+            </div>               
+        </div>
+        <div class="row">
+            <div class="col-md-6">                        
+                <!-- START jVectorMap Europe -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">jVectorMap Europe</h3>
+
+                    </div>
+                    <div class="panel-body panel-body-map">
+                        <div id="vector_europe_map" style="width: 100%; height: 300px;"></div>
+                    </div>
+                </div>
+                <!-- END jVectorMap Europe -->
+            </div>
+            <div class="col-md-6">                        
+                <!-- START jVectorMap USA -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">jVectorMap USA</h3>
+                        <div class="pull-right" style="width: 200px;">
+                            <input type="text" class="form-control" placeholder="Select state" id="vector_usa_map_value"/>
+                        </div>
+                    </div>
+                    <div class="panel-body panel-body-map">
+                        <div id="vector_usa_map" style="width: 100%; height: 300px;"></div>
+                    </div>
+                </div>
+                <!-- END jVectorMap USA -->
+            </div>
+        </div>
+        
+    </div>
+    <!-- PAGE CONTENT WRAPPER -->                                
+</div>            
+
+{% endblock content %}
+
+{% block imports %}
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script type="text/javascript" src="{{ url_for('static', filename= '/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename= '/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename= '/js/plugins/jvectormap/jquery-jvectormap-europe-mill-en.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename= '/js/plugins/jvectormap/jquery-jvectormap-us-aea-en.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/demo_maps.js') }}"></script>
+{% endblock imports %}

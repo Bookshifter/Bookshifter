@@ -1,0 +1,362 @@
+{% extends 'base-admin.html' %}
+
+{% block content %}                    
+    
+    <!-- START BREADCRUMB -->
+    <ul class="breadcrumb">
+        <li><a href="{{url_for('dashboard.dashboard')}}">Home</a></li>
+        
+        
+        <li><a href="#" class="active">Services</a></li>
+    </ul>
+    <!-- END BREADCRUMB -->                                                
+    
+    <!-- PAGE TITLE -->
+    <div class="page-title">                    
+        <h2><span class="fa fa-cogs"></span> Serviços - AS {{asn_route}}</h2>
+    </div>
+    <!-- END PAGE TITLE -->                     
+    
+    <!-- PAGE CONTENT WRAPPER -->
+    <div class="page-content-wrap">
+        <div class="row" id="atms-panel">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title-box">
+                            <h3>ATMs</h3>
+                            <span>Seus ATMs no IX.br</span>
+                        </div>
+                        <ul class="panel-controls panel-controls-title">
+                            <li>
+                                <div id="reportrange" class="dtrange"> 
+                                    <span></span><b class="caret"></b>
+                                </div>
+                            </li>
+                            <li><a href="#" class="panel-fullscreen rounded"><span class="fa fa-expand"></span></a></li>
+                        </ul>
+                        
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table datatable" style="text-align:center;">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Tipo de serviço</th>
+                                        <th>Tag</th>
+                                        <th>IP</th>
+                                        <th>Status</th>
+                                        <th>Detalhes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% if errors_ser %}
+                
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-danger" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <span class="fa fa-warning"></span>&nbsp; Erro ao carregar dados da tabela - {{errors_cix}}.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+
+                                    {% for atm in services %}
+                                    <tr>
+                                        <td>{{ atm.name }}</td>
+                                        <td>{{ atm.service.name.upper() }}</td>
+                                        <td><a href="">{{ atm.service_vlan.tag }}</a></td>
+
+                                        {% if atm.mlpav4_address %}
+                                        <td>{{ atm.mlpav4_address.address }}</td>
+                                        {% else %}
+                                        <td>{{ atm.mlpav6_address.address }}</td>
+                                        {% endif %}
+
+                                        {% if atm.active_status == 'PRODUCTION' %}
+                                            <td><span class="label label-success">{{ atm.active_status }}</span></td>
+                                        {% else %}
+                                            <td><span class="label label-info">{{ atm.active_status }}</span></td>
+                                        {% endif %}
+                                        <td><span class="fa fa-info-circle"></span></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="col-md-3">
+                <div class="panel panel-dafault">
+                    <div class="panel-body">
+                        <h3>ATM</h3>
+                        <p style="text-align:justify;">
+                            O ATM é uma modalidade de participação em um Internet Exchange onde troca-se tráfego com todos participantes que estão nessa mesma modalidade.
+                            No IX.br o ATM não envolve relações comerciais entre os participantes, ou entre estes e o IX.br. Esse modo de participação está disponível para todos, por meio do estabelecimento de sessões BGP com o route-server.
+                            <br><br>
+                            A participação no ATM é o caso mais comum para os participantes do IX.br, e é recomendada, contudo ela é facultativa. 
+                            Ao participar do ATM é o participante também quem decide se vai anunciar todos os seus prefixos ou apenas parte deles. Pode-se verificar quem participa do ATM no IX.br <a href="http://ix.br/particip/.">aqui.</a></p>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+        <div class="row" id="bilaterals-panel">
+            <!--
+            <div class="col-md-3">
+                <div class="panel panel-dafault">
+                    <div class="panel-body">
+                        <h3>Bilaterais</h3>
+                        <p style="text-align:justify;">
+                            Uma relação bilateral é um acordo firmado entre dois Sistemas Autônomos participantes de um IX. Pode ser um acordo comercial, envolvendo a venda de serviços, ou um acordo não comercial, com finalidades como: compra e venda de trânsito, troca de tráfego ou outros tipos de serviços (acesso a backup, telefonia IP, etc). 
+                            <br><br>
+                            Dentro do IX.br, as relações bilaterais são aceitas e podem ser estabelecidas nas VLANs 'comuns' (as mesmas usadas para o ATM). Os participantes podem também solicitar ao IX.br que VLANs dedicadas sejam provisionadas.
+                    </div>
+                </div>
+            </div>
+            -->
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title-box">
+                            <h3>Bilaterais</h3>
+                            <span>Suas bilaterais com outros ASNs</span>
+                        </div>
+                        <ul class="panel-controls panel-controls-title">
+                            <li>
+                                <div id="reportrange" class="dtrange"> 
+                                    <span></span><b class="caret"></b>
+                                </div>
+                            </li>
+                            <li><a href="#" class="panel-fullscreen rounded"><span class="fa fa-expand"></span></a></li>
+                        </ul>
+                        
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table datatable" style="text-align:center;">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Tag</th>
+                                        <th>Ticket</th>
+                                        <th>MAC</th>
+                                        <th>Status</th>
+                                        <th>Detalhes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if errors_bil %}
+                
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-danger" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <span class="fa fa-warning"></span>&nbsp; Erro ao carregar dados da tabela - {{errors_cix}}.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+
+                                    {% for bilateral in bilaterals %}
+                                    <tr>
+                                        <td>{{ bilateral.bilateral_services.origin.service__name.upper() }}</td>
+
+                                        <td>{{ bilateral.bilateral_services.origin.service_vlan__tag }}</td>
+
+                                        {% if bilateral.bilateral_services.origin.ticket == None %}
+                                            <td>--</td>
+                                        {% else %}
+                                            <td>{{ bilateral.bilateral_services.origin.ticket }}</td>
+                                        {% endif %}
+                                        
+                                        {% if bilateral.bilateral_services.origin.mac_address_list %}
+                                            <td>{{ bilateral.bilateral_services.origin.mac_address_list.0.address }}</td>
+                                        {% else %}
+                                            <td>--</td>
+                                        {% endif %}
+                                        
+                                        {% if bilateral.bilateral_services.origin.active_status == "PRODUCTION" %}
+                                            <td><span class="label label-success">{{ bilateral.bilateral_services.origin.active_status }}</span></td>
+                                        {% else %}
+                                            <td><span class="label label-info">{{ bilateral.bilateral_services.origin.active_status }}</span></td>
+                                        {% endif %}
+
+                                        <td><span class="fa fa-info-circle"></span></td>
+                                    </tr>
+                                    {% endfor %}                             
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="connections-panel">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title-box">
+                            <h3>Conexões</h3>
+                            <span>Suas conexões com o IX.br</span>
+                        </div>
+                        <ul class="panel-controls panel-controls-title">
+                            <li>
+                                <div id="reportrange" class="dtrange"> 
+                                    <span></span><b class="caret"></b>
+                                </div>
+                            </li>
+                            <li><a href="#" class="panel-fullscreen rounded"><span class="fa fa-expand"></span></a></li>
+                        </ul>
+                        
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table datatable" style="text-align:center;">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Ticket</th>
+                                        <th>PIX</th>
+                                        <th>Capacidade</th>
+                                        <th>Tipo</th>
+                                        <th>Status</th>
+                                        <th>Detalhes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if errors_ccs %}
+                
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-danger" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <span class="fa fa-warning"></span>&nbsp; Erro ao carregar dados da tabela - {{errors_cix}}.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+
+                                    {% for cc in connections %}
+                                    <tr>
+                                        <td>{{cc.name}}</td>
+                                        <td>{% if cc.ticket %}<a href=""> {{cc.ticket}}</a>{% else %}--{% endif %}</td>
+                                        <td>{{cc.connected_device_info.pix}}</td>
+                                        {% if cc.customerconnectionendpoint %}
+                                            <td>{{format_capacity(cc.customerconnectionendpoint.0.configured_capacity)}}</td>
+                                        {% else %}
+                                        <td>--</td>
+                                        {% endif %}
+                                        <td>{{cc.connection_type.connection_name}}</td>
+                                        <td><span class="label label-{% if cc.active_status == 'PRODUCTION' %}success{% else %}danger{% endif %} ">{{cc.active_status}}</span></td>
+                                        <td><span class="fa fa-info-circle"></span></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="col-md-3">
+                <div class="panel panel-dafault">
+                    <div class="panel-body">
+                        <h3>Conexões</h3>
+                        <p style="text-align:justify;">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos ratione magni nesciunt autem quae odit blanditiis consequatur quasi vitae pariatur! Quaerat excepturi aspernatur vero hic molestias? Sunt ad esse aliquam.
+                            <br><br>
+                            Eum explicabo voluptates, ad iure quisquam animi distinctio cum libero nobis, illo veritatis, earum saepe illum consequuntur modi itaque voluptatibus sint similique? Fugit ducimus dolore tenetur recusandae unde voluptas similique a dolor enim quis numquam laboriosam.
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+        <div class="row" id="cix-panel">
+            <!--
+            <div class="col-md-3">
+                <div class="panel panel-dafault">
+                    <div class="panel-body">
+                        <h3>CIX</h3>
+                        <p style="text-align:justify;">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos ratione magni nesciunt autem quae odit blanditiis consequatur quasi vitae pariatur! Quaerat excepturi aspernatur vero hic molestias? Sunt ad esse aliquam.
+                            <br><br>
+                            Eum explicabo voluptates, ad iure quisquam animi distinctio cum libero nobis, illo veritatis, earum saepe illum consequuntur modi itaque voluptatibus sint similique? Fugit ducimus dolore tenetur recusandae unde voluptas similique a dolor enim quis numquam laboriosam.
+                    </div>
+                </div>
+            </div>
+            -->
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title-box">
+                            <h3>CIX</h3>
+                            <span>Suas portas CIX</span>
+                        </div>
+                        <ul class="panel-controls panel-controls-title">
+                            <li>
+                                <div id="reportrange" class="dtrange"> 
+                                    <span></span><b class="caret"></b>
+                                </div>
+                            </li>
+                            <li><a href="#" class="panel-fullscreen rounded"><span class="fa fa-expand"></span></a></li>
+                        </ul>
+                        
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table datatable" style="text-align:center;">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>PIX</th>
+                                        <th>ATMv4</th>
+                                        <th>ATMv6</th>
+                                        <th>Bilaterais</th>
+                                        <th>Detalhes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if errors_cix %}
+                
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-danger" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <span class="fa fa-warning"></span>&nbsp; Erro ao carregar dados da tabela - {{errors_cix}}.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    {% endif %}
+
+                                    {% for cix in cixes %}
+                                    <tr>
+                                        <td>{{cix.name}}</td>
+                                        <td>{{cix.destination_device_info.pix}}</td>
+                                        <td>{{cix.cix_information.atmv4}}</td>
+                                        <td>{{cix.cix_information.atmv6}}</td>
+                                        <td>{{cix.cix_information.bilaterais}}</td>
+                                        <td><span class="fa fa-info-circle"></span></td>
+                                    </tr>
+                                    {% endfor %}                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT WRAPPER -->                                                 
+</div>
+
+{% endblock content %}
