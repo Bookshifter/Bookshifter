@@ -39,7 +39,8 @@ public class Security {
                         "/login",
                         "/error",
                         "/register/**",
-                        "/forgot-password/**"
+                        "/forgot-password/**",
+                            "/users/**"
                     ).permitAll().anyRequest().authenticated()
                 ).addFilterBefore(createJwtFilter(), UsernamePasswordAuthenticationFilter.class).build();
     }
