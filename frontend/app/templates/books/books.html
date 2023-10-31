@@ -98,7 +98,7 @@
     
     <!-- PAGE CONTENT WRAPPER -->
     <div class="page-content-wrap">
-        {% if not books %}
+        {% if not user_data.books %}
             <div class="text-center">
                 <h1>Você não tem livros cadastrados.</h3>
                 <br>
@@ -106,7 +106,7 @@
                 <br><br><br>
                 <h3>Para cadastrar um livro, clique <a data-toggle="modal" data-target="#add-book" class="text-info">aqui</a> ou no botão adicionar livro.</h3>
             </div>
-        {% elif 'error' in books %}
+        {% elif 'error' in user_data %}
         <div class="text-center">
             <h1>Erro ao buscar livros!</h3>
             <br>
@@ -117,7 +117,7 @@
         {% else %}
         <div class="container">
             <div class="row">
-                {% for book in books %}
+                {% for book in user_data.books %}
                     <div class="col-md-4 col-sm-12 col-lg-4 mt-4">
                         <div class="card" id="book-{{ book.id }}">
                             <img src="{{ book.mediumCoverUrl }}" class="card-img-top" style="height:400px;">
