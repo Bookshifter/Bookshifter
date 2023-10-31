@@ -21,7 +21,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create().withIssuer(issuer).withSubject(user.getEmail())
-                    .withExpiresAt(TokensExpirationTime.getExpirantionTime())
+                    .withExpiresAt(TokensExpirationTime.getJWTExpirationTime())
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception){
