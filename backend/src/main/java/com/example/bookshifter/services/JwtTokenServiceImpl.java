@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.example.bookshifter.entities.User;
+import com.example.bookshifter.exceptions.JWTExcepion;
 import com.example.bookshifter.services.interfaces.JwtTokenService;
 import com.example.bookshifter.utils.TokensExpirationTime;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +26,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception){
-            throw new RuntimeException("Erro ao gerar o token", exception);
+            throw new JWTExcepion("Erro ao gerar o token: " + exception);
         }
     }
 
