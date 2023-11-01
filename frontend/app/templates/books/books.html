@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">Fatec destino</label>
                             <div class="col-md-10">
-                                <select class="form-control" name="fatec">
+                                <select class="form-control" name="fatec" required>
                                     <option value="N/A" disabled selected>Selecione uma Fatec</option>
                                     {% for fatec in fatecs %}
                                         <option value="{{fatec.id}}" id="fatec-{{fatec.id}}" name=>{{fatec.name}}</option>
@@ -53,14 +53,14 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">ISBN do livro</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" placeholder="ISBN-10 ou ISBN-13 do livro sem hífens..." name="isbn" />
+                                <input type="text" class="form-control" placeholder="ISBN-10 ou ISBN-13 do livro sem hífens..." name="isbn"  required/>
                             </div>
                             <br>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label">Estado do livro</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" placeholder="Descreva brevemente o estado do livro..." name="state" />
+                                <input type="text" class="form-control" placeholder="Descreva brevemente o estado do livro..." name="state" required/>
                             </div>
                             <br>
                         </div>
