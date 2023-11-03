@@ -63,19 +63,20 @@
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item">
+								<li class="{% if page == "index" %}current-list-item{% endif %}">
 									<a href="{{url_for('ecommerce.index')}}">Home</a>
 								</li>
-								<li>
+								<li class="{% if page == "shop" %}current-list-item{% endif %}">
 									<a href="{{url_for('ecommerce.shop')}}">Livraria</a>
 								</li>
-								<li>
+								<li class="{% if page == "summary" %}current-list-item{% endif %}">
 									<a href="{{url_for('ecommerce.summary')}}">Resumos</a>
 								</li>
-								<li>
+								<li class="{% if page == "about" %}current-list-item{% endif %}">
 									<a href="{{url_for('ecommerce.about')}}">Sobre</a></li>
 								</li>
-								<li><a href="{{url_for('ecommerce.contact')}}">Contato</a></li>
+								<li class="{% if page == "contact" %}current-list-item{% endif %}">
+									<a href="{{url_for('ecommerce.contact')}}">Contato</a></li>
 								<li>
 									<div class="header-icons">
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search" title="Buscar livros"></i></a>

@@ -9,10 +9,10 @@ def books():
     session_active = auth.verify_session(session)
     if not session_active:
         return redirect(url_for('authentication.login'))
+    print(session['token'])
     backend_url = current_app.config.get('BACKEND_API_URL')
     if request.method == 'POST':
         form = dict(request.form)
-        print(form)
         if 'add-book' in request.form:
             url = backend_url + f"books/?isbn={form['isbn']}&fatecId={form['fatec']}"
             params = {
@@ -25,6 +25,7 @@ def books():
             }
             response = api.api_books(params)
             if 'error' in response:
+                print(response)
                 flash(response['error'], 'danger')
                 return redirect(url_for('books.books'))
             else:
@@ -45,7 +46,7 @@ def books():
                 flash('Livro apagado com sucesso!', 'success')
                 return redirect(url_for('books.books'))
         
-    books = api.get_api_books({'url':f'{backend_url}books/all', 'token': session['token']})
+    user_data = api.get_api_books({"url":f"{backend_url}users/books?email={session['username']}", "token": session['token']})
     fatecs = api.get_api_books({'url':f'{backend_url}fatecs', 'token': session['token']})
-    response = make_response(render_template('/books/books.html', backend_url=backend_url, books=books, fatecs=fatecs))
+    response = make_response(render_template('/books/books.html', backend_url=backend_url, user_data=user_data, fatecs=fatecs))
     return response

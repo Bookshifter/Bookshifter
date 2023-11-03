@@ -1,6 +1,7 @@
 package com.example.bookshifter.services.interfaces;
 
 import com.example.bookshifter.dto.RegisterUserDTO;
+import com.example.bookshifter.dto.UserAndBookDTO;
 import com.example.bookshifter.dto.UserDTO;
 import com.example.bookshifter.entities.User;
 import org.springframework.security.core.Authentication;
@@ -18,4 +19,6 @@ public interface UserService {
 
 
     User getAuthenticatedUserInfo(Authentication authentication);
+
+    public UserAndBookDTO getAuthenticatedUserBooks(String email);
 }
