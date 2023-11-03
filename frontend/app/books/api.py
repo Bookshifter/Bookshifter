@@ -52,7 +52,7 @@ def api_books(params):
 def get_api_books(params):
     try:
         response = requests.get(params['url'],
-                            headers={"Authorization": f"Bearer {params['token']}"}
+                                headers={"Authorization": f"Bearer {params['token']}"}
                             )
     except requests.exceptions.ConnectionError:
         return {'error': 'Erro ao conectar na API.'}
