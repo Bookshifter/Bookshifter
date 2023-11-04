@@ -42,14 +42,14 @@ def search():
   params = {
     'method': 'GET',
     'url': search_url,
-    'token': session['token']
+    'token': session['token'] if 'token' in session else None
   }
   response = books_api.api_books(params)
-  if 'error' in response:
-    flash(response['error'], 'danger')
-    return redirect(url_for('ecommerce.shop'))
-  else:
+  if type(response) != dict:
     response = eval(response)
+    
+  # if 'error' in response:
+  #   flash(response['error'], 'danger')
   return render_template('/ecommerce/search.html', page="shop", books=response)
 
 @bp.route('/single-news')

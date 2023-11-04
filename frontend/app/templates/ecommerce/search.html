@@ -38,34 +38,59 @@
                 </div>
             </div>
 
-			<div class="row product-lists">
-				{% for book in books %}
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<img src="{{book.mediumCoverUrl}}">
+			{% if not books %}
+			<div class="text-center">
+                <h2>Não há livros com esse título.</h2>
+                <br>
+                <img src="{{ url_for('static', filename= 'img/media/no-books.png') }}" style="max-width:20%;">
+                <br><br><br>
+                <h3>Busque outros livros!</h3>
+            </div>
+			{% elif 'error' in books %}
+			<div class="text-center">
+				<h1>Erro ao buscar livros!</h3>
+				<br>
+				<img src="{{ url_for('static', filename= 'img/media/no-books.png') }}" style="max-width:20%;">
+				<br><br><br>
+				<h3>Tente novamente mais tarde!</h3>
+			</div>
+			
+			{% else %}
+				<div class="row product-lists">
+					{% for book in books %}
+					<div class="col-lg-4 col-md-4 text-center">
+						<div class="single-product-item">
+							<div class="product-image">
+								<a href="{{url_for('ecommerce.single_product')}}">
+									<img src="{{book.mediumCoverUrl}}">
+								</a>
+							</div>
+							<h3>{{book.title}}</h3>
+							<p class="description">Autor{% if book.authors|length > 1 %}es{% endif %}:
+                                {% for author in book.authors %}{{ author }}{% if not loop.last %}, {% endif %}{% endfor %}
+                            </p>
+							<p class="description">Local: {{book.fatecName}}</p>
+							<a href="{{url_for('ecommerce.cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao carrinho</a>
 						</div>
-						<h3>{{book.title}}</h3>
-						<p class="description">Fatec: {{book.fatecName}}</p>
-						<a href="{{url_for('ecommerce.cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao carrinho</a>
 					</div>
+					{% endfor %}
 				</div>
-				{% endfor %}
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="pagination-wrap">
-						<ul>
-							<li><a href="#">Prev</a></li>
-							<li><a class="active" href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">Next</a></li>
-						</ul>
+				{% endif %}
+				<!-- 
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<div class="pagination-wrap">
+								<ul>
+									<li><a href="#">Prev</a></li>
+									<li><a class="active" href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">Next</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
+				-->
 		</div>
 	</div>
 	<!-- end products -->

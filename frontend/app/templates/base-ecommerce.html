@@ -123,8 +123,8 @@
 					<div class="search-bar">
 						<div class="search-bar-tablecell">
 							<h3>Buscar por:</h3>
-							<input type="text" placeholder="Nome do livro..." id="searchBookInput">
-							<button type="button" onclick="searchBook()">Search <i class="fas fa-search"></i></button>
+							<input type="text" placeholder="Nome do livro..." id="search-book-input">
+							<button type="button" onclick="searchBooks()">Search <i class="fas fa-search"></i></button>
 						</div>
 					</div>
 				</div>
@@ -204,6 +204,8 @@
 	</div>
 	<!-- end copyright -->
 	
+	<!-- base -->
+	<script src="{{url_for('static', filename='js/ecommerce/base.js')}}"></script>
 	<!-- jquery -->
 	<script src="{{url_for('static', filename='js/ecommerce/jquery-1.11.3.min.js')}}"></script>
 	<!-- bootstrap -->
