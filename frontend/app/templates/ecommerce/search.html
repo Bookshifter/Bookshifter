@@ -39,72 +39,18 @@
             </div>
 
 			<div class="row product-lists">
-				<div class="col-lg-4 col-md-6 text-center romance">
+				{% for book in books %}
+				<div class="col-lg-4 col-md-6 text-center">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/o-iluminado.jpg" alt=""></a>
+							<img src="{{book.mediumCoverUrl}}">
 						</div>
-						<h3>Orgulho e Preconceito</h3>
-						<p class="description">Elizabeth Bennet e Mr. Darcy se apaixonam, apesar das barreiras sociais e preconceitos de classe</p>
-						<p class="product-price">R$ 29,00 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao carrinho</a>
+						<h3>{{book.title}}</h3>
+						<p class="description">Fatec: {{book.fatecName}}</p>
+						<a href="{{url_for('ecommerce.cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao carrinho</a>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 text-center acao">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/o-iluminado.jpg" alt=""></a>
-						</div>
-						<h3>O Código Da Vinci</h3>
-						<p class="description">Uma emocionante busca por segredos ancestrais e mistérios religiosos que coloca o professor Robert Langdon em uma corrida contra o tempo.</p>
-						<p class="product-price">R$ 39,90 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao carrinho</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center comedia">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/o-iluminado.jpg" alt=""></a>
-						</div>
-						<h3>O Guia do Mochileiro das Galáxias</h3>
-						<p class="description">A hilariante saga de Arthur Dent, um humano que é arrastado para uma aventura intergaláctica.</p>
-						<p class="product-price">R$ 19,90 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao carrinho</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center terror">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/o-iluminado.jpg" alt=""></a>
-						</div>
-						<h3>O Iluminado</h3>
-						<p class="description">Jack Torrance aceita um emprego como zelador de um hotel isolado durante o inverno, mas eventos sobrenaturais começam a assombrar sua família.</p>
-						<p class="product-price">R$ 38,00 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao carrinho</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center superacao">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/o-iluminado.jpg" alt=""></a>
-						</div>
-						<h3>A Menina Que Roubava Livros</h3>
-						<p class="description">Liesel Meminger, uma jovem na Alemanha nazista, encontra consolo e coragem na leitura durante tempos difíceis.</p>
-						<p class="product-price">R$ 28,90 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao carrinho</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center tensao">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="assets/img/products/o-iluminado.jpg" alt=""></a>
-						</div>
-						<h3>O Silêncio das Montanhas</h3>
-						<p class="description">Uma história emocionante que segue a vida de dois irmãos afegãos, Amir e Hassan, ao longo de décadas, enquanto enfrentam segredos, traições e redenção.</p>
-						<p class="product-price">R$ 42,00 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao carrinho</a>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 
 			<div class="row">

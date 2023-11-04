@@ -2,6 +2,8 @@ from flask import render_template, redirect, url_for, session, flash, request
 from app.ecommerce import bp
 from flask import current_app
 from app.authentication import functions as auth
+from app.books import api as books_api
+import json
 
 @bp.route('/')
 def index():
@@ -35,8 +37,20 @@ def shop():
 @bp.route('/search')
 def search():
   query = request.args.get('query')
-  print(query)
-  return render_template('/ecommerce/search.html', page="shop")
+  backend_url = current_app.config.get('BACKEND_API_URL')
+  search_url = backend_url + 'books/search?query=' + query
+  params = {
+    'method': 'GET',
+    'url': search_url,
+    'token': session['token']
+  }
+  response = books_api.api_books(params)
+  if 'error' in response:
+    flash(response['error'], 'danger')
+    return redirect(url_for('ecommerce.shop'))
+  else:
+    response = eval(response)
+  return render_template('/ecommerce/search.html', page="shop", books=response)
 
 @bp.route('/single-news')
 def single_news():
