@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, session, flash
+from flask import render_template, redirect, url_for, session, flash, request
 from app.ecommerce import bp
 from flask import current_app
 from app.authentication import functions as auth
@@ -31,6 +31,12 @@ def summary():
 @bp.route('/shop')
 def shop():
   return render_template('/ecommerce/shop.html', page="shop")
+
+@bp.route('/search')
+def search():
+  query = request.args.get('query')
+  print(query)
+  return render_template('/ecommerce/search.html', page="shop")
 
 @bp.route('/single-news')
 def single_news():
