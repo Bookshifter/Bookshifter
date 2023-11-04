@@ -60,12 +60,16 @@
 					{% for book in books %}
 					<div class="col-lg-4 col-md-4 text-center">
 						<div class="single-product-item">
-							<div class="product-image">
-								<a href="{{url_for('ecommerce.single_product')}}">
-									<img src="{{book.mediumCoverUrl}}">
-								</a>
-							</div>
-							<h3>{{book.title}}</h3>
+							<!-- 
+								<div class="product-image">
+									<a href="{{url_for('ecommerce.book', book_id=book.id)}}">
+										<img src="{{book.mediumCoverUrl}}">
+									</a>
+								</div>
+
+							-->
+							<br>
+							<a href="{{url_for('ecommerce.book', book_id=book.id)}}"><h3>{{book.title}}</h3></a>
 							<p class="description">Autor{% if book.authors|length > 1 %}es{% endif %}:
                                 {% for author in book.authors %}{{ author }}{% if not loop.last %}, {% endif %}{% endfor %}
                             </p>
