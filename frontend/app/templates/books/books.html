@@ -41,6 +41,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">Fatec destino</label>
                             <div class="col-md-10">
+                            
                                 <select class="form-control" name="fatec" required>
                                     <option value="N/A" disabled selected>Selecione uma Fatec</option>
                                     {% for fatec in fatecs %}
@@ -50,6 +51,17 @@
                             </div>
                             <br>
                         </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="origem">Digite sua Origem</label>
+                            <div class="col-md-10">
+                                <input type="text" id="origem" placeholder="Digite seu local de origem" />
+                            </div>
+                            <br>
+                        </div>
+
+
                         <div class="form-group">
                             <label class="col-md-2 control-label">ISBN do livro</label>
                             <div class="col-md-10">
