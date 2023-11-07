@@ -54,10 +54,9 @@
 
 
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="origem">Digite sua Origem </label>
+                            <label class="col-md-5 control-label" for="origem">Digite sua Origem </label>
                             <div class="col-md-10">
                                 <input class="form-control" type="text" id="origem" placeholder="Digite seu local de origem" required />
-
                             </div>
                             <br>
                         </div>
@@ -78,21 +77,24 @@
                             <br>
                         </div>
 
-                        <br>
-                        <select id="mode">
+                        <label class="col-md-10 control-label">Escolha seu meio de transporte</label>
+                        <div class="col-md-3">
+                            <select id="mode"  class="form-control">
                             <option value="DRIVING">Veículo próprio</option>
                             <option value="WALKING">Andando</option>
                             <option value="TRANSIT">Transporte Público</option>
                         </select> 
+                        </div>
+                        
                         
                 
                         <br>
-                        <button type="submit" name="add-book" class="btn btn-success pull-right" >Salvar</button>
+                        <div>
+                            <button type="submit" name="add-book" class="btn btn-success pull-right" >Salvar</button>
+                            <button id="btn-rota" type="button" class="btn btn-success pull-righ" onclick="initMap()">Calcular rota</button>
+                        </div>
                         <br>
-                        <button id="btn-rota" type="button" class="btn btn-success pull-righ" onclick="initMap()">Calcular rota</button>
-                        <div id="map" style="height: 400px;"></div>
-                    
-                    
+                        <div id="map" style="height: 500px;"></div>
                         
                     </form>
                 </div>
