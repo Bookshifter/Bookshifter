@@ -1,0 +1,128 @@
+{% extends "base-ecommerce.html" %}
+
+{% block title %}Bookshifter - Buscar{% endblock title %}
+
+	{% block content %}
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Sua Próxima Aventura Literária Começa Aqui.</p>
+						<h1>Biblioteca Virtual</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- products -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+
+			<div class="row">
+                <div class="col-md-12">
+                    <div class="product-filters">
+                        <ul>
+                            <li class="active" data-filter="*">All</li>
+                            <li data-filter=".acao">Ação</li>
+                            <li data-filter=".romance">Romance</li>
+                            <li data-filter=".terror">Terror</li>
+							<li data-filter=".comedia">Comédia</li>
+							<li data-filter=".tensao">Tensão</li>
+							<li data-filter=".superacao">Superação</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+			{% if not books %}
+			<div class="text-center">
+                <h2>Não há livros com esse título.</h2>
+                <br>
+                <img src="{{ url_for('static', filename= 'img/media/no-books.png') }}" style="max-width:20%;">
+                <br><br><br>
+                <h3>Busque outros livros!</h3>
+            </div>
+			{% elif 'error' in books %}
+			<div class="text-center">
+				<h1>Erro ao buscar livros!</h3>
+				<br>
+				<img src="{{ url_for('static', filename= 'img/media/no-books.png') }}" style="max-width:20%;">
+				<br><br><br>
+				<h3>Tente novamente mais tarde!</h3>
+			</div>
+			
+			{% else %}
+				<div class="row product-lists">
+					{% for book in books %}
+					<div class="col-lg-4 col-md-4 text-center">
+						<div class="single-product-item">
+								<div class="product-image">
+									<a href="{{url_for('ecommerce.book', book_id=book.id)}}">
+										<img src="{{book.mediumCoverUrl}}">
+									</a>
+								</div>
+
+			
+							<br>
+							<a href="{{url_for('ecommerce.book', book_id=book.id)}}"><h3>{{book.title}}</h3></a>
+							<p class="description">Autor{% if book.authors|length > 1 %}es{% endif %}:
+                                {% for author in book.authors %}{{ author }}{% if not loop.last %}, {% endif %}{% endfor %}
+                            </p>
+							<p class="description">Local: {{book.fatecName}}</p>
+							<a href="{{url_for('ecommerce.cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Adicionar ao carrinho</a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				{% endif %}
+				<!-- 
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<div class="pagination-wrap">
+								<ul>
+									<li><a href="#">Prev</a></li>
+									<li><a class="active" href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">Next</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				-->
+		</div>
+	</div>
+	<!-- end products -->
+
+	<!-- logo carousel -->
+	<div class="logo-carousel-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="logo-carousel-inner">
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/1.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/2.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/3.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/4.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/5.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end logo carousel -->
+	{% endblock content %}
