@@ -134,17 +134,10 @@ google.maps.event.addListener(map, 'mousemove', function(event) {
         infowindow.close();
     }
 });
-
-//CLOSE func
-
-}
-
-    //usar serviço do google para mostrar a rota
-
     function calculateAndDisplayRoute(directionsService, directionsRederer){
         const selectedMode = document.getElementById('mode').value;
+
     
-        
         directionsService
         .route({
             origin: document.getElementById('origem').value,
@@ -156,8 +149,16 @@ google.maps.event.addListener(map, 'mousemove', function(event) {
             const route = response.routes[0];
             const leg = route.legs[0]; 
             const duration = leg.duration.text; 
-    
+
             document.getElementById('duration').textContent = 'Tempo de Percurso: ' + duration;
         }) 
-    console.log(nome_fatec)
+        console.log(nome_fatec)
 }
+
+//CLOSE func
+}
+
+
+    //usar serviço do google para mostrar a rota
+
+    
