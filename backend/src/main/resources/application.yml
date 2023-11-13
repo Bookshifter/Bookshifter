@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/testdb
     username: root
-    password: 61203650@Fe
+    password:
     driver-class-name:
   jpa:
     hibernate:
@@ -18,7 +18,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: book.shifter.brazil@gmail.com
-    password: rmiduyrssggrjiep
+    password:
     properties:
       mail:
         smtp:
@@ -37,4 +37,4 @@ api:
   security:
     token:
       #NÃO COMMITAR COM A LINHA ABAIXO PREENCHIDA
-      secret: ${JWT_SECRET:teste}
+      secret:
