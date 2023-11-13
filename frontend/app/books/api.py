@@ -5,18 +5,15 @@ import json
 def api_books(params):
     message = ''
     response = None
-    if 'token' in params:
-        headers = {
-        'Authorization': f"Bearer {params['token']}"
-        }
-    else: 
-        headers = None
+    headers = {
+    'Authorization': f"Bearer {params['token']}"
+    }
     try:
         match params['method']:
-            case 'GET':
-                response = requests.get(url=params['url'], headers=headers)
             case 'POST':
                 response = requests.post(json=params['data'], url=params['url'], headers=headers)
+            case 'GET':
+                response = requests.get(url=params['url'], headers=headers)
             case 'PATCH':
                 response = requests.patch(json=params['data'], url=params['url'], headers=headers)
             case 'DELETE': 

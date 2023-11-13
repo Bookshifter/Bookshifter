@@ -9,7 +9,6 @@ def books():
     session_active = auth.verify_session(session)
     if not session_active:
         return redirect(url_for('authentication.login'))
-    print(session['token'])
     backend_url = current_app.config.get('BACKEND_API_URL')
     if request.method == 'POST':
         form = dict(request.form)
@@ -25,7 +24,6 @@ def books():
             }
             response = api.api_books(params)
             if 'error' in response:
-                print(response)
                 flash(response['error'], 'danger')
                 return redirect(url_for('books.books'))
             else:

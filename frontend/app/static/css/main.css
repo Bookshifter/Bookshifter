@@ -2751,25 +2751,3 @@ table.order-details tbody td {
   vertical-align: middle;
   width: 100%;
 }
-
-/* zap - zap */
-.buttonzap, #btn-zap{
-  position:fixed;
-  width:60px;
-  height:60px;
-  bottom:40px;
-  right:40px;
-  background-color:#25d366;
-  color:#FFF;
-  border-radius:50px;
-  text-align:center;
-  font-size:32px;
-  box-shadow: 1px 1px 7px #888;
-  z-index:1000
-}
-
-.buttonzap, #btn-zap:hover{
-  background-color:#0f8c3d;
-  color:#FFF;
-  font-size:34px;
-}
