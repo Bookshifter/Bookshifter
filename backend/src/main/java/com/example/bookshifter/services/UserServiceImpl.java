@@ -8,15 +8,15 @@ import com.example.bookshifter.dto.UserDTO;
 import com.example.bookshifter.entities.Book;
 import com.example.bookshifter.entities.Role;
 import com.example.bookshifter.entities.User;
+import com.example.bookshifter.exceptions.JWTExcepion;
+import com.example.bookshifter.exceptions.UserNotFoundException;
 import com.example.bookshifter.repositories.BookRepository;
 import com.example.bookshifter.repositories.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,7 +35,6 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     @Autowired
     private BookRepository bookRepository;
 
-    private Authentication auth;
     @Override
     public List<UserDTO> findAll(){
         var result = repository.findAll();
@@ -66,7 +65,7 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
                 return userOptional.get();
             }
         }
-        throw new RuntimeException("Token JWT expirado ou não informado, por favaor tente novamente");
+        throw new JWTExcepion("Token JWT expirado ou não informado, por favor tente novamente");
     }
 
     @Override
@@ -81,6 +80,6 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
                     userOptional.get().getEmail(), booksDTO);
         }
 
-        throw new RuntimeException("O email requisatado não está atrelado a nenhum usuário");
+        throw new UserNotFoundException("O email requisatado não está atrelado a nenhum usuário", HttpStatusCode.valueOf(404));
     }
 }

@@ -7,11 +7,14 @@ import com.example.bookshifter.dto.FatecInfoDTO;
 import com.example.bookshifter.dto.ResponseFatecDTO;
 import com.example.bookshifter.entities.Book;
 import com.example.bookshifter.entities.Fatec;
+import com.example.bookshifter.exceptions.ApiException;
+import com.example.bookshifter.exceptions.FatecException;
 import com.example.bookshifter.repositories.BookRepository;
 import com.example.bookshifter.repositories.FatecRepository;
 
 import com.example.bookshifter.services.interfaces.FatecService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -41,17 +44,21 @@ public class FatecServiceImpl implements FatecService {
             FatecInfoDTO fatecInfoDTO = new FatecInfoDTO(fatec);
             return  fatecInfoDTO;
         }
-        throw new RuntimeException("Fatec requerida ainda não cadastrada");
+        throw new FatecException("Fatec requerida ainda não cadastrada", HttpStatusCode.valueOf(404));
     }
 
     public FatecDTO createFatec(FatecDTO dto){
         String url ="https://viacep.com.br/ws/" + dto.cep() + "/json/";
 
         ResponseEntity<LocationInfo> response = template.getForEntity(url, LocationInfo.class);
-        Fatec newFatec = new Fatec(dto.name(), response.getBody().getRua(), response.getBody().getBairro(),
+        if(response.hasBody()){
+            Fatec newFatec = new Fatec(dto.name(), response.getBody().getRua(), response.getBody().getBairro(),
                 response.getBody().getCidade());
-        repository.save(newFatec);
-        return dto;
+            repository.save(newFatec);
+            return dto;
+        }else {
+            throw new ApiException("Erro na requisição da api ViaCEP");
+        }
     }
 
     public ResponseFatecDTO getAllFatecBooks(Long fatecId){
@@ -65,6 +72,6 @@ public class FatecServiceImpl implements FatecService {
             ResponseFatecDTO fatecDTO = new ResponseFatecDTO(fatec, booksDTO);
             return fatecDTO;
         }
-        throw new RuntimeException("A Fatec desejada não é elegível");
+        throw new FatecException("A Fatec desejada não é elegível", HttpStatusCode.valueOf(404));
     }
 }

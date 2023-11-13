@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tb_user")
@@ -73,7 +72,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.stream(this.getRoles().toString().split(", "))
-                .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+                .map(SimpleGrantedAuthority::new).toList();
 
     }
 
