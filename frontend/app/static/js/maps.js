@@ -2,6 +2,8 @@ let fatecDiadema;
 
 
 function initMap(){
+    const mapDiv = document.getElementById('map');
+    mapDiv.removeAttribute('hidden', '');
     const directionsRenderer = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
     const valorSelecionado = document.getElementById("form-fatec");
