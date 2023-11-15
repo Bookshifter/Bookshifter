@@ -40,7 +40,7 @@ public class Security {
                         "/error",
                         "/register/**",
                         "/forgot-password/**",
-                            "/users/**"
+                            "/books/all"
                     ).permitAll().anyRequest().authenticated()
                 ).addFilterBefore(createJwtFilter(), UsernamePasswordAuthenticationFilter.class).build();
     }
