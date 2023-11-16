@@ -17,9 +17,6 @@
     text-decoration: none;
     color: #ffffff;
 }
-#tickets-list .pendency {
-    line-height: 2em;
-}
 .fs-1 {
     font-size: 5rem !important; 
 }
@@ -131,3 +128,5 @@
   height: 300px;
   margin: auto;
 }
+
+

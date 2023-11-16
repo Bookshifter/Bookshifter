@@ -1,6 +1,4 @@
 import requests
-from flask import jsonify
-import json
 
 def api_books(params):
     message = ''

@@ -1,14 +1,23 @@
-from flask import render_template, redirect, url_for, session, flash, request
+from flask import render_template, session, request
 from app.ecommerce import bp
 from flask import current_app
 from app.authentication import functions as auth
 from app.books import api as books_api
-import json
+import ast, random
 
 @bp.route('/')
 def index():
-  print(session)
-  return render_template('/ecommerce/index.html', page="index")
+  backend_url = current_app.config.get('BACKEND_API_URL')
+  books_url = backend_url + 'books/all'
+  params = {
+   'method': 'GET',
+   'url': books_url,
+  }
+  response = books_api.api_books(params)
+  our_library = ast.literal_eval(response)
+  if len(our_library) >= 3:
+        random_books = random.sample(our_library, 3)
+  return render_template('/ecommerce/index.html', page="index", our_library=random_books)
 
 @bp.route('/about')
 def about():
@@ -46,10 +55,8 @@ def search():
   }
   response = books_api.api_books(params)
   if type(response) != dict:
-    response = eval(response)
+    response = ast.literal_eval(response)
     
-  # if 'error' in response:
-  #   flash(response['error'], 'danger')
   return render_template('/ecommerce/search.html', page="shop", books=response)
 
 @bp.route('/single-news')
