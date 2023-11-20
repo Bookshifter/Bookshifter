@@ -7,17 +7,17 @@ import ast, random
 
 @bp.route('/')
 def index():
-  backend_url = current_app.config.get('BACKEND_API_URL')
-  books_url = backend_url + 'books/all'
-  params = {
-   'method': 'GET',
-   'url': books_url,
-  }
-  response = books_api.api_books(params)
-  our_library = ast.literal_eval(response)
-  if len(our_library) >= 3:
-        random_books = random.sample(our_library, 3)
-  return render_template('/ecommerce/index.html', page="index", our_library=random_books)
+  ##backend_url = current_app.config.get('BACKEND_API_URL')
+  ##books_url = backend_url + 'books/all'
+  #params = {
+   #'method': 'GET',
+   #'url': books_url,
+  #}
+  #response = books_api.api_books(params)
+  #our_library = ast.literal_eval(response)
+  #if len(our_library) >= 3:
+        #random_books = random.sample(our_library, 3)
+  return render_template('/ecommerce/index.html', page="index")
 
 @bp.route('/about')
 def about():

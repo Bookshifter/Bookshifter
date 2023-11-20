@@ -4515,8 +4515,16 @@ ul.panel-controls > li > .dropdown-menu:before {
 .btn-info {
   background-color: #3FBAE4;
   border-color: #3FBAE4;
+  border-radius: 5px;
+  border: 1px solid transparent
 }
-.btn-info:hover,
+
+.btn-info:hover {
+  background-color: #142738;
+  font-size: 16px;
+}
+
+
 .btn-info:focus,
 .btn-info:active,
 .btn-info.active,
@@ -6724,7 +6732,7 @@ td.dataTables_empty {
   float: left;
   width: 100%;
   min-height: 100%;
-  background: url("../img/bg.png") left top repeat #1B1E24;
+  background-image: linear-gradient(60deg, #EFC183, #0F2535);
 }
 .login-container .login-box {
   width: 400px;
@@ -6755,11 +6763,12 @@ td.dataTables_empty {
 }
 .login-container .login-box .login-body .form-control {
   border: 0px;
-  background: rgba(0, 0, 0, 0.2);
+  background: #fff;
   padding: 10px 15px;
-  color: #CCC;
+  color: gray;
   line-height: 20px;
   height: auto;
+  font-size: 18px;
   -webkit-transition: all 200ms ease;
   -moz-transition: all 200ms ease;
   -ms-transition: all 200ms ease;

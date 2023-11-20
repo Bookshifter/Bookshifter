@@ -444,9 +444,9 @@ a.boxed-btn, a.bordered-btn, a.cart-btn {
 }
 
 .section-title h3 {
-  font-size: 40px;
+  font-size: 60px;
   position: relative;
-  padding-bottom: 15px;
+  padding-bottom: 25px;
 }
 
 .section-title h3:after {
@@ -462,7 +462,7 @@ a.boxed-btn, a.bordered-btn, a.cart-btn {
 }
 
 .section-title p {
-  font-size: 15px;
+  font-size: 20px;
   width: 530px;
   margin: 0 auto;
   color: #555;
@@ -486,7 +486,7 @@ a.boxed-btn, a.bordered-btn, a.cart-btn {
 }
 
 .breadcrumb-text h1 {
-  font-size: 50px;
+  font-size: 80px;
   font-weight: 900;
   color: #fff;
   margin: 0;
@@ -559,7 +559,8 @@ nav.main-menu ul li a {
   color: #fff;
   font-weight: 700;
   display: block;
-  padding: 15px;
+  font-size: 16px;
+  padding: 18px;
 }
 
 nav.main-menu ul > li {
@@ -864,7 +865,8 @@ a.mobile-show {
 .footer-area {
   background-color: #051922;
   color: #fff;
-  padding: 150px 0;
+  padding: 150px;
+  font-size: 16px;
 }
 
 h2.widget-title {
@@ -1241,11 +1243,15 @@ a.cart-btn {
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
+  border: none;
+  font-size: 16px;
 }
 
 a.cart-btn:hover {
-  background-color: #051922;
+  background-color: #042230;
   color: #F28123;
+  font-weight: 800;
+  
 }
 
 .recent-posts ul li {
@@ -2115,18 +2121,21 @@ a.video-play-btn {
 
 ----------------------------------------------------------------------------- */
 .shop-banner {
+  margin-top: 200px;
   position: relative;
-  background-color: #f5f5f5;
-  background-image: url(../img/1.png);
+  background: #012738;
   background-size: cover;
   padding: 110px 0 115px;
+  border-top-left-radius: 100px;
+  border-bottom-right-radius: 100px;
 }
 
 .shop-banner h3 {
+  color: white;
   position: relative;
   font-size: 50px;
   line-height: 1.2em;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
 }
 
 .shop-banner .sale-percent {
