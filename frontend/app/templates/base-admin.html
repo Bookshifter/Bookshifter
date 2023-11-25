@@ -35,17 +35,20 @@
                         </div>
                     </li>
                     <li>
-                        <a href="{{url_for('dashboard.dashboard')}}"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboard</span></a>
+                        <a href="{{url_for('books.books')}}"><span class="fa fa-book"></span> <span class="xn-text">Meus livros</span></a>
                     </li>
+                    <!-- 
                     <li>
                         <a href="{{url_for('account.account')}}"><span class="fa fa-user"></span> <span class="xn-text">Conta</span></a>
                     </li>
                     <li>
-                        <a href="{{url_for('books.books')}}"><span class="fa fa-book"></span> <span class="xn-text">Meus livros</span></a>
+                        <a href="{{url_for('dashboard.dashboard')}}"><span class="fa fa-dashboard"></span> <span class="xn-text">Dashboard</span></a>
                     </li>
+                    
                     <li>
                         <a href="{{url_for('admin.history')}}"><span class="fa fa-lock"></span> <span class="xn-text">Histórico</span></a>
                     </li>
+                    <li class="xn-title">Components</li>
                     <li class="xn-openable">
                         <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Pages</span></a>
                         <ul>
@@ -110,7 +113,6 @@
                             </li>                            
                         </ul>
                     </li>
-                    <li class="xn-title">Components</li>
                     <li class="xn-openable">
                         <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">UI Kits</span></a>                        
                         <ul>
@@ -190,6 +192,7 @@
                             </li>                            
                         </ul>
                     </li>
+                    -->
                     
                 </ul>
                 <!-- END X-NAVIGATION -->
@@ -203,20 +206,20 @@
                     </li>
                     
                     <!-- END TOGGLE NAVIGATION -->
-                    <!-- SEARCH -->
+                    <!--
                     <li class="xn-search">
                         <form role="form">
                             <input type="text" name="search" placeholder="Search..."/>
                         </form>
-                    </li>   
-                    <!-- END SEARCH -->
+                    </li>
+                     -->
                     <!-- POWER OFF -->
                     <li class="xn-icon-button float-right last">
                         <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>
                                           
                     </li> 
                     <!-- END POWER OFF -->
-                    <!-- LANG BAR -->
+                    <!-- LANG BAR
                     <li class="xn-icon-button float-right">
                         <a href="#"><img class="flag" src="{{ url_for('static', filename= 'img/flags/br.png') }}"></a>
                         <ul class="xn-drop-left xn-drop-white animated zoomIn">
@@ -224,7 +227,7 @@
                             <li><a href="#"><img class="flag" src="{{ url_for('static', filename= 'img/flags/es.png') }}"> Espanhol</a></li>
                         </ul>                        
                     </li> 
-                    <!-- END LANG BAR -->
+                   -->
                 </ul>
                 <!-- PAGE CONTENT -->
                     {% block content %}

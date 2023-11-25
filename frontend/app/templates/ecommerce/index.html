@@ -8,16 +8,18 @@
 	<div class="hero-area hero-bg">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-9 offset-lg-2 text-center">
+				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="hero-text">
 						<div class="hero-text-tablecell">
 							<p class="subtitle">Bookshifter</p>
 							<!-- <h1>Descubra Tesouros Literários em Nosso Sebo Virtual!</h1> -->
-							<h1>Onde os livros encontram <br>novos leitores.</h1>
-							<div class="hero-btns">
-								<a href="shop.html" class="boxed-btn">Ver mais</a>
-								<a href="contact.html" class="bordered-btn">Contato</a>
-							</div>
+							<h1>Onde os livros encontram <br>novos leitores</h1>
+							<!-- 
+								<div class="hero-btns">
+									<a href="{{url_for('ecommerce.shop')}}" class="boxed-btn">Ver mais</a>
+									<a href="contact.html" class="bordered-btn">Contato</a>
+								</div>
+							-->
 						</div>
 					</div>
 				</div>
@@ -34,11 +36,11 @@
 				<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 					<div class="list-box d-flex align-items-center">
 						<div class="list-icon">
-							<i class="fas fa-shipping-fast"></i>
+							<i class="fas fa-map-marker-alt"></i>
 						</div>
 						<div class="content">
-							<h3>Frete</h3>
-							<p>Via correios/negociação com o vendedor</p>
+							<h3>Locais de retirada</h3>
+							<p>Confira o local das Fatecs</p>
 						</div>
 					</div>
 				</div>
@@ -48,19 +50,19 @@
 							<i class="fas fa-phone-volume"></i>
 						</div>
 						<div class="content">
-							<h3>Suporte técnico 24h</h3>
-							<p>Todos os dias</p>
+							<h3>Suporte técnico</h3>
+							<p>Dias úteis das 9h às 16h</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="list-box d-flex justify-content-start align-items-center">
 						<div class="list-icon">
-							<i class="fas fa-sync"></i>
+							<i class="far fa-handshake"></i>
 						</div>
 						<div class="content">
-							<h3>Devolução</h3>
-							<p>Deve ser realizada em até 7 dias</p>
+							<h3>Doe mais</h3>
+							<p>Incentive a leitura!</p>
 						</div>
 					</div>
 				</div>
@@ -76,85 +78,39 @@
 			<div class="row">
 				<div class="col-lg-8 offset-lg-2 text-center">
 					<div class="section-title">	
-						<h3><span class="orange-text">Nossa</span> Biblioteca</h3>
+						<a href="http://localhost:8000/shop"><h3><span class="orange-text">Nossa</span> Biblioteca</h3></a>
 						<p>Descubra Tesouros Literários em Nosso Sebo Virtual!</p>
+						<!--<i class="fas fa-shopping-cart"></i>-->
+						<a href="http://localhost:8000/shop" class="cart-btn mt-3">Ver Livros</a>
 					</div>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="{{url_for('static', filename='img/products/dom-casmurro.jpg')}}" alt=""></a>
+				{% for book in our_library %}
+					<div class="col-lg-4 col-md-6 text-center">
+						<div class="single-product-item">
+							<div class="product-image">
+								<a href="{{url_for('ecommerce.book',  book_id=book.id)}}"><img src="{{book.mediumCoverUrl}}" ></a>
+							</div>
+							<h3 class="card-title" style="height: 50px;">{{book.title}}</h3>
+							<div class="description-container">
+								<p class="description">{{book.description}}</p>
+							</div>
+							<br>
+							<a href="{{url_for('ecommerce.cart')}}" class="cart-btn"><i class="fas fa-shopping-cart"></i>Adicionar ao carrinho</a>
 						</div>
-						<h3>Dom Casmurro</h3>
-						<p class="description"> Dom Casmurro é uma obra-prima de Machado de Assis que narra a história de Bentinho e seu amor não correspondido por Capitu. Uma trama envolvente de ciúmes, dúvidas e traição.</p>
-						<p class="product-price">R$ 39,90 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i>Adicionar ao carrinho</a>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="{{url_for('static', filename='img/products/dom-casmurro.jpg')}}" alt=""></a>
-						</div>
-						<h3>Dom Casmurro</h3>
-						<p class="description"> Dom Casmurro é uma obra-prima de Machado de Assis que narra a história de Bentinho e seu amor não correspondido por Capitu. Uma trama envolvente de ciúmes, dúvidas e traição.</p>
-						<p class="product-price">R$ 39,90 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i>Adicionar ao carrinho</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 text-center">
-					<div class="single-product-item">
-						<div class="product-image">
-							<a href="single-product.html"><img src="{{url_for('static', filename='img/products/dom-casmurro.jpg')}}" alt=""></a>
-						</div>
-						<h3>Dom Casmurro</h3>
-						<p class="description"> Dom Casmurro é uma obra-prima de Machado de Assis que narra a história de Bentinho e seu amor não correspondido por Capitu. Uma trama envolvente de ciúmes, dúvidas e traição.</p>
-						<p class="product-price">R$ 39,90 </p>
-						<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i>Adicionar ao carrinho</a>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
 	<!-- end product section -->
 
-	<!-- cart banner section -->
-	<section class="cart-banner pt-100 pb-100">
-    	<div class="container">
-        	<div class="row clearfix">
-            	<!--Image Column-->
-            	<div class="image-column col-lg-6">
-                	<div class="image">
-						<!--
-                    	<div class="price-box">
-                        	<div class="inner-price">
-                                <span class="price">
-                                    <strong>15%</strong> <br> off
-                                </span>
-                            </div>
-                        </div> 
-					-->
-                    	<img style="border-radius: 10px;" src="{{url_for('static', filename='img/products/o-guarani.jpg')}}" alt="">
-                    </div>
-                </div>
-                <!--Content Column-->
-                <div class="content-column col-lg-6">
-					<h3><span class="orange-text">Oferta</span> do mês</h3>
-                    <h4>O Guarani</h4>
-                    <div class="text">José de Alencar nos leva à época colonial brasileira, onde a história de amor entre Peri e Ceci se desenrola em meio a aventuras e conflitos com os colonizadores.</div>
-                    <!--Countdown Timer-->
-                	<a href="cart.html" class="cart-btn mt-3"><i class="fas fa-shopping-cart"></i>Adicionar ao carrinho</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end cart banner section -->
+	
 
 	<!-- testimonail-section -->
-	<div class="testimonail-section mt-150 mb-150">
+	<!--<div class="testimonail-section mt-150 mb-150">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 offset-lg-1 text-center">
@@ -178,7 +134,7 @@
 								<img src="{{url_for('static', filename='img/avaters/avatar2.png')}}" alt="">
 							</div>
 							<div class="client-meta">
-								<h3>Flávio Kawan <span>Desocupado</span></h3>
+								<h3>Flávio Kawan <span>Leitor assíduo</span></h3>
 								<p class="testimonial-body">
 									" Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam excepturi veritatis voluptatem libero nulla maiores. Incidunt ea illum nemo nam. Doloremque necessitatibus ad numquam labore laudantium quisquam earum tempore tenetur. "
 								</p>
@@ -205,22 +161,20 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>-->
 	<!-- end testimonail-section -->
 	
 	
 	<!-- shop banner -->
 	<section class="shop-banner">
     	<div class="container">
-        	<h3>Há mais promoções para Setembro! <br> com <span class="orange-text">Desconto...</span></h3>
-            <div class="sale-percent"><span>Até</span>50% <span>off</span></div>
-            <a href="shop.html" class="cart-btn btn-lg">Comprar agora</a>
+        	<h3>Há mais livros para doação em Novembro! <br> com <span class="orange-text">Confira...</span></h3>
         </div>
     </section>
 	<!-- end shop banner -->
-
+	
 	<!-- latest news -->
-	<div class="latest-news pt-150 pb-150">
+	<!--<div class="latest-news pt-150 pb-150">
 		<div class="container">
 
 			<div class="row">
@@ -235,53 +189,120 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-m6">
 					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-4"></div></a>
+						<a href="{{url_for('ecommerce.single_news')}}"><div class="latest-news-bg news-bg-4"></div></a>
 						<div class="news-text-box">
-							<h3><a href="single-news.html">You will vainly look for fruit on it in autumn.</a></h3>
+							<h3><a href="{{url_for('ecommerce.single_news')}}">You will vainly look for fruit on it in autumn.</a></h3>
 							<p class="blog-meta">
 								<span class="author"><i class="fas fa-user"></i> Admin</span>
 								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
 							</p>
 							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+							<a href="{{url_for('ecommerce.single_news')}}" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-2"></div></a>
+						<a href="{{url_for('ecommerce.single_news')}}"><div class="latest-news-bg news-bg-2"></div></a>
 						<div class="news-text-box">
-							<h3><a href="single-news.html">A man's worth has its season, like tomato.</a></h3>
+							<h3><a href="{{url_for('ecommerce.single_news')}}">A man's worth has its season, like tomato.</a></h3>
 							<p class="blog-meta">
 								<span class="author"><i class="fas fa-user"></i> Admin</span>
 								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
 							</p>
 							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+							<a href="{{url_for('ecommerce.single_news')}}" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
 					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-3"></div></a>
+						<a href="{{url_for('ecommerce.single_news')}}"><div class="latest-news-bg news-bg-3"></div></a>
 						<div class="news-text-box">
-							<h3><a href="single-news.html">Good thoughts bear good fresh juicy fruit.</a></h3>
+							<h3><a href="{{url_for('ecommerce.single_news')}}">Good thoughts bear good fresh juicy fruit.</a></h3>
 							<p class="blog-meta">
 								<span class="author"><i class="fas fa-user"></i> Admin</span>
 								<span class="date"><i class="fas fa-calendar"></i> 27 December, 2019</span>
 							</p>
 							<p class="excerpt">Vivamus lacus enim, pulvinar vel nulla sed, scelerisque rhoncus nisi. Praesent vitae mattis nunc, egestas viverra eros.</p>
-							<a href="single-news.html" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+							<a href="{{url_for('ecommerce.single_news')}}" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<a href="news.html" class="boxed-btn">Mais resumos</a>
+					<a href="{{url_for('ecommerce.summary')}}" class="boxed-btn">Mais resumos</a>
+				</div>
+			</div>
+		</div>-->
+		<!-- zap - zap -->
+
+		<!-- Seção em Destaque -->
+	<div style="box-shadow: none" class="feature-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-7">
+					<div class="featured-text">
+						<h2 class="pb-3">Por que o <span class="orange-text">Bookshifter?</span></h2>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 mb-4 mb-md-5">
+								<div class="list-box d-flex">
+									<div class="list-icon">
+										<i class="fas fa-map-marker-alt"></i>
+									</div>
+									<div class="content">
+										<h3>Localização</h3>
+										<p>Localize e Verifique a rota até a Fatec disponível.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 mb-5 mb-md-5">
+								<div class="list-box d-flex">
+									<div class="list-icon">
+										<i class="fas fa-barcode"></i>
+									</div>
+									<div class="content">
+										<h3>Melhores livros</h3>
+										<p>Adição de livros facilitadas através de seu ISBN (código do livro).</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 mb-5 mb-md-5">
+								<div class="list-box d-flex">
+									<div class="list-icon">
+										<i class="fas fa-home"></i>
+									</div>
+									<div class="content">
+										<h3>Colabore com a leitura</h3>
+										<p>Abra espaço em sua casa e transforme a vida do próximo!</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6">
+								<div class="list-box d-flex">
+									<div class="list-icon">
+										<i class="fab fa-whatsapp"></i>
+									</div>
+									<div class="content">
+										<h3>Contato</h3>
+										<p>Suporte via WhatsApp persolizado e eficiente!</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<!-- Fim da Seção em Destaque -->
+		
+	<div class="buttonzap">
+		<a id="btn-zap" href='https://api.whatsapp.com/send?phone=5511986592453&text=Olá,%20você%20poderia%20me%20orientar%20com%20o%20uso%20do%20BookShifter?' class="icon" target='_blank'>
+		  <i class="fab fa-whatsapp"></i>
+		</a>
+	</div>
 	</div>
 	
 	<!-- end latest news -->

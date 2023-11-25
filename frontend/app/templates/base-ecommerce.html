@@ -69,20 +69,17 @@
 								<li class="{% if page == "shop" %}current-list-item{% endif %}">
 									<a href="{{url_for('ecommerce.shop')}}">Livraria</a>
 								</li>
-								<li class="{% if page == "summary" %}current-list-item{% endif %}">
-									<a href="{{url_for('ecommerce.summary')}}">Resumos</a>
-								</li>
-								<li class="{% if page == "about" %}current-list-item{% endif %}">
+								<!--<li class="{% if page == "about" %}current-list-item{% endif %}">
 									<a href="{{url_for('ecommerce.about')}}">Sobre</a></li>
-								</li>
+								</li>-->
 								<li class="{% if page == "contact" %}current-list-item{% endif %}">
 									<a href="{{url_for('ecommerce.contact')}}">Contato</a></li>
 								<li>
 									<div class="header-icons">
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search" title="Buscar livros"></i></a>
-										<a href="{{url_for('ecommerce.cart')}}"><i class="fas fa-shopping-cart" title="Carrinho"></i></a>
+										<!--<a href="{{url_for('ecommerce.cart')}}"><i class="fas fa-shopping-cart" title="Carrinho"></i></a>-->
 										{% if session['token'] %}
-										<a href="{{url_for('dashboard.dashboard')}}" title="Painel de livros"><i class="fas fa-lock"></i></a>
+										<a href="{{url_for('books.books')}}" title="Painel de livros"><i class="fas fa-book"></i></a>
 										<a href="{{url_for('authentication.logout')}}" title="Sair"><i class="fas fa-sign-out-alt"></i></a>
 										{% else %}
 										<a href="{{url_for('authentication.login')}}" class="float-right"><i class="fas fa-sign-in-alt"></i></a>
@@ -122,9 +119,9 @@
 					<span class="close-btn"><i class="fas fa-window-close"></i></span>
 					<div class="search-bar">
 						<div class="search-bar-tablecell">
-							<h3>Search For:</h3>
-							<input type="text" placeholder="Keywords">
-							<button type="submit">Search <i class="fas fa-search"></i></button>
+							<h3>Buscar por:</h3>
+							<input type="text" placeholder="Nome do livro..." id="search-book-input">
+							<button type="button" onclick="searchBooks()">Buscar &nbsp;&nbsp;<i class="fas fa-search"></i></button>
 						</div>
 					</div>
 				</div>
@@ -142,17 +139,16 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-box about-widget">
-						<h2 class="widget-title">About us</h2>
-						<p>Ut enim ad minim veniam perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>
+						<h2 class="widget-title">Sobre nós</h2>
+						<p>O BookShifter busca facilitar o acesso a livros.</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-box get-in-touch">
-						<h2 class="widget-title">Get in Touch</h2>
+						<h2 class="widget-title">Entre em contato</h2>
 						<ul>
-							<li>34/8, East Hukupara, Gifirtok, Sadan.</li>
-							<li>support@Bookshifter.com</li>
-							<li>+00 111 222 3333</li>
+							<li>Av. Luiz Merenda, 443 - Campanário, Diadema - SP, 09931-390</li>
+							<li>book.shifter.brazil@gmail.com</li>
 						</ul>
 					</div>
 				</div>
@@ -161,21 +157,16 @@
 						<h2 class="widget-title">Pages</h2>
 						<ul>
 							<li><a href="{{url_for('ecommerce.index')}}">Home</a></li>
-							<li><a href="{{url_for('ecommerce.about')}}">About</a></li>
-							<li><a href="{{url_for('ecommerce.shop')}}">Shop</a></li>
-							<li><a href="{{url_for('ecommerce.summary')}}">News</a></li>
-							<li><a href="{{url_for('ecommerce.contact')}}">Contact</a></li>
+							<li><a href="{{url_for('ecommerce.shop')}}">Livraria</a></li>
+							<li><a href="{{url_for('ecommerce.contact')}}">Contato</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6">
 					<div class="footer-box subscribe">
-						<h2 class="widget-title">Subscribe</h2>
-						<p>Subscribe to our mailing list to get the latest updates.</p>
-						<form action="index.html">
-							<input type="email" placeholder="Email">
-							<button type="submit"><i class="fas fa-paper-plane"></i></button>
-						</form>
+						<h2 class="widget-title">Duvidas</h2>
+						<p>Envie um email para</p>
+						<p>book.shifter.brazil@gmail.com</p>
 					</div>
 				</div>
 			</div>
@@ -204,6 +195,8 @@
 	</div>
 	<!-- end copyright -->
 	
+	<!-- base -->
+	<script src="{{url_for('static', filename='js/ecommerce/base.js')}}"></script>
 	<!-- jquery -->
 	<script src="{{url_for('static', filename='js/ecommerce/jquery-1.11.3.min.js')}}"></script>
 	<!-- bootstrap -->

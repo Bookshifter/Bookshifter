@@ -7,16 +7,18 @@ import com.example.bookshifter.dto.BookRequestDTO;
 import com.example.bookshifter.entities.Book;
 import com.example.bookshifter.entities.Fatec;
 import com.example.bookshifter.entities.User;
+import com.example.bookshifter.exceptions.ApiException;
+import com.example.bookshifter.exceptions.BookException;
+import com.example.bookshifter.exceptions.FatecException;
 import com.example.bookshifter.repositories.BookRepository;
 import com.example.bookshifter.repositories.FatecRepository;
 import com.example.bookshifter.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.authentication.AuthenticationManager;
+
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -51,10 +53,10 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
         ResponseEntity<FullRequestOpenLibrary> extraInfoResponse = restTemplate.getForEntity(url, FullRequestOpenLibrary.class);
         Optional<Fatec> fatecOptional = fatecRepository.findById(fatecId);
         if(fatecOptional.isEmpty()){
-            throw new RuntimeException("Fatec não elegível");
+            throw new FatecException("Fatec ainda não cadastrada", HttpStatusCode.valueOf(404));
         }
 
-        try {
+        if(response.hasBody() && extraInfoResponse.hasBody()){
             User owner = userService.getAuthenticatedUserInfo(auth);
             Book newBook = new Book(
                     Objects.requireNonNull(response.getBody()).getItems()[0].getVolumeInfo().getTitle(),
@@ -72,9 +74,10 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
 
             repository.save(newBook);
             return new BookDTO(newBook);
-        } catch(RuntimeException e ){
-            throw new RuntimeException("Erro nas busca da api externa:"+ e.getStackTrace() );
-            }
+        } else {
+            throw new ApiException("Erro na requisição das apis externas");
+        }
+
     }
 
     @Override
@@ -90,7 +93,7 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
     public BookDTO findById(Long id){
         var result = repository.findById(id);
         if(result.isEmpty()){
-            throw new RuntimeException("Livro não existe");
+            throw new BookException("Livro não existe", HttpStatusCode.valueOf(404));
         }
         Book bookFound = result.get();
 
@@ -104,7 +107,7 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
         var result = repository.findById(id);
 
         if(result.isEmpty()){
-            throw new RuntimeException("Livro não encontrado");
+            throw new BookException("Livro não encontrado", HttpStatusCode.valueOf(404));
         }
 
         Book book = result.get();

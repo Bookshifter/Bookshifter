@@ -4,8 +4,8 @@
     
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb">
-        <li><a href="{{url_for('dashboard.dashboard')}}">Home</a></li>
-        <li><a href="/books" class="active">Livros</a></li>
+        <li><a href="{{url_for('ecommerce.index')}}">Home</a></li>
+        <li class="active">Meus livros</li>
     </ul>
     <!-- END BREADCRUMB -->     
                                           
@@ -29,7 +29,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Adicionar livro</h5>
+                    <h3 class="modal-title">Adicionar livro</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -38,10 +38,29 @@
                 <div class="modal-body">
                     <form method="POST">
                         <br>
+                        <p>* Obrigatório</p>
+                        <br>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">Fatec destino</label>
-                            <div class="col-md-10">
-                                <select class="form-control" name="fatec">
+                            <label class="col-md-12 control-label">* ISBN do livro</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" placeholder="ISBN-10 ou ISBN-13 do livro sem hífens..." name="isbn"  required/>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label">* Estado do livro</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" placeholder="Descreva brevemente o estado do livro..." name="state" required/>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12 control-label">* Fatec destino</label>
+                            <div class="col-md-12">
+                            
+                                <select class="form-control" name="fatec" required id="form-fatec">
                                     <option value="N/A" disabled selected>Selecione uma Fatec</option>
                                     {% for fatec in fatecs %}
                                         <option value="{{fatec.id}}" id="fatec-{{fatec.id}}" name=>{{fatec.name}}</option>
@@ -50,22 +69,34 @@
                             </div>
                             <br>
                         </div>
+
                         <div class="form-group">
-                            <label class="col-md-2 control-label">ISBN do livro</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" placeholder="ISBN-10 ou ISBN-13 do livro sem hífens..." name="isbn" />
+                            <label class="col-md-12 control-label" for="origem">Digite seu endereço/CEP </label>
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" id="origem" placeholder="Digite seu local de origem" />
                             </div>
                             <br>
                         </div>
+
                         <div class="form-group">
-                            <label class="col-md-2 control-label">Estado do livro</label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" placeholder="Descreva brevemente o estado do livro..." name="state" />
+                            <label class="col-md-12 control-label">Escolha seu meio de transporte</label>
+                            <div class="col-md-12">
+                                <select id="mode" class="form-control">
+                                <option value="DRIVING">Veículo próprio</option>
+                                <option value="WALKING">Andando</option>
+                                <option value="TRANSIT">Transporte Público</option>
+                            </select> 
                             </div>
-                            <br>
+                        </div>
+                        
+                        <br><br><br>
+                        <div>
+                            <button type="submit" name="add-book" class="btn btn-success pull-right" >Salvar</button>
+                            <button id="btn-rota" type="button" class="btn btn-success pull-righ" onclick="initMap()">Calcular rota</button>
                         </div>
                         <br>
-                        <button type="submit" name="add-book" class="btn btn-success pull-right" >Salvar</button>
+                        <div id="map" style="height: 500px;" hidden></div>
+                        
                     </form>
                 </div>
             </div>
@@ -132,16 +163,14 @@
                                 <p class="card-text"><strong>Local: </strong>{{ book.fatecName }}</p>
                                 <p class="card-text"><strong>Descrição: </strong>&nbsp;<span class="fa fa-info-circle" title="{{ book.description }}"></span></p>
                                 
-                                <!-- Campo oculto para armazenar o ID do livro -->
-                                
                                 <div class="row">
+                                    <br>
+                                    <!-- 
                                     <div class="col-md-6">
-                                        <form method="POST">
-                                            <!-- Botão de envio para editar -->
-                                            <input type="submit" class="btn btn-block btn-info" value="Editar">
-                                        </form>
+                                        <input type="submit" class="btn btn-block btn-info" value="Editar">
                                     </div>
-                                    <div class="col-md-6">
+                                    -->
+                                    <div class="col-md-12">
                                         <button type="button" class="btn btn-block btn-danger" href="#" data-toggle="modal" data-target="#delete-book" onclick="modalDeleteChangeId({{book.id}})">Apagar</button>
                                     </div>
                                 </div>
@@ -159,5 +188,9 @@
 {% endblock content %}
 
 {% block imports %}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl41q9OZr8ADefUeTvI4UziXYzjiwEOKQ"></script>
+
     <script type="text/javascript" src="{{ url_for('static', filename= 'js/book.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename= 'js/maps.js') }}"></script>
 {% endblock imports %}
+
