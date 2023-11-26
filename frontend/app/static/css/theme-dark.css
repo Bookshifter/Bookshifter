@@ -6638,7 +6638,7 @@ td.dataTables_empty {
   float: left;
   width: 100%;
   min-height: 100%;
-  background: url("../img/bg.png") left top repeat #1B1E24;
+  background-color: #051922;
 }
 .registration-container .registration-box {
   width: 400px;
