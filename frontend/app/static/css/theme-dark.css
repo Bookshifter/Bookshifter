@@ -2339,18 +2339,12 @@ strong {
   float: left;
   min-height: 100%;
   position: relative;
-  background: #1B1E24;
+  background:#051922;
   -webkit-transition: all 200ms ease;
   -moz-transition: all 200ms ease;
   -ms-transition: all 200ms ease;
   -o-transition: all 200ms ease;
   transition: all 200ms ease;
-
-
-
-
-
-
 }
 .page-container .page-sidebar {
   width: 300px;
@@ -2774,7 +2768,7 @@ body.page-container-boxed.wall_10 {
 }
 .x-navigation.x-navigation-horizontal {
   height: 50px;
-  background: #1D2127;
+  background: #051922;
 }
 .x-navigation.x-navigation-horizontal .xn-logo a {
   border-bottom: 0px;
@@ -3422,7 +3416,7 @@ body.page-container-boxed.wall_10 {
   float: left;
   padding: 15px 10px;
   position: relative;
-  background: #14171b;
+  background: #051922;
 }
 .profile .profile-image {
   float: left;
@@ -4518,12 +4512,6 @@ ul.panel-controls > li > .dropdown-menu:before {
   border-radius: 5px;
   border: 1px solid transparent
 }
-
-.btn-info:hover {
-  background-color: #142738;
-  font-size: 16px;
-}
-
 
 .btn-info:focus,
 .btn-info:active,
@@ -6650,7 +6638,7 @@ td.dataTables_empty {
   float: left;
   width: 100%;
   min-height: 100%;
-  background: url("../img/bg.png") left top repeat #1B1E24;
+  background-color: #051922;
 }
 .registration-container .registration-box {
   width: 400px;
@@ -6732,7 +6720,7 @@ td.dataTables_empty {
   float: left;
   width: 100%;
   min-height: 100%;
-  background-image: linear-gradient(60deg, #EFC183, #0F2535);
+  background-color: #051922 
 }
 .login-container .login-box {
   width: 400px;

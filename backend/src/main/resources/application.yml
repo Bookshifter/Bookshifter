@@ -6,7 +6,7 @@ spring:
   #criar db na fatec antes de rodar
   datasource:
     url: jdbc:mysql://localhost:3306/testdb
-    username: root
+    username: 
     password:
     driver-class-name:
   jpa:
