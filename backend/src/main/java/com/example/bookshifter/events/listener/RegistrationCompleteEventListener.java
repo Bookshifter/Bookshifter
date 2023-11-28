@@ -31,7 +31,7 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         String verificationToken = UUID.randomUUID().toString();
         tokenService.saveVerificationToken(user, verificationToken);
 
-        String url = "https://flask-production-de81.up.railway.app/register/enable?token=" + verificationToken;
+        String url = "https://br-bookshifter.up.railway.app/register/enable?token=" + verificationToken;
         try {
             sendActivationEmail(url);
         } catch (MessagingException | UnsupportedEncodingException e) {
