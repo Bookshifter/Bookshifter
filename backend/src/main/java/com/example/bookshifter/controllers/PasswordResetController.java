@@ -48,12 +48,15 @@ public class PasswordResetController {
             if(user.isPresent()){
                 if (checkValidation(newPassword, request.getNewPasswordConfirmation()).equalsIgnoreCase("valid")){
                     service.resetPassword(user.get(), newPassword);
+                    service.deleteToken(requestToken);
                     return ResponseEntity.status(200).body("Senha alterada com sucesso");
-                } else ResponseEntity.status(409).body("AS senhas não coincidem");
+                } else ResponseEntity.status(409).body("As senhas não coincidem");
             }
+        } else if(validationTokenResult.equalsIgnoreCase("expired")) {
+            return ResponseEntity.status(401).body("Token de recuperação de senha expirado, por favor gere outro token");
         }
 
-        return ResponseEntity.status(406).body("Token não pertence a nenhum usuário ou expirou");
+        return ResponseEntity.status(406).body("Token não pertence a nenhum usuário");
     }
 
     private String checkValidation(String newPassword, String newPasswordConfirmation){
