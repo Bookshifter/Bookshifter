@@ -6,7 +6,6 @@ import com.example.bookshifter.dto.RegisterUserDTO;
 import com.example.bookshifter.dto.UserAndBookDTO;
 import com.example.bookshifter.dto.UserDTO;
 import com.example.bookshifter.entities.Book;
-import com.example.bookshifter.entities.Role;
 import com.example.bookshifter.entities.User;
 import com.example.bookshifter.exceptions.JWTExcepion;
 import com.example.bookshifter.exceptions.UserNotFoundException;
@@ -22,7 +21,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +44,7 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     @Override
     public User registerUser(RegisterUserDTO dto){
       User newUser = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(),
-              passwordEncoder.encode(dto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
+              passwordEncoder.encode(dto.getPassword()), "USER");
       return repository.save(newUser);
     }
     @Override
