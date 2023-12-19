@@ -11,6 +11,7 @@ def books():
         return redirect(url_for('authentication.login'))
     print(session['token'])
     backend_url = current_app.config.get('BACKEND_API_URL')
+    key_google = current_app.config.get('KEY_API_GOOGLE')
     if request.method == 'POST':
         form = dict(request.form)
         if 'add-book' in request.form:
@@ -48,5 +49,5 @@ def books():
         
     user_data = api.get_api_books({"url":f"{backend_url}users/books?email={session['username']}", "token": session['token']})
     fatecs = api.get_api_books({'url':f'{backend_url}fatecs', 'token': session['token']})
-    response = make_response(render_template('/books/books.html', backend_url=backend_url, user_data=user_data, fatecs=fatecs))
+    response = make_response(render_template('/books/books.html', backend_url=backend_url, user_data=user_data, fatecs=fatecs, key_google=key_google))
     return response

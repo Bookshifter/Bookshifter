@@ -12,6 +12,7 @@ class Config:
     FLASK_PORT = os.getenv("FLASK_PORT")
     DEV = os.getenv("DEV")
     BACKEND_API_URL=os.getenv("BACKEND_API_URL")
+    KEY_API_GOOGLE=os.getenv("KEY_API_GOOGLE")
     DEBUG = ENV == "development"
     
     # URLs
