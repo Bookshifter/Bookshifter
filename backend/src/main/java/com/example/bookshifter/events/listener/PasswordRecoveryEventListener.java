@@ -28,7 +28,7 @@ public class PasswordRecoveryEventListener implements ApplicationListener<Passwo
         user = event.getUser();
         String token = UUID.randomUUID().toString();
         service.saveResetPasswordToken(user, token);
-        String url = "https://br-bookshifter.up.railway.app/password-reset?token=" + token;
+        String url = "http://localhost:8080/password-reset?token=" + token;
 
         try {
             sendResetPasswordEmail(url);
