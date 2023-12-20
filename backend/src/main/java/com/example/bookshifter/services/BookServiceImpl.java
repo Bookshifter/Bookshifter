@@ -68,7 +68,6 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
                     largeCoverUrl,
                     mediumCoverURL,
                     dto.bookState(),
-                    fatecOptional.get(),
                     owner
             );
 

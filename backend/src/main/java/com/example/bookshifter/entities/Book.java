@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "tb_book")
 public class Book {
@@ -31,9 +32,8 @@ public class Book {
     private String mediumCoverUrl;
     @Column(columnDefinition = "TEXT")
     private String bookState;
-    @ManyToOne()
-    @JoinColumn(name = "fatec")
-    private Fatec fatec;
+    @ManyToMany(mappedBy = "book")
+    private Set<Fatec> fatec;
 
     @ManyToOne()
     @JoinColumn(name = "owner_id", nullable = false)
@@ -44,7 +44,7 @@ public class Book {
     }
 
     public Book(String title, List<String> authors, String description, String publisher, Integer publishYear,
-                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState, Fatec fatec, User owner)
+                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState, User owner)
     {
         this.title = title;
         this.authors = authors;
@@ -55,7 +55,6 @@ public class Book {
         this.largeCoverUrl = largeCoverUrl;
         this.mediumCoverUrl = mediumCoverUrl;
         this.bookState = bookState;
-        this.fatec = fatec;
         this.owner = owner;
 
     }
@@ -114,7 +113,7 @@ public class Book {
         return this.bookState;
     }
 
-    public Fatec getFatec(){
+    public Set<Fatec> getFatec(){
         return this.fatec;
     }
     public User getOwner(){

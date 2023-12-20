@@ -3,6 +3,8 @@ package com.example.bookshifter.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_fatec")
 public class Fatec {
@@ -10,11 +12,26 @@ public class Fatec {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+
+
+
+
     private String name;
 
     private String street;
     private String neighborhood;
     private String city;
+
+    @ManyToMany
+    @JoinTable (
+     name="book_fatec",
+     joinColumns = @JoinColumn(name="fatec_id"),
+     inverseJoinColumns = @JoinColumn(name= "book_id")
+    )
+    private Set<Book> book;
+
+
 
     public Fatec() {
     }
