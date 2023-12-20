@@ -23,6 +23,7 @@ public class Fatec {
     private String neighborhood;
     private String city;
 
+
     @ManyToMany
     @JoinTable (
      name="book_fatec",
@@ -70,6 +71,10 @@ public class Fatec {
 
     public String getCity() {
         return this.city;
+    }
+
+    public Set<Book> getBooks(){
+        return this.book;
     }
 
     public void setCity(String city) {

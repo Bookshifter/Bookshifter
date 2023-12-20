@@ -25,6 +25,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class BookServiceImpl implements com.example.bookshifter.services.interfaces.BookService {
@@ -70,6 +71,11 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
                     dto.bookState(),
                     owner
             );
+
+            Set<Fatec> bookDestination = Set.of(fatecOptional.get());
+            newBook.setFatec(bookDestination);
+
+            fatecOptional.get().getBooks().add(newBook);
 
             repository.save(newBook);
             return new BookDTO(newBook);

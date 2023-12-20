@@ -32,7 +32,7 @@ public class Book {
     private String mediumCoverUrl;
     @Column(columnDefinition = "TEXT")
     private String bookState;
-    @ManyToMany(mappedBy = "book")
+    @ManyToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private Set<Fatec> fatec;
 
     @ManyToOne()
@@ -115,6 +115,10 @@ public class Book {
 
     public Set<Fatec> getFatec(){
         return this.fatec;
+    }
+
+    public void setFatec(Set<Fatec> fatec){
+        this.fatec = fatec;
     }
     public User getOwner(){
         return this.owner;
