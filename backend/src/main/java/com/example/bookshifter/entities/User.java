@@ -7,7 +7,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Stream;
 
 
@@ -24,6 +26,16 @@ public class User implements UserDetails {
     private String password;
     private String role;
     private boolean isEnabled = false;
+
+
+
+    @OneToMany()
+    private List <Book> books = new ArrayList<>();
+
+
+
+
+
 
     public User(){
     }
@@ -115,5 +127,13 @@ public class User implements UserDetails {
 
     public void setRoles(String role) {
         this.role = role;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

@@ -3,6 +3,8 @@ package com.example.bookshifter.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,13 +26,10 @@ public class Fatec {
     private String city;
 
 
-    @ManyToMany
-    @JoinTable (
-     name="book_fatec",
-     joinColumns = @JoinColumn(name="fatec_id"),
-     inverseJoinColumns = @JoinColumn(name= "book_id")
-    )
-    private Set<Book> book;
+
+    @OneToMany
+
+    private List<Book> books = new ArrayList<>();
 
 
 
@@ -73,9 +72,12 @@ public class Fatec {
         return this.city;
     }
 
-    public Set<Book> getBooks(){
-        return this.book;
+    public List<Book> getBooks(){
+        return this.books;
     }
+
+
+
 
     public void setCity(String city) {
         this.city = city;

@@ -68,14 +68,13 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
                     Objects.requireNonNull(response.getBody().getItems()[0].getVolumeInfo().getPageCount()),
                     largeCoverUrl,
                     mediumCoverURL,
-                    dto.bookState(),
-                    owner
+                    dto.bookState()
             );
 
-            Set<Fatec> bookDestination = Set.of(fatecOptional.get());
-            newBook.setFatec(bookDestination);
 
-            fatecOptional.get().getBooks().add(newBook);
+            newBook.setOwner(owner);
+            newBook.setFatec(fatecOptional.get());
+
 
             repository.save(newBook);
             return new BookDTO(newBook);

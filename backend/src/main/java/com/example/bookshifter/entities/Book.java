@@ -32,19 +32,22 @@ public class Book {
     private String mediumCoverUrl;
     @Column(columnDefinition = "TEXT")
     private String bookState;
-    @ManyToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    private Set<Fatec> fatec;
+
 
     @ManyToOne()
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
+
+    @ManyToOne()
+    @JoinColumn(name = "fatec_id" , nullable = false)
+    private Fatec fatec;
 
 
     public Book(){
     }
 
     public Book(String title, List<String> authors, String description, String publisher, Integer publishYear,
-                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState, User owner)
+                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState)
     {
         this.title = title;
         this.authors = authors;
@@ -55,7 +58,7 @@ public class Book {
         this.largeCoverUrl = largeCoverUrl;
         this.mediumCoverUrl = mediumCoverUrl;
         this.bookState = bookState;
-        this.owner = owner;
+
 
     }
 
@@ -113,15 +116,18 @@ public class Book {
         return this.bookState;
     }
 
-    public Set<Fatec> getFatec(){
+    public Fatec getFatec(){
         return this.fatec;
     }
 
-    public void setFatec(Set<Fatec> fatec){
+    public void setFatec(Fatec fatec){
         this.fatec = fatec;
     }
     public User getOwner(){
         return this.owner;
     }
 
+    public void setOwner(User owmer){
+        this.owner = owmer;
+    }
 }
