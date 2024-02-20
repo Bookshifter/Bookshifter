@@ -35,4 +35,4 @@ api:
   security:
     token:
       #NÃO COMMITAR COM A LINHA ABAIXO PREENCHIDA
-      secret: ${JWT_SECRET:test}
+      secret: ${JWT_SECRET}
