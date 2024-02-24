@@ -1,6 +1,7 @@
 package com.example.bookshifter.controllers;
 
-import com.example.bookshifter.dto.PasswordResetDTO;
+import com.example.bookshifter.dto.NewPasswordDTO;
+import com.example.bookshifter.dto.PasswordResetEmailRequest;
 import com.example.bookshifter.entities.User;
 import com.example.bookshifter.events.PasswordRecoveryEvent;
 import com.example.bookshifter.services.PasswordResetTokenServiceImpl;
@@ -26,9 +27,8 @@ public class PasswordResetController {
     private PasswordResetTokenServiceImpl service;
 
     @PostMapping
-    public ResponseEntity<String> sendResetPasswordRequest(@RequestBody PasswordResetDTO dto, HttpServletRequest request){
-        String email = dto.getEmail();
-        Optional<User> user = userService.findByEmail(email);
+    public ResponseEntity<String> sendResetPasswordRequest(@RequestBody PasswordResetEmailRequest dto, HttpServletRequest request){
+        Optional<User> user = userService.findByEmail(dto.email());
 
         if(user.isEmpty()){
             return ResponseEntity.status(404).body("Usuário não encontrado");
@@ -39,15 +39,14 @@ public class PasswordResetController {
     }
 
     @PostMapping("/password-reset")
-    public ResponseEntity<String> resetPassword(@RequestBody PasswordResetDTO request, @RequestParam("token") String requestToken){
+    public ResponseEntity<String> resetPassword(@RequestBody NewPasswordDTO request, @RequestParam("token") String requestToken){
         String validationTokenResult = service.validateToken(requestToken);
-        String newPassword = request.getNewPassword();
         if(validationTokenResult.equalsIgnoreCase("valid")){
             Optional<User> user = service.findUserByToken(requestToken);
 
             if(user.isPresent()){
-                if (checkValidation(newPassword, request.getNewPasswordConfirmation()).equalsIgnoreCase("valid")){
-                    service.resetPassword(user.get(), newPassword);
+                if (checkValidation(request.newPassword(), request.passwordConfirmation()).equalsIgnoreCase("valid")){
+                    service.resetPassword(user.get(), request.newPassword());
                     service.deleteToken(requestToken);
                     return ResponseEntity.status(200).body("Senha alterada com sucesso");
                 } else ResponseEntity.status(409).body("As senhas não coincidem");
