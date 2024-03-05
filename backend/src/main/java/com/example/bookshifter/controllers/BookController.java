@@ -18,13 +18,13 @@ public class BookController {
     private BookService service;
 
     @CrossOrigin("*")
-    @PostMapping("/")
-public String getBook(@RequestParam(name = "isbn") Long isbn, @RequestParam(name = "fatecId") Long fatecId, @RequestBody BookRequestDTO dto){
+    @PostMapping
+    public String createBook(@RequestParam(name = "isbn") Long isbn, @RequestParam(name = "fatecId") Long fatecId, @RequestBody BookRequestDTO dto){
         service.saveBookByIsbn(isbn, fatecId, dto);
         return "Livro adicionado!";
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<BookDTO>> findAll(){
         return ResponseEntity.ok(service.findAllBooks());
     }

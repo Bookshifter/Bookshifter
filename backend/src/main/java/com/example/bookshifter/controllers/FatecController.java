@@ -19,12 +19,12 @@ public class FatecController {
 
 
     @PostMapping
-    public ResponseEntity<FatecDTO> getFatec(@RequestBody FatecDTO dto) {
+    public ResponseEntity<FatecDTO> createFatec(@RequestBody FatecDTO dto) {
         service.createFatec(dto);
         return  ResponseEntity.ok(dto);
     }
     @GetMapping("/books/")
-    public ResponseEntity<ResponseFatecDTO> getInfo(@RequestParam("fatecID") Long id){
+    public ResponseEntity<ResponseFatecDTO> getFqatecBooks(@RequestParam("fatecID") Long id){
         return ResponseEntity.ok(service.getAllFatecBooks(id));
     }
 
