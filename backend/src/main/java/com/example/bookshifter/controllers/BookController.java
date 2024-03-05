@@ -3,6 +3,7 @@ package com.example.bookshifter.controllers;
 import com.example.bookshifter.dto.BookDTO;
 import com.example.bookshifter.dto.BookRequestDTO;
 
+import com.example.bookshifter.exceptions.BookException;
 import com.example.bookshifter.services.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +43,13 @@ public class BookController {
 
     @CrossOrigin(origins="*")
     @DeleteMapping("/{id}")
-    public String deleteBook(@PathVariable Long id){
-        service.deleteBook(id);
-        return "Livro deletado com sucesso!";
+    public ResponseEntity<String> deleteBook(@PathVariable Long id){
+
+        try {
+            service.deleteBook(id);
+            return ResponseEntity.noContent().build();
+        } catch(BookException error){
+            return ResponseEntity.status(404).body("Livro não encontrado");
+        }
     }
 }

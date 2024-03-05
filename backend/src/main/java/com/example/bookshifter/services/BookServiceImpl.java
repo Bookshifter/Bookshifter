@@ -110,13 +110,13 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
 
     @Override
     public void deleteBook(Long id){
-        var result = repository.findById(id);
+        User user = userService.getAuthenticatedUserInfo(auth);
 
-        if(result.isEmpty()){
+        Book book = repository.findBookByOwnerAndId(user, id);
+
+        if(book == null){
             throw new BookException("Livro não encontrado", HttpStatusCode.valueOf(404));
         }
-
-        Book book = result.get();
         repository.delete(book);
     }
 
