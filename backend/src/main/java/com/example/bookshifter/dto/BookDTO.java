@@ -19,10 +19,7 @@ public class BookDTO{
     private String largeCoverUrl;
     private String mediumCoverUrl;
     private String bookState;
-    private String fatecName;
-    private String ownerName;
-    private Long fatecID;
-    private Long ownerID;
+
 
 
     public BookDTO(){
@@ -41,10 +38,7 @@ public class BookDTO{
         this.largeCoverUrl = largeCoverUrl;
         this.mediumCoverUrl = mediumCoverUrl;
         this.bookState = bookState;
-        this.fatecName = fatecName;
-        this.ownerName = ownerName;
-        this.fatecID = fatecID;
-        this.ownerID = ownerID;
+
 
     }
 
@@ -60,9 +54,7 @@ public class BookDTO{
         this.mediumCoverUrl = book.getMediumCoverUrl();
         this.bookState = book.getBookState();
 
-        this.ownerName = book.getOwner().getFirstName() + " " + book.getOwner().getLastName();
 
-        this.ownerID = book.getOwner().getId();
     }
 
     public String getTitle(){
@@ -97,7 +89,4 @@ public class BookDTO{
         return this.mediumCoverUrl;
     }
 
-    public String getFatecName(){
-        return this.fatecName;
-    }
 }
