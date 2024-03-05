@@ -20,5 +20,4 @@ public interface UserService {
 
     User getAuthenticatedUserInfo(Authentication authentication);
 
-    public UserAndBookDTO getAuthenticatedUserBooks(String email);
 }

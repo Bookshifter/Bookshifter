@@ -66,18 +66,4 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
         throw new JWTExcepion("Token JWT expirado ou não informado, por favor tente novamente");
     }
 
-    @Override
-    public UserAndBookDTO getAuthenticatedUserBooks(String email) {
-        Optional<User> userOptional = repository.findByEmail(email);
-
-        if(userOptional.isPresent()){
-            List<Book> books = bookRepository.findByOwner(userOptional.get().getId());
-            List<BookDTO> booksDTO = books.stream().map(BookDTO::new).toList();
-
-            return new UserAndBookDTO(userOptional.get().getFirstName(), userOptional.get().getLastName(),
-                    userOptional.get().getEmail(), booksDTO);
-        }
-
-        throw new UserNotFoundException("O email requisatado não está atrelado a nenhum usuário", HttpStatusCode.valueOf(404));
-    }
 }
