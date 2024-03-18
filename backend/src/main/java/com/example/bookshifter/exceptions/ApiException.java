@@ -1,7 +1,10 @@
 package com.example.bookshifter.exceptions;
 
-public class ApiException extends RuntimeException{
-    public ApiException(String message){
-        super(message);
+import org.springframework.http.HttpStatusCode;
+import org.springframework.web.client.HttpStatusCodeException;
+
+public class ApiException extends HttpStatusCodeException {
+    public ApiException(String message, HttpStatusCode statusCode){
+        super(statusCode, message);
     }
 }

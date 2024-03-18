@@ -3,12 +3,16 @@ package com.example.bookshifter.controllers;
 import com.example.bookshifter.dto.BookDTO;
 import com.example.bookshifter.dto.BookRequestDTO;
 
+import com.example.bookshifter.exceptions.ApiException;
 import com.example.bookshifter.exceptions.BookException;
+import com.example.bookshifter.exceptions.FatecException;
 import com.example.bookshifter.services.interfaces.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,9 +24,15 @@ public class BookController {
 
     @CrossOrigin("*")
     @PostMapping
-    public String createBook(@RequestParam(name = "isbn") Long isbn, @RequestParam(name = "fatecId") Long fatecId, @RequestBody BookRequestDTO dto){
-        service.saveBookByIsbn(isbn, fatecId, dto);
-        return "Livro adicionado!";
+    public ResponseEntity<?> createBook(@RequestParam(name = "isbn") Long isbn, @RequestParam(name = "fatecId") Long fatecId, @RequestBody BookRequestDTO dto, UriComponentsBuilder ucb){
+        try {
+            BookDTO createdBook = service.saveBookByIsbn(isbn, fatecId, dto);
+            URI createdBookURI = ucb.path("/books/{id}").buildAndExpand(createdBook.getId()).toUri();
+            return ResponseEntity.created(createdBookURI).build();
+        } catch (ApiException | FatecException exception ){
+            return ResponseEntity.status(404).body(exception.getStatusText());
+        }
+
     }
 
     @GetMapping
@@ -36,8 +46,13 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDTO> getById(@PathVariable Long id){
-        return ResponseEntity.ok(service.findById(id));
+    public ResponseEntity<?> getById(@PathVariable Long id){
+        try {
+            BookDTO book = service.findById(id);
+            return ResponseEntity.ok(book);
+        } catch (BookException exception){
+            return ResponseEntity.status(404).body(exception.getStatusText());
+        }
     }
 
 

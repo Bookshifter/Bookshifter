@@ -55,11 +55,12 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
 
         ResponseEntity<FullRequestOpenLibrary> extraInfoResponse = restTemplate.getForEntity(url, FullRequestOpenLibrary.class);
         Optional<Fatec> fatecOptional = fatecRepository.findById(fatecId);
+
         if(fatecOptional.isEmpty()){
             throw new FatecException("Fatec ainda não cadastrada", HttpStatusCode.valueOf(404));
         }
 
-        if(response.hasBody() && extraInfoResponse.hasBody()){
+        try{
             User owner = userService.getAuthenticatedUserInfo(auth);
             Book newBook = new Book(
                     Objects.requireNonNull(response.getBody()).getItems()[0].getVolumeInfo().getTitle(),
@@ -80,10 +81,9 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
 
             repository.save(newBook);
             return new BookDTO(newBook);
-        } else {
-            throw new ApiException("Erro na requisição das apis externas");
+        } catch(NullPointerException exception){
+            throw new ApiException("Erro ao requisitar livro pelas APIs externas", HttpStatusCode.valueOf(404));
         }
-
     }
 
     @Override
