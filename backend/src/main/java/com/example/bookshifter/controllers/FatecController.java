@@ -4,6 +4,7 @@ package com.example.bookshifter.controllers;
 import com.example.bookshifter.dto.FatecDTO;
 import com.example.bookshifter.dto.FatecInfoDTO;
 import com.example.bookshifter.dto.ResponseFatecDTO;
+import com.example.bookshifter.exceptions.FatecException;
 import com.example.bookshifter.services.FatecServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +20,17 @@ public class FatecController {
 
 
     @PostMapping
-    public ResponseEntity<FatecDTO> createFatec(@RequestBody FatecDTO dto) {
-        service.createFatec(dto);
-        return  ResponseEntity.ok(dto);
+    public ResponseEntity<?> createFatec(@RequestBody FatecDTO dto) {
+        try {
+            service.createFatec(dto);
+            return  ResponseEntity.ok(dto);
+        } catch(FatecException exception){
+            return ResponseEntity.status(409).body(exception.getStatusText());
+        }
+
     }
-    @GetMapping("/books/")
-    public ResponseEntity<ResponseFatecDTO> getFqatecBooks(@RequestParam("fatecID") Long id){
+    @GetMapping("/books")
+    public ResponseEntity<ResponseFatecDTO> getFatecBooks(@RequestParam("fatecID") Long id){
         return ResponseEntity.ok(service.getAllFatecBooks(id));
     }
 
@@ -34,7 +40,12 @@ public class FatecController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FatecInfoDTO> getFatecById(@PathVariable Long id){
-        return ResponseEntity.ok(service.getFatecById(id));
+    public ResponseEntity<?> getFatecById(@PathVariable Long id){
+        try{
+            return ResponseEntity.ok(service.getFatecById(id));
+        } catch(FatecException exception){
+            return ResponseEntity.status(404).body(exception.getStatusText());
+        }
+
     }
 }

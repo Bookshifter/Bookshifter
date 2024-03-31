@@ -51,13 +51,20 @@ public class FatecServiceImpl implements FatecService {
         String url ="https://viacep.com.br/ws/" + dto.cep() + "/json/";
 
         ResponseEntity<LocationInfo> response = template.getForEntity(url, LocationInfo.class);
-        if(response.hasBody()){
+
+        Optional<Fatec> fatec = repository.findByName(dto.name());
+
+        if(fatec.isPresent()){
+            throw new FatecException("Fatec já existe no banco de dados", HttpStatusCode.valueOf(409));
+        }
+
+        try{
             Fatec newFatec = new Fatec(dto.name(), response.getBody().getRua(), response.getBody().getBairro(),
                 response.getBody().getCidade());
             repository.save(newFatec);
             return dto;
-        }else {
-            throw new ApiException("Erro na requisição da api ViaCEP");
+        }catch(FatecException exception) {
+            throw new ApiException("Erro na requisição da api ViaCEP", HttpStatusCode.valueOf(500));
         }
     }
 
