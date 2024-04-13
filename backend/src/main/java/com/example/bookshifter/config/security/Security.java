@@ -35,12 +35,14 @@ public class Security {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("/home",
-                        "/login",
-                        "/error",
-                        "/register/**",
-                        "/forgot-password/**",
-                            "/books/all"
+                    .requestMatchers(
+                            "/books/**",
+                            "/fatecs/**",
+                            "/home/**",
+                            "/login/**",
+                            "/forgot-password/**",
+                            "/register/**",
+                            "/user/**"
                     ).permitAll().anyRequest().authenticated()
                 ).addFilterBefore(createJwtFilter(), UsernamePasswordAuthenticationFilter.class).build();
     }
