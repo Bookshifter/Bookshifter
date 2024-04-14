@@ -34,10 +34,9 @@ public class Book {
     private String bookState;
 
 
-    @ManyToOne()
+    /*@ManyToOne()
     @JoinColumn(name = "owner_id", nullable = false)
-    private User owner;
-
+    private User owner;*/
     @ManyToOne()
     @JoinColumn(name = "fatec_id" , nullable = false)
     private Fatec fatec;
@@ -123,11 +122,12 @@ public class Book {
     public void setFatec(Fatec fatec){
         this.fatec = fatec;
     }
-    public User getOwner(){
+
+    /*public User getOwner(){
         return this.owner;
     }
 
     public void setOwner(User owmer){
         this.owner = owmer;
-    }
+    }*/
 }

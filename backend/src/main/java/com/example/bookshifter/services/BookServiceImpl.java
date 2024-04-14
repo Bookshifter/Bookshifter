@@ -61,7 +61,7 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
         }
 
         try{
-            User owner = userService.getAuthenticatedUserInfo(auth);
+            //User owner = userService.getAuthenticatedUserInfo(auth);
             Book newBook = new Book(
                     Objects.requireNonNull(response.getBody()).getItems()[0].getVolumeInfo().getTitle(),
                     List.of(response.getBody().getItems()[0].getVolumeInfo().getAuthors()),
@@ -75,7 +75,7 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
             );
 
 
-            newBook.setOwner(owner);
+            //newBook.setOwner(owner);
             newBook.setFatec(fatecOptional.get());
 
 
@@ -110,14 +110,14 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
 
     @Override
     public void deleteBook(Long id){
-        User user = userService.getAuthenticatedUserInfo(auth);
+        //User user = userService.getAuthenticatedUserInfo(auth);
 
-        Book book = repository.findBookByOwnerAndId(user, id);
+        Optional<Book> book = repository.findById(id);
 
-        if(book == null){
+        if(book.isEmpty()){
             throw new BookException("Livro não encontrado", HttpStatusCode.valueOf(404));
         }
-        repository.delete(book);
+        repository.delete(book.get());
     }
 
     @Override
@@ -126,7 +126,7 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
         return foundBooks.stream().map(BookDTO::new).toList();
     }
 
-    @Override
+    /*@Override
     public UserAndBookDTO getAuthenticatedUserBooks() {
         User user = userService.getAuthenticatedUserInfo(auth);
 
@@ -139,5 +139,5 @@ public class BookServiceImpl implements com.example.bookshifter.services.interfa
         List<BookDTO> userBooksDTO = userBooks.stream().map(BookDTO::new).toList();
 
         return new UserAndBookDTO(new UserDTO(user.getFirstName(), user.getLastName()), userBooksDTO);
-    }
+    }*/
 }

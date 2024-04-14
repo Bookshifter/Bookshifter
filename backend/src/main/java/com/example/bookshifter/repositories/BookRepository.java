@@ -23,7 +23,7 @@ public interface BookRepository extends JpaRepository<Book,  Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM tb_book book where book.fatec =:id")
     List<Book> findByFatecId(Long id);
 
-    List<Book> findBooksByOwner(User user);
+    //List<Book> findBooksByOwner(User user);
 
-    Book findBookByOwnerAndId(User user, Long id);
+    //Book findBookByOwnerAndId(User user, Long id);
 }

@@ -18,5 +18,5 @@ public interface BookService {
 
     List<BookDTO> searchProducts(String query);
 
-    UserAndBookDTO getAuthenticatedUserBooks();
+    //UserAndBookDTO getAuthenticatedUserBooks();
 }

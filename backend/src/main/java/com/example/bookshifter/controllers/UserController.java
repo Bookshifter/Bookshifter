@@ -29,13 +29,13 @@ public class UserController {
     }
 
 
-    @GetMapping("/books")
+    /*@GetMapping("/books")
     public ResponseEntity<UserAndBookDTO> getUserBooks(){
         try{
             return ResponseEntity.ok(bookService.getAuthenticatedUserBooks());
         } catch(BookException exception){
             return ResponseEntity.notFound().build();
         }
-    }
+    }*/
 
 }
