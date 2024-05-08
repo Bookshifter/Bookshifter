@@ -24,28 +24,21 @@ public class User implements UserDetails {
     @NaturalId(mutable = true)
     private String email;
     private String password;
-    private String role;
+    private Role role;
     private boolean isEnabled = false;
-
-
 
     @OneToMany()
     private List <Book> books = new ArrayList<>();
 
-
-
-
-
-
     public User(){
     }
 
-    public User(String firstName, String lastName, String email, String password, String role) {
+    public User(String firstName, String lastName, String email, String password,  Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.role = role;
+        setRole(role);
     }
 
     public Long getId() {
@@ -82,7 +75,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Stream.of(this.getRole()).map(SimpleGrantedAuthority::new).toList();
+        return Stream.of(this.getRole().getValue()).map(SimpleGrantedAuthority::new).toList();
     }
 
     public String getPassword() {
@@ -121,12 +114,14 @@ public class User implements UserDetails {
         isEnabled = enabled;
     }
 
-    public String getRole() {
-        return role;
+    public Role getRole() {
+        return  this.role;
     }
 
-    public void setRoles(String role) {
-        this.role = role;
+    public void setRole(Role role) {
+        if(role != null){
+            this.role = role;
+        }
     }
 
     public List<Book> getBooks() {

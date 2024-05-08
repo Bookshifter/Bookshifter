@@ -17,7 +17,7 @@ public interface UserService {
 
     Optional<User> findByEmail(String email);
 
-    boolean isAdminExists();
+    boolean isAdminExists(String email);
 
     User getAuthenticatedUserInfo(Authentication authentication);
 

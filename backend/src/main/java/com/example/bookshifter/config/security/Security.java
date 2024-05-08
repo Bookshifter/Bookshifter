@@ -1,5 +1,6 @@
 package com.example.bookshifter.config.security;
 
+import com.example.bookshifter.entities.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,14 +36,13 @@ public class Security {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/createadmin").hasRole("ADMIN")
+                        .requestMatchers("/createadmin").hasAuthority(Role.ADMIN.getValue())
                     .requestMatchers("/home",
                         "/login",
                         "/error",
                         "/register/**",
                         "/forgot-password/**",
                             "/books/all"
-
 
 
                     ).permitAll()

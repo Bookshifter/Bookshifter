@@ -3,6 +3,7 @@ package com.example.bookshifter.services;
 import com.example.bookshifter.dto.RegisterUserDTO;
 
 import com.example.bookshifter.dto.UserDTO;
+import com.example.bookshifter.entities.Role;
 import com.example.bookshifter.entities.User;
 import com.example.bookshifter.exceptions.JWTExcepion;
 import com.example.bookshifter.repositories.BookRepository;
@@ -39,7 +40,7 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     @Override
     public User registerUser(RegisterUserDTO dto) {
         User newUser = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(),
-                passwordEncoder.encode(dto.getPassword()), "USER");
+                passwordEncoder.encode(dto.getPassword()), Role.USER);
         return repository.save(newUser);
     }
 
@@ -69,8 +70,8 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
 
 
     public User registerAdmin(RegisterUserDTO dto) {
-        if (!isAdminExists()) {
-            User newAdmin = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), "ROLE_ADMIN");
+        if (!isAdminExists(dto.getEmail())) {
+            User newAdmin = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), Role.ADMIN);
             newAdmin.setEnabled(true);
             repository.save(newAdmin);
 
@@ -79,12 +80,11 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
             throw new RuntimeException("Admin already exists");
 
         }
-
         return null;
     }
 
-    public boolean isAdminExists() {
-        Optional<User> admin = repository.findByRole("ADMIN");
+    public boolean isAdminExists(String email) {
+        Optional<User> admin = repository.findByEmailAndRole(email, Role.ADMIN);
         return admin.isPresent();
 
     }

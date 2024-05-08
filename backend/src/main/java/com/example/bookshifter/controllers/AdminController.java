@@ -19,7 +19,7 @@ public class AdminController {
 
     @PostMapping
     public ResponseEntity<String> createadmin(@RequestBody RegisterUserDTO requestDTO){
-        if(userService.isAdminExists()){
+        if(userService.isAdminExists(requestDTO.getEmail())){
             return ResponseEntity.badRequest().body("Admin ja existe");
         }
 
