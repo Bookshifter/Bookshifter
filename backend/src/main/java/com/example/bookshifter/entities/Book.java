@@ -1,6 +1,7 @@
 package com.example.bookshifter.entities;
 
 
+import com.example.bookshifter.dto.BookDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -60,7 +61,18 @@ public class Book {
         this.mediumCoverUrl = mediumCoverUrl;
         this.bookState = bookState;
 
+    }
 
+    public Book(BookDTO dto){
+        this.title = dto.getTitle();
+        this.authors = dto.getAuthors();
+        this.description = dto.getDescription();
+        this.publisher = dto.getPublisher();
+        this.publishYear = dto.getPublishYear();
+        this.pageCount = dto.getPageCount();
+        this.largeCoverUrl = dto.getLargeCoverUrl();
+        this.mediumCoverUrl = dto.getMediumCoverUrl();
+        this.bookState = dto.getBookState();
     }
 
     public Long getId(){return this.id; }
@@ -130,5 +142,9 @@ public class Book {
 
     public void setOwner(User owmer){
         this.owner = owmer;
+    }
+
+    public List<WishList> getWishList() {
+        return wishList;
     }
 }
