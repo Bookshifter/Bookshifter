@@ -30,6 +30,10 @@ public class User implements UserDetails {
     @OneToMany()
     private List <Book> books = new ArrayList<>();
 
+    @OneToOne(mappedBy = "user")
+    private WishList wishList;
+
+
     public User(){
     }
 

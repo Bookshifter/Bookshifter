@@ -42,7 +42,8 @@ public class Book {
     @JoinColumn(name = "fatec_id" , nullable = false)
     private Fatec fatec;
 
-
+    @ManyToMany(mappedBy = "books")
+    List<WishList> wishList = new ArrayList<>();
     public Book(){
     }
 

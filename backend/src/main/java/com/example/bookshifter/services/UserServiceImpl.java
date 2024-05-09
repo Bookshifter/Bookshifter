@@ -5,9 +5,11 @@ import com.example.bookshifter.dto.RegisterUserDTO;
 import com.example.bookshifter.dto.UserDTO;
 import com.example.bookshifter.entities.Role;
 import com.example.bookshifter.entities.User;
+import com.example.bookshifter.entities.WishList;
 import com.example.bookshifter.exceptions.JWTExcepion;
 import com.example.bookshifter.repositories.BookRepository;
 import com.example.bookshifter.repositories.UserRepository;
+import com.example.bookshifter.repositories.WishListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,6 +30,8 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     private PasswordEncoder passwordEncoder;
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private WishListRepository wishListRepository;
 
     @Override
     public List<UserDTO> findAll() {
@@ -41,7 +45,13 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     public User registerUser(RegisterUserDTO dto) {
         User newUser = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(),
                 passwordEncoder.encode(dto.getPassword()), Role.USER);
-        return repository.save(newUser);
+
+        WishList userWishList = new WishList(0, newUser);
+
+        repository.save(newUser);
+        wishListRepository.save(userWishList);
+
+        return newUser;
     }
 
     @Override
@@ -62,12 +72,6 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
         }
         throw new JWTExcepion("Token JWT expirado ou não informado, por favor tente novamente");
     }
-
-    @Override
-    public void registerUser(String firstName, String lastName, String email, String password, String admin) {
-
-    }
-
 
     public User registerAdmin(RegisterUserDTO dto) {
         if (!isAdminExists(dto.getEmail())) {

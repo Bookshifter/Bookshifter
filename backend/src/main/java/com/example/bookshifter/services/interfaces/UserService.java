@@ -21,7 +21,5 @@ public interface UserService {
 
     User getAuthenticatedUserInfo(Authentication authentication);
 
-    void registerUser(String firstName, String lastName, String email, String password, String admin);
-
     User registerAdmin(RegisterUserDTO dto);
 }
