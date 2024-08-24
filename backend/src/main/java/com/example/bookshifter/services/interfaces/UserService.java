@@ -1,9 +1,9 @@
 package com.example.bookshifter.services.interfaces;
 
 import com.example.bookshifter.dto.RegisterUserDTO;
-import com.example.bookshifter.dto.UserAndBookDTO;
 import com.example.bookshifter.dto.UserDTO;
 import com.example.bookshifter.entities.User;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.security.core.Authentication;
 
 import java.util.List;
@@ -17,8 +17,9 @@ public interface UserService {
 
     Optional<User> findByEmail(String email);
 
+    boolean isAdminExists(String email);
 
     User getAuthenticatedUserInfo(Authentication authentication);
 
-    public UserAndBookDTO getAuthenticatedUserBooks(String email);
+    User registerAdmin(RegisterUserDTO dto);
 }

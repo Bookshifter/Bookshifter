@@ -55,8 +55,15 @@ def search():
   }
   response = books_api.api_books(params)
   if type(response) != dict:
+<<<<<<< HEAD
     response = ast.literal_eval(response)
     
+=======
+    response = eval(response)
+    
+  # if 'error' in response:
+  #   flash(response['error'], 'danger')
+>>>>>>> backend-joao
   return render_template('/ecommerce/search.html', page="shop", books=response)
 
 @bp.route('/single-news')

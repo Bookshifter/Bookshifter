@@ -3,6 +3,10 @@ package com.example.bookshifter.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_fatec")
 public class Fatec {
@@ -10,11 +14,24 @@ public class Fatec {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+
+
+
+
     private String name;
 
     private String street;
     private String neighborhood;
     private String city;
+
+
+
+    @OneToMany
+
+    private List<Book> books = new ArrayList<>();
+
+
 
     public Fatec() {
     }
@@ -54,6 +71,13 @@ public class Fatec {
     public String getCity() {
         return this.city;
     }
+
+    public List<Book> getBooks(){
+        return this.books;
+    }
+
+
+
 
     public void setCity(String city) {
         this.city = city;

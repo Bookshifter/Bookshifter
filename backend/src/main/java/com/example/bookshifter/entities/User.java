@@ -6,8 +6,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
+
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
+
 
 @Entity
 @Table(name = "tb_user")
@@ -20,21 +24,25 @@ public class User implements UserDetails {
     @NaturalId(mutable = true)
     private String email;
     private String password;
+    private Role role;
     private boolean isEnabled = false;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "tb_user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+
+    @OneToMany()
+    private List <Book> books = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user")
+    private WishList wishList;
+
 
     public User(){
     }
 
-    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+    public User(String firstName, String lastName, String email, String password,  Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.roles = roles;
+        setRole(role);
     }
 
     public Long getId() {
@@ -71,9 +79,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.stream(this.getRoles().toString().split(", "))
-                .map(SimpleGrantedAuthority::new).toList();
-
+        return Stream.of(this.getRole().getValue()).map(SimpleGrantedAuthority::new).toList();
     }
 
     public String getPassword() {
@@ -112,11 +118,21 @@ public class User implements UserDetails {
         isEnabled = enabled;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return  this.role;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        if(role != null){
+            this.role = role;
+        }
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

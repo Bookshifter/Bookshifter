@@ -1,10 +1,12 @@
 package com.example.bookshifter.entities;
 
 
+import com.example.bookshifter.dto.BookDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "tb_book")
 public class Book {
@@ -31,20 +33,23 @@ public class Book {
     private String mediumCoverUrl;
     @Column(columnDefinition = "TEXT")
     private String bookState;
-    @ManyToOne()
-    @JoinColumn(name = "fatec")
-    private Fatec fatec;
+
 
     @ManyToOne()
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
+    @ManyToOne()
+    @JoinColumn(name = "fatec_id" , nullable = false)
+    private Fatec fatec;
 
+    @ManyToMany(mappedBy = "books")
+    List<WishList> wishList = new ArrayList<>();
     public Book(){
     }
 
     public Book(String title, List<String> authors, String description, String publisher, Integer publishYear,
-                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState, Fatec fatec, User owner)
+                Integer pageCount, String largeCoverUrl, String mediumCoverUrl, String bookState)
     {
         this.title = title;
         this.authors = authors;
@@ -55,9 +60,19 @@ public class Book {
         this.largeCoverUrl = largeCoverUrl;
         this.mediumCoverUrl = mediumCoverUrl;
         this.bookState = bookState;
-        this.fatec = fatec;
-        this.owner = owner;
 
+    }
+
+    public Book(BookDTO dto){
+        this.title = dto.getTitle();
+        this.authors = dto.getAuthors();
+        this.description = dto.getDescription();
+        this.publisher = dto.getPublisher();
+        this.publishYear = dto.getPublishYear();
+        this.pageCount = dto.getPageCount();
+        this.largeCoverUrl = dto.getLargeCoverUrl();
+        this.mediumCoverUrl = dto.getMediumCoverUrl();
+        this.bookState = dto.getBookState();
     }
 
     public Long getId(){return this.id; }
@@ -117,8 +132,19 @@ public class Book {
     public Fatec getFatec(){
         return this.fatec;
     }
+
+    public void setFatec(Fatec fatec){
+        this.fatec = fatec;
+    }
     public User getOwner(){
         return this.owner;
     }
 
+    public void setOwner(User owmer){
+        this.owner = owmer;
+    }
+
+    public List<WishList> getWishList() {
+        return wishList;
+    }
 }

@@ -36,6 +36,7 @@ public class PasswordResetTokenServiceImpl implements com.example.bookshifter.se
         if(passwordResetToken.isEmpty()){
             return "INVALID";
         } else if(passwordResetToken.get().getExpirationTime().getTime() - calendar.getTime().getTime() <= 0){
+            repository.delete(passwordResetToken.get());
             return "EXPIRED";
         }
 
@@ -55,4 +56,13 @@ public class PasswordResetTokenServiceImpl implements com.example.bookshifter.se
             userRepository.save(user);
         }
     }
+    @Override
+    public void deleteToken(String token) {
+        Optional<PasswordResetToken> tokenToBeDeleted = repository.findByToken(token);
+
+        tokenToBeDeleted.ifPresent(passwordResetToken -> repository.delete(passwordResetToken));
+
+    }
+
+
 }

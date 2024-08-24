@@ -1,34 +1,27 @@
 package com.example.bookshifter.entities;
 
-import jakarta.persistence.*;
+public enum Role {
+    USER("USER"),
+    ADMIN("ADMIN"),
+    LIBRARY("LIBRARY");
 
-@Entity
-@Table(name = "tb_role")
-public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String roleName;
+    private String value;
 
-    public Role(){
+    private Role(String value) {
+        this.value = value;
     }
 
-     public Role(String roleName){
-        this.setRoleName(roleName);
-    }
-    public Long getId() {
-        return id;
+    public String getValue() {
+        return value;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public static Role getRole(String  value){
+        for(Role role : Role.values()){
+            if(role.getValue().equalsIgnoreCase(value)){
+                return role;
+            }
 
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+        }
+        throw new IllegalArgumentException("Role informada inválida");
     }
 }

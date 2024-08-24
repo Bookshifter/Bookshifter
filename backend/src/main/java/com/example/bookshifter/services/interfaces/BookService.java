@@ -2,6 +2,7 @@ package com.example.bookshifter.services.interfaces;
 
 import com.example.bookshifter.dto.BookDTO;
 import com.example.bookshifter.dto.BookRequestDTO;
+import com.example.bookshifter.dto.UserAndBookDTO;
 
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface BookService {
     void deleteBook(Long id);
 
     List<BookDTO> searchProducts(String query);
+
+    UserAndBookDTO getAuthenticatedUserBooks();
 }

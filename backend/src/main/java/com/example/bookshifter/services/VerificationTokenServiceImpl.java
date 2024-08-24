@@ -21,12 +21,14 @@ public class VerificationTokenServiceImpl implements com.example.bookshifter.ser
         if(tokenToBeVerified.isEmpty()){
             return "INVALID";
         }
-
         User user = tokenToBeVerified.get().getUser();
+
 
         Calendar calendar = Calendar.getInstance();
 
         if((tokenToBeVerified.get().getExpirationTime().getTime() - calendar.getTime().getTime()) <= 0){
+            repository.delete(tokenToBeVerified.get());
+            userRepository.delete(user);
             return "EXPIRED";
         }
 

@@ -1,19 +1,16 @@
 package com.example.bookshifter.services;
 
-import com.example.bookshifter.dto.BookDTO;
 import com.example.bookshifter.dto.RegisterUserDTO;
 
-import com.example.bookshifter.dto.UserAndBookDTO;
 import com.example.bookshifter.dto.UserDTO;
-import com.example.bookshifter.entities.Book;
 import com.example.bookshifter.entities.Role;
 import com.example.bookshifter.entities.User;
+import com.example.bookshifter.entities.WishList;
 import com.example.bookshifter.exceptions.JWTExcepion;
-import com.example.bookshifter.exceptions.UserNotFoundException;
 import com.example.bookshifter.repositories.BookRepository;
 import com.example.bookshifter.repositories.UserRepository;
+import com.example.bookshifter.repositories.WishListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +19,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,9 +30,11 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     private PasswordEncoder passwordEncoder;
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private WishListRepository wishListRepository;
 
     @Override
-    public List<UserDTO> findAll(){
+    public List<UserDTO> findAll() {
         var result = repository.findAll();
 
         List<UserDTO> users = result.stream().map(UserDTO::new).toList();
@@ -44,42 +42,54 @@ public class UserServiceImpl implements com.example.bookshifter.services.interfa
     }
 
     @Override
-    public User registerUser(RegisterUserDTO dto){
-      User newUser = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(),
-              passwordEncoder.encode(dto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
-      return repository.save(newUser);
+    public User registerUser(RegisterUserDTO dto) {
+        User newUser = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(),
+                passwordEncoder.encode(dto.getPassword()), Role.USER);
+
+        WishList userWishList = new WishList(0, newUser);
+
+        repository.save(newUser);
+        wishListRepository.save(userWishList);
+
+        return newUser;
     }
+
     @Override
-    public Optional<User> findByEmail(String email){
+    public Optional<User> findByEmail(String email) {
         return Optional.ofNullable(repository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado")));
     }
 
     @Override
-    public User getAuthenticatedUserInfo(Authentication authentication){
-        if(!(authentication instanceof AnonymousAuthenticationToken)) {
-           String getEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+    public User getAuthenticatedUserInfo(Authentication authentication) {
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String getEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 
             Optional<User> userOptional = repository.findByEmail(getEmail);
-            if(userOptional.isPresent()){
+            if (userOptional.isPresent()) {
                 return userOptional.get();
             }
         }
         throw new JWTExcepion("Token JWT expirado ou não informado, por favor tente novamente");
     }
 
-    @Override
-    public UserAndBookDTO getAuthenticatedUserBooks(String email) {
-        Optional<User> userOptional = repository.findByEmail(email);
+    public User registerAdmin(RegisterUserDTO dto) {
+        if (!isAdminExists(dto.getEmail())) {
+            User newAdmin = new User(dto.getFirstName(), dto.getLastName(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), Role.ADMIN);
+            newAdmin.setEnabled(true);
+            repository.save(newAdmin);
 
-        if(userOptional.isPresent()){
-            List<Book> books = bookRepository.findByOwner(userOptional.get().getId());
-            List<BookDTO> booksDTO = books.stream().map(BookDTO::new).toList();
-
-            return new UserAndBookDTO(userOptional.get().getFirstName(), userOptional.get().getLastName(),
-                    userOptional.get().getEmail(), booksDTO);
         }
+        else{
+            throw new RuntimeException("Admin already exists");
 
-        throw new UserNotFoundException("O email requisatado não está atrelado a nenhum usuário", HttpStatusCode.valueOf(404));
+        }
+        return null;
+    }
+
+    public boolean isAdminExists(String email) {
+        Optional<User> admin = repository.findByEmailAndRole(email, Role.ADMIN);
+        return admin.isPresent();
+
     }
 }

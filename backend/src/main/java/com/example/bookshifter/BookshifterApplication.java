@@ -12,13 +12,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 public class BookshifterApplication extends SpringBootServletInitializer {
 
-
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(BookshifterApplication.class);
 	}
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(BookshifterApplication.class, args);
 	}

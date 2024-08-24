@@ -13,5 +13,6 @@ public interface PasswordResetTokenService {
 
     void resetPassword(User user, String newPassword);
 
+    void deleteToken(String token);
 
 }
