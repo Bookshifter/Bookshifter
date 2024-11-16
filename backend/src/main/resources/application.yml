@@ -3,9 +3,9 @@ server:
 spring:
   #criar db na fatec antes de rodar
   datasource:
-    url: jdbc:mysql://localhost:3306/bookshifter
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:465112SQL_}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/bookshifter}
+    username: root
+    password: ${DB_PASSWORD:root}
     driver-class-name:
   jpa:
     hibernate:
@@ -15,7 +15,7 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: book.shifter.brazil@gmail.com
+    username: ${SMTP_EMAIL:book.shifter.brazil@gmail.com}
     password:  ${SMTP_PASSWORD:mvsqdhfcbdnj knqn}
     properties:
       mail:
@@ -35,4 +35,4 @@ api:
   security:
     token:
       #NÃO COMMITAR COM A LINHA ABAIXO PREENCHIDA
-      secret: ${JWT_SECRET:test}
+      secret: ${JWT_SECRET:5T#45NA^r2s=}
